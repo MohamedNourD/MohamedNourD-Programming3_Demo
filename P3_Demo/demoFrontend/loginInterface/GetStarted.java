@@ -1,4 +1,4 @@
-package loginIn_terface;
+package loginInterface;
 
 
 import javax.swing.ImageIcon;

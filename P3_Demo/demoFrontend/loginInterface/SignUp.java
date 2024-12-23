@@ -1,4 +1,4 @@
-package loginIn_terface;
+package loginInterface;
 
 
 import java.nio.file.Paths;

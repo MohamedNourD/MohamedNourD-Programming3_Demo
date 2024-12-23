@@ -1,4 +1,4 @@
-package loginIn_terface;
+package loginInterface;
 
 import java.awt.Color;
 import java.io.IOException;
