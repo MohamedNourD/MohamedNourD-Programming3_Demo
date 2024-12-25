@@ -13,7 +13,7 @@ public class UserManagement {
 
     public static List<User> getUsers() throws IOException {
         List<User> users = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("users.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("Files\\users.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 users.add(User.fromString(line));
