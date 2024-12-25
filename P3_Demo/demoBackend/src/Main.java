@@ -14,6 +14,7 @@ public class Main {
         List<Order> orders = OrderManagment.getOrders();
         List<Meal> meals = MealsManagment.getMeals();
 
+//        System.out.println(MealsManagment.createMeal("Burger", "Tomato, ", 900).getMsg());
 //        User u1 = new User();
 //        System.out.println(u1.createAccount("Super", "Admin", "SuperAdmin@Mgroup.org", "0000", "0000", 0));
 //        UserManagement.addUser(u1);
@@ -24,11 +25,11 @@ public class Main {
 
 //        System.out.println(u1.toString());
 
-        for (User user : users) {
-            System.out.println(user.getName());
+        for (Meal meal : meals) {
+            System.out.println(meal.getName());
         }
-
-        System.out.println(UserManagement.logIn("m.zakaria@sanadyouth.org", "123"));
+//
+//        System.out.println(UserManagement.logIn("m.zakaria@sanadyouth.org", "123"));
 
 //        Notififcation n = new Notififcation();
 //        n.getNotification("Hello", "Miss you MR.Mulham");

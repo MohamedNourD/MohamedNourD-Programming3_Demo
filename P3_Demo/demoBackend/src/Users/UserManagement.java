@@ -1,10 +1,12 @@
 package Users;
 
+import Execptions.Status;
+
 import java.io.*;
 import java.util.*;
 
 public class UserManagement {
-    public static void addUser(User user) throws IOException {
+    private static void addUser(User user) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt", true))) {
             writer.write(user.toString());
             writer.newLine();
@@ -35,6 +37,27 @@ public class UserManagement {
 
         System.out.println("Email not found: " + email);
         return null;
+    }
+    public Status createCustomerAccount(String firstName, String lastName, String email, String password1, String password2, int userType) {
+        try {
+            if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password1.isEmpty() || password2.isEmpty()) {
+                throw new Exception("Not all fields are complete.");
+            }
+            else if (!email.contains("@") && !email.contains(".")) {
+                throw new Exception("The email is not valid.");
+            }
+            else if (!password1.equals(password2)) {
+                throw new Exception("Password mismatching!");
+            }
+            else {
+                User user = new User(firstName, lastName, email, password1, 1);
+                addUser(user);
+                return new Status();
+            }
+        }
+        catch (Exception e) {
+            return new Status(e.getMessage());
+        }
     }
 
     public static boolean logIn (String email, String password) throws IOException {

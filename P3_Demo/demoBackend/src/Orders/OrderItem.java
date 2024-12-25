@@ -3,29 +3,29 @@ package Orders;
 import Meals.*;
 
 class OrderItem {
-    private String meal;
+    private String mealName;
     private int quantity;
 
     public OrderItem(Meal meal, int quantity) {
-        this.meal = meal.getName();
+        this.mealName = meal.getName();
         this.quantity = quantity;
     }
-    public OrderItem(String meal, int quantity) {
-        this.meal = meal;
+    public OrderItem(String mealName, int quantity) {
+        this.mealName = mealName;
         this.quantity = quantity;
     }
     public OrderItem () {}
 
     public String getMeal() {
-        return meal;
+        return mealName;
     }
 
     public void setMeal(Meal meal) {
-        this.meal = meal.getName();
+        this.mealName = meal.getName();
     }
 
-    public void setMeal(String meal) {
-        this.meal = meal;
+    public void setMeal(String mealName) {
+        this.mealName = mealName;
     }
 
     public int getQuantity() {
@@ -36,7 +36,7 @@ class OrderItem {
         this.quantity = quantity;
     }
     public String toString() {
-        return meal + "|" + quantity;
+        return mealName + "|" + quantity;
     }
     public static OrderItem fromString(String str) {
         String[] parts = str.split("\\|", 2);

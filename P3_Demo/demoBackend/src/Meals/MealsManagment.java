@@ -1,10 +1,12 @@
 package Meals;
 
+import Execptions.Status;
+
 import java.io.*;
 import java.util.*;
 
 public class MealsManagment {
-    public static void addMeal(Meal meal) throws IOException {
+    private static void addMeal(Meal meal) throws IOException {
         try (FileWriter writer = new FileWriter("Files\\meals.txt", true)) {
             writer.write(meal.toString() + "\n");
         }
@@ -40,6 +42,22 @@ public class MealsManagment {
             }
         }
         return meals;
+    }
+
+    public static Status createMeal (String mealName, String ingredients, double price) {
+        try{
+            if (mealName.isEmpty() || ingredients.isEmpty() || price == 0.0) {
+                throw new Exception();
+            }
+            else {
+                Meal meal = new Meal(mealName, ingredients, price);
+                addMeal(meal);
+            }
+        }
+        catch (Exception e) {
+            return new Status("Not all fields are complete.");
+        }
+        return new Status();
     }
 
 }

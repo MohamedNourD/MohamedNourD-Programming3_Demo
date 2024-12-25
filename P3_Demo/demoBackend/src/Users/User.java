@@ -1,5 +1,7 @@
 package Users;
 
+import Execptions.Status;
+
 public class User {
     private String firstName;
     private String lastName;
@@ -26,69 +28,6 @@ public class User {
 
     public String getPassword() {
         return password;
-    }
-
-    public boolean createAccount(String firstName, String lastName, String email, String password1, String password2, int userType) {
-        try {
-            if (firstName.isEmpty())
-                throw new EmptyString();
-
-            else
-                this.firstName=firstName;
-        }
-        catch (EmptyString e) {
-            System.out.println("The first name is empty!");
-            return false;
-        }
-        try {
-            if (lastName.isEmpty())
-                throw new EmptyString();
-            else
-                this.lastName=lastName;
-        }
-        catch (EmptyString e) {
-            System.out.println("The last name is empty!");
-            return false;
-        }
-        try {
-            if (email.isEmpty())
-                throw new EmptyString();
-            else {
-                if (email.contains("@") && email.contains("."))
-                    this.email = email;
-                else
-                    throw new NotValidEmail();
-            }
-        }
-        catch (EmptyString e) {
-            System.out.println("The email is empty!");
-            return false;
-        }
-        catch (NotValidEmail e) {
-            System.out.println("The email is Invalid!");
-            return false;
-        }
-
-        try {
-            if (password1.isEmpty())
-                throw new EmptyString();
-            else {
-                if (password1.equals(password2))
-                    this.password = password1;
-                else
-                    throw new PasswordMismatching();
-            }
-        }
-        catch (EmptyString e) {
-            System.out.println("The password is empty!");
-            return false;
-        }
-        catch (PasswordMismatching e) {
-            System.out.println("Password mismatching!");
-            return false;
-        }
-        this.userType = userType;
-        return true;
     }
 
     public String toString() {
