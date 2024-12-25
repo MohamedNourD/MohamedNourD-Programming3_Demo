@@ -11,8 +11,8 @@ public class Main {
 
     public static void main (String[] args) throws IOException{
         List<User> users = UserManagement.getUsers();
-        List<Order> orders = OrderManagment.getOrders();
-        List<Meal> meals = MealsManagment.getMeals();
+       // List<Order> orders = OrderManagment.getOrders();
+        //List<Meal> meals = MealsManagment.getMeals();
 
 //        User u1 = new User();
 //        System.out.println(u1.createAccount("Super", "Admin", "SuperAdmin@Mgroup.org", "0000", "0000", 0));
