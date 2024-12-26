@@ -170,6 +170,7 @@ public class AddEmployee extends javax.swing.JFrame {
     private void addActionListeners() {
         addEmployeeButton.addActionListener(evt -> onAddEmployeeButtonClick());
     }
+// mehtode to link with backend during the add employee
 
     private void onAddEmployeeButtonClick() {
         String firstNameText = firstNamefield.getText();
