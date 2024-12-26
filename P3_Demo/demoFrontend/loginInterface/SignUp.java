@@ -269,24 +269,26 @@ public class SignUp extends javax.swing.JFrame {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        User newUser = new User();
-        boolean isVailedSignUp = newUser.createAccount(firstNameText.getText(),lastNameText.getText(),emailText.getText(), new String(jPasswordField1.getPassword()),new String(jPasswordField2.getPassword()) ,1);
-        new SignInFrame().setVisible(isVailedSignUp);
-      if(isVailedSignUp){
-        this.dispose();
-      }else if (isVailedSignUp == false){ 
-         JLabel messageLabel = new JLabel("An error occurred while signing up");
-        messageLabel.setForeground(Color.decode("#fb8500")); // Set text color
-        messageLabel.setFont(new Font("Arial", Font.PLAIN, 14)); // Optional: Set font and size
 
-        // Display the JOptionPane with the custom label
-        JOptionPane.showMessageDialog(
-            null,
-            messageLabel,
-            "Error",
-            JOptionPane.ERROR_MESSAGE
-        );
-    }
+        new SignInFrame().setVisible(true);
+    //     User newUser = new User();
+    //     boolean isVailedSignUp = newUser.createAccount(firstNameText.getText(),lastNameText.getText(),emailText.getText(), new String(jPasswordField1.getPassword()),new String(jPasswordField2.getPassword()) ,1);
+    //     new SignInFrame().setVisible(isVailedSignUp);
+    //   if(isVailedSignUp){
+    //     this.dispose();
+    //   }else if (isVailedSignUp == false){ 
+    //      JLabel messageLabel = new JLabel("An error occurred while signing up");
+    //     messageLabel.setForeground(Color.decode("#fb8500")); // Set text color
+    //     messageLabel.setFont(new Font("Arial", Font.PLAIN, 14)); // Optional: Set font and size
+
+    //     // Display the JOptionPane with the custom label
+    //     JOptionPane.showMessageDialog(
+    //         null,
+    //         messageLabel,
+    //         "Error",
+    //         JOptionPane.ERROR_MESSAGE
+    //     );
+    // }
       }
     
     

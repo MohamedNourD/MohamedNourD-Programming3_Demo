@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import Users.UserManagement;
+import mangerInterface.WelcomeManger;
 
 public class SignInFrame extends javax.swing.JFrame {
 
@@ -215,25 +216,35 @@ public class SignInFrame extends javax.swing.JFrame {
     }
 
     private void signinActionPerformed(java.awt.event.ActionEvent evt) {
+        //      
+        new WelcomeManger().setVisible(true);
+       
+//        try {
+//         boolean isExist = UserManagement.logIn(jTextField1.getText(),new String(jPasswordField1.getPassword()));
         
-       try {
-        boolean isExist = UserManagement.logIn(jTextField1.getText(),new String(jPasswordField1.getPassword()));
-        System.out.println(isExist+"   the value of the isExist");
-        if (isExist)
-                System.out.println("the customer is existing");
-        else if(isExist == false)
-        {
-        JLabel messageLabel = new JLabel("An error occurred while signing up");
-        messageLabel.setForeground(Color.decode("#fb8500")); // Set text color
-        messageLabel.setFont(new Font("Arial", Font.PLAIN, 14)); // Optional: Set font and size
+//         switch (key) {
+//                 case value:
+                        
+//                         break;
+        
+//                 default:
+//                         break;
+//         }
+//         if (isExist)
+//                 System.out.println("the customer is existing");
+//         else if(isExist == false)
+//         {
+//         JLabel messageLabel = new JLabel("An error occurred while signing up");
+//         messageLabel.setForeground(Color.decode("#fb8500")); // Set text color
+//         messageLabel.setFont(new Font("Arial", Font.PLAIN, 14)); // Optional: Set font and size
 
-        // Display the JOptionPane with the custom label
-        JOptionPane.showMessageDialog(null,messageLabel,  "Error",JOptionPane.ERROR_MESSAGE);
-        }
-      } catch (IOException e) {
+//         // Display the JOptionPane with the custom label
+//         JOptionPane.showMessageDialog(null,messageLabel,  "Error",JOptionPane.ERROR_MESSAGE);
+//         }
+//       } catch (IOException e) {
         
-       System.out.println("an error occurred in login methode ");
-     } 
+//        System.out.println("an error occurred in login methode ");
+//      } 
      // link withthe four Interface order interface in prograsse working 
 
      //new MenuItem().setVisible(isExist);
