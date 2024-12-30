@@ -22,11 +22,15 @@ public class Meal {
     public String getName () {
         return mealName;
     }
+
+    public void addCnt (int num) {
+        orderCnt+=num;
+    }
     public String toString() {
         return mealName + "||" + ingredients + "||" + price + "||" + orderCnt;
     }
     public static Meal fromString(String line) {
-        String[] parts = line.split("||", 4);
+        String[] parts = line.split("#", 4);
         return new Meal(parts[0], parts[1], Double.parseDouble(parts[2]), Integer.parseInt(parts[3]));
     }
 }

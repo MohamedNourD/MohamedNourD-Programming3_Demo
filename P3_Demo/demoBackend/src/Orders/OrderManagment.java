@@ -8,7 +8,7 @@ import java.util.*;
 public class OrderManagment {
     public static void addOrder(Customer customer, List<OrderItem> items) throws IOException {
         Order order = new Order(0 ,customer.getName(), items);
-        customer.newOrder(order);
+        customer.newOrder(order.getId());
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\orders.txt", true))) {
             writer.write(order.toString());
             writer.newLine();

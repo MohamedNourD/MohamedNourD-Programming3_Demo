@@ -2,15 +2,16 @@ package Orders;
 
 import Meals.*;
 
-class OrderItem {
+public class OrderItem {
     private String mealName;
     private int quantity;
 
     public OrderItem(Meal meal, int quantity) {
         this.mealName = meal.getName();
         this.quantity = quantity;
+        meal.addCnt(quantity);
     }
-    public OrderItem(String mealName, int quantity) {
+    private OrderItem(String mealName, int quantity) {
         this.mealName = mealName;
         this.quantity = quantity;
     }
@@ -20,21 +21,10 @@ class OrderItem {
         return mealName;
     }
 
-    public void setMeal(Meal meal) {
-        this.mealName = meal.getName();
-    }
-
-    public void setMeal(String mealName) {
-        this.mealName = mealName;
-    }
-
     public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
     public String toString() {
         return mealName + "|" + quantity;
     }

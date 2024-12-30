@@ -43,7 +43,7 @@ public class UserManagement {
             if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password1.isEmpty() || password2.isEmpty()) {
                 throw new Exception("Not all fields are complete.");
             }
-            else if (!email.contains("@") && !email.contains(".")) {
+            else if (!email.contains("@") || !email.contains(".")) {
                 throw new Exception("The email is not valid.");
             }
             else if (!password1.equals(password2)) {
@@ -60,40 +60,24 @@ public class UserManagement {
         }
     }
 
-    public static boolean logIn (String email, String password) throws IOException {
+    public static Status logIn (String email, String password) throws IOException {
         try {
             User currentUser = getUserByEmail(email);
             if (currentUser == null)
-                    throw new NullPointerException();
-            if (email.isEmpty())
-                throw new EmptyString();
-            else {
-                if (email.contains("@") && email.contains(".")) {
-                    if (currentUser.getPassword().equals(password))
-                        System.out.println("Oh hi " + currentUser.getName() + "!");
-                    else
-                        throw new PasswordMismatching();
-                }
-                else
-                    throw new NotValidEmail();
+                throw new Exception("There is no user with that email!");
+            else if (email.isEmpty()) {
+                throw new Exception("The email is empty!");
+            } else if (!email.contains("@") || !email.contains(".")) {
+                throw new Exception("The email is Invalid!");
+            } else if (!currentUser.getPassword().equals(password)) {
+                throw new Exception("Password isn't correct");
+            } else {
+                System.out.println("Oh hi " + currentUser.getName() + "!");
+                return new Status();
             }
         }
-        catch (EmptyString e) {
-            System.out.println("The email is empty!");
-            return false;
+        catch (Exception e) {
+            return new Status(e.getMessage());
         }
-        catch (NotValidEmail e) {
-            System.out.println("The email is Invalid!");
-            return false;
-        }
-        catch (NullPointerException e) {
-            System.out.println("There is no user with that email!");
-            return false;
-        }
-        catch (PasswordMismatching e) {
-            System.out.println("Password isn't correct");
-            return false;
-        }
-        return true;
     }
 }

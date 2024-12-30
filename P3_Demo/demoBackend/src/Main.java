@@ -1,18 +1,24 @@
-import Meals.Meal;
-import Meals.MealsManagment;
-import Orders.Order;
-import Orders.OrderManagment;
+import Meals.*;
+import Orders.*;
 import Users.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
     public static void main (String[] args) throws IOException{
         List<User> users = UserManagement.getUsers();
-       // List<Order> orders = OrderManagment.getOrders();
-        //List<Meal> meals = MealsManagment.getMeals();
+        List<Customer> customers = new ArrayList<>();
+        for (User tempUser : users) {
+            if (tempUser.getUserType() == 1) {
+                customers.add((Customer) tempUser);
+            }
+        }
+        List<Order> orders = OrderManagment.getOrders();
+        List<Meal> meals = MealsManagment.getMeals();
+
 
 //        System.out.println(MealsManagment.createMeal("Burger", "Tomato, ", 900).getMsg());
 //        User u1 = new User();
@@ -24,10 +30,13 @@ public class Main {
 //        UserManagement.addUser(u2);
 
 //        System.out.println(u1.toString());
-
+        List<OrderItem> orderItems = new ArrayList<>();
         for (Meal meal : meals) {
-            System.out.println(meal.getName());
+            OrderItem o1 = new OrderItem(meal, 2);
+            orderItems.add(o1);
+//            System.out.println(meal.getName());
         }
+        OrderManagment.addOrder((Customer) users.get(1), orderItems);
 //
 //        System.out.println(UserManagement.logIn("m.zakaria@sanadyouth.org", "123"));
 

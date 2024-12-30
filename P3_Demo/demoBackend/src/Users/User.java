@@ -30,6 +30,7 @@ public class User {
         return password;
     }
 
+    public int getUserType() {return userType;}
     public String toString() {
         return firstName + "," + lastName + "," + email + "," + password + "," + userType;
     }

@@ -1,5 +1,7 @@
 package Orders;
 
+import Users.Customer;
+
 import java.util.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -12,6 +14,13 @@ public class Order {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    public Order(int orderId, Customer customer, List<OrderItem> orderItems) {
+        this.orderId = orderId;
+        this.customerName = customer.getName();
+        this.orderDate = LocalDateTime.now();
+        this.orderItems = orderItems;
+        customer.newOrder(orderId);
+    }
     public Order(int orderId, String customerName, List<OrderItem> orderItems) {
         this.orderId = orderId;
         this.customerName = customerName;
