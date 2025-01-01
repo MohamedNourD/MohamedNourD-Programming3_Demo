@@ -6,6 +6,24 @@ public class Meal {
     private double price;
     int orderCnt;
 
+    public String getMealName() {
+        return mealName;
+    }
+    public void setMealName(String mealName) {
+        this.mealName = mealName;
+    }
+    public String getIngredients() {
+        return ingredients;
+    }
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
+    }
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price) {
+        this.price = price;
+    }
     private Meal(String mealName, String ingredients, double price, int orderCnt) {
         this.mealName = mealName;
         this.ingredients = ingredients;

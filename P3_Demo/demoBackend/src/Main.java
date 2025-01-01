@@ -25,9 +25,9 @@ public class Main {
 
 //        System.out.println(u1.toString());
 
-        for (Meal meal : meals) {
-            System.out.println(meal.getName());
-        }
+        // for (Meal meal : meals) {
+        //     System.out.println(meal.getName());
+        // }
 //
 //        System.out.println(UserManagement.logIn("m.zakaria@sanadyouth.org", "123"));
 
