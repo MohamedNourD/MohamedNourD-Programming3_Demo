@@ -131,7 +131,7 @@ public class WelcomeManger extends javax.swing.JFrame {
     }
 
     private void addEmployeeAction(ActionEvent evt) {
-        System.out.println("the button is clicked");
+      
 
         new AddEmployee().setVisible(true);
         this.dispose();
