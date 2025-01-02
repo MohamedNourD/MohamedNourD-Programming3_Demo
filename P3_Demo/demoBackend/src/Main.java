@@ -1,15 +1,23 @@
-import Meals.*;
+import Meals.Meal;
+import Meals.MealsManagment;
 import Orders.*;
-import Users.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
     public static void main (String[] args) throws IOException{
-        System.out.println(OrderManagment.countOrdersForToday());
+        System.out.println(MealsManagment.createMeal("Burger", "Potatp, Tomato", 50.3).getMsg());
+        System.out.println(MealsManagment.createMeal("Piz", "fdk, Tomato", 5).getMsg());
+        System.out.println(MealsManagment.createMeal("fsl", "ato", 53).getMsg());
+
+        MealsManagment.deleteMeal(1);
+        List<Meal> meals = MealsManagment.getMeals();
+        for (Meal meal: meals) {
+            System.out.println(meal.getId() + " " + meal.getName());
+        }
+//        System.out.println(OrderManagment.countOrdersForToday());
 //        List<User> users = UserManagement.getUsers();
 //        List<Customer> customers = new ArrayList<>();
 //        for (User tempUser : users) {

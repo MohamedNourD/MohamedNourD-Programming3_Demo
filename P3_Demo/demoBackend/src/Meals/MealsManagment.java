@@ -12,11 +12,11 @@ public class MealsManagment {
         }
     }
     
-    private static void updateMeal(String mealName, Meal updatedMeal) throws IOException {
+    private static void updateMeal(int mealId, Meal updatedMeal) throws IOException {
         List<Meal> meals = getMeals();
         try (FileWriter writer = new FileWriter("Files\\meals.txt")) {
             for (Meal meal : meals) {
-                if (meal.getName().equals(mealName)) {
+                if (meal.getId() == mealId) {
                     writer.write(updatedMeal.toString() + "\n");
                 } else {
                     writer.write(meal.toString() + "\n");
@@ -25,11 +25,11 @@ public class MealsManagment {
         }
     }
 
-    public static void deleteMeal(String mealName) throws IOException {
+    public static void deleteMeal(int mealId) throws IOException {
         List<Meal> meals = getMeals();
         try (FileWriter writer = new FileWriter("Files\\meals.txt")) {
             for (Meal meal : meals) {
-                if (!meal.getName().equals(mealName)) {
+                if (meal.getId() != mealId) {
                     writer.write(meal.toString() + "\n");
                 }
             }
@@ -53,7 +53,10 @@ public class MealsManagment {
                 throw new Exception();
             }
             else {
-                Meal meal = new Meal(mealName, ingredients, price);
+                List<Meal> meals = getMeals();
+                int nextMealId = meals.isEmpty() ? 1 : meals.get(meals.size() - 1).getId() + 1;
+
+                Meal meal = new Meal(nextMealId, mealName, ingredients, price);
                 addMeal(meal);
                 return new Status();
             }
@@ -62,14 +65,14 @@ public class MealsManagment {
             return new Status("Not all fields are complete.");
         }
     }
-    public static Status updateMeal (String lastMealName, String mealName, String ingredients, double price) {
+    public static Status updateMeal (int mealID, String mealName, String ingredients, double price) {
         try{
             if (mealName.isEmpty() || ingredients.isEmpty() || price == 0.0) {
                 throw new Exception();
             }
             else {
-                Meal meal = new Meal(mealName, ingredients, price);
-                updateMeal(lastMealName, meal);
+                Meal meal = new Meal(mealID ,mealName, ingredients, price);
+                updateMeal(mealID, meal);
                 return new Status();
             }
         }

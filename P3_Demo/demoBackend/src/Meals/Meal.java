@@ -1,37 +1,76 @@
 package Meals;
 
 public class Meal {
+
+    private int mealId;
     private String mealName;
     private String ingredients;
     private double price;
-    int orderCnt;
+    private int orderCnt;
 
-    private Meal(String mealName, String ingredients, double price, int orderCnt) {
+    public Meal(int mealId, String mealName, String ingredients, double price, int orderCnt) {
+        this.mealId = mealId;
         this.mealName = mealName;
         this.ingredients = ingredients;
         this.price = price;
         this.orderCnt = orderCnt;
     }
-    public Meal(String mealName, String ingredients, double price) {
+
+    public Meal(int mealId, String mealName, String ingredients, double price) {
+        this.mealId = mealId;
         this.mealName = mealName;
         this.ingredients = ingredients;
         this.price = price;
         this.orderCnt = 0;
     }
-    public Meal () {}
-    public String getName () {
+
+    public Meal() {}
+
+    public int getId() {
+        return mealId;
+    }
+
+    public String getName() {
         return mealName;
     }
-    public double getPrice() {return price;}
 
-    public void addCnt (int num) {
-        orderCnt+=num;
+    public void setName(String mealName) {
+        this.mealName = mealName;
     }
+
+    public String getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void addCnt(int num) {
+        orderCnt += num;
+    }
+
+    public int getOrderCnt() {
+        return orderCnt;
+    }
+
+    @Override
     public String toString() {
-        return mealName + "||" + ingredients + "||" + price + "||" + orderCnt;
+        return mealId + "||" + mealName + "||" + ingredients + "||" + price + "||" + orderCnt;
     }
+
     public static Meal fromString(String line) {
-        String[] parts = line.split("#", 4);
-        return new Meal(parts[0], parts[1], Double.parseDouble(parts[2]), Integer.parseInt(parts[3]));
+        String[] parts = line.split("\\|\\|", 5);
+        return new Meal(
+                Integer.parseInt(parts[0]),
+                parts[1],
+                parts[2],
+                Double.parseDouble(parts[3]),
+                Integer.parseInt(parts[4])
+        );
     }
 }

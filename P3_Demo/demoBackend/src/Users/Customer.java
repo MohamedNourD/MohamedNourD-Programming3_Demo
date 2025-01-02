@@ -6,12 +6,14 @@ import Orders.OrderItem;
 import java.util.*;
 
 public class Customer extends User {
+    private int customerId;
     private List<Integer> ordersID;
     public Customer (String firstName, String lastName, String email, String password, int userType) {
         super(firstName, lastName, email, password, userType);
     }
-    public Customer (String firstName, String lastName, String email, String password, int userType, List<Integer> ordersID) {
+    public Customer (int customerId, String firstName, String lastName, String email, String password, int userType, List<Integer> ordersID) {
         super(firstName, lastName, email, password, userType);
+        this.customerId = customerId;
         this.ordersID = ordersID;
     }
     public void newOrder(int orderId) {
@@ -30,7 +32,7 @@ public class Customer extends User {
             }
         }
 
-        return getFirstName() + "," + getLastName() + "," + getEmail() + "," + getPassword() + "," + getUserType() + "," + idString;
+        return customerId + "," + getFirstName() + "," + getLastName() + "," + getEmail() + "," + getPassword() + "," + getUserType() + "," + idString;
     }
     public static Customer fromString(String line) {
         String[] parts = line.split(",", 6);
@@ -40,6 +42,6 @@ public class Customer extends User {
         for (String id : idParts) {
             ordersID.add(Integer.valueOf(id));
         }
-        return new Customer(parts[0], parts[1], parts[2], parts[3], Integer.parseInt(parts[4]), ordersID);
+        return new Customer(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4], Integer.parseInt(parts[5]), ordersID);
     }
 }

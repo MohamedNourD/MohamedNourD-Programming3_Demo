@@ -7,7 +7,7 @@ import java.util.*;
 
 public class UserManagement {
     private static void addUser(User user) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("customers.txt", true))) {
             writer.write(user.toString());
             writer.newLine();
         }
