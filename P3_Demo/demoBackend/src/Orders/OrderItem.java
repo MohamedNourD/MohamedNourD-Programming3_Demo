@@ -5,15 +5,18 @@ import Meals.*;
 public class OrderItem {
     private String mealName;
     private int quantity;
+    private double price;
 
     public OrderItem(Meal meal, int quantity) {
         this.mealName = meal.getName();
         this.quantity = quantity;
+        this.price = meal.getPrice();
         meal.addCnt(quantity);
     }
-    private OrderItem(String mealName, int quantity) {
+    private OrderItem(String mealName, int quantity, double price) {
         this.mealName = mealName;
         this.quantity = quantity;
+        this.price = price;
     }
     public OrderItem () {}
 
@@ -29,7 +32,7 @@ public class OrderItem {
         return mealName + "|" + quantity;
     }
     public static OrderItem fromString(String str) {
-        String[] parts = str.split("\\|", 2);
-        return new OrderItem(parts[0], Integer.parseInt(parts[1]));
+        String[] parts = str.split("\\|", 3);
+        return new OrderItem(parts[0], Integer.parseInt(parts[1]), Double.parseDouble(parts[2]));
     }
 }

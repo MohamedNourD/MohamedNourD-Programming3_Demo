@@ -3,6 +3,14 @@ package Users;
 import Execptions.Status;
 
 public class User {
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
     private String firstName;
     private String lastName;
     private String email;

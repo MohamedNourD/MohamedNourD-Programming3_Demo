@@ -23,6 +23,16 @@ public class UserManagement {
         }
         return users;
     }
+    public static List<Customer> getCustomers() throws IOException {
+        List<Customer> customers = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("Files\\users.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                customers.add(Customer.fromString(line));
+            }
+        }
+        return customers;
+    }
     public static User getUserByEmail(String email) throws IOException {
         List<User> users = getUsers();
         System.out.println("Searching for email: " + email);
@@ -51,6 +61,28 @@ public class UserManagement {
             }
             else {
                 User user = new User(firstName, lastName, email, password1, 1);
+                addUser(user);
+                return new Status();
+            }
+        }
+        catch (Exception e) {
+            return new Status(e.getMessage());
+        }
+    }
+
+    public Status createEmployeeAccount(String firstName, String lastName, String email, String password1, String password2, int userType) {
+        try {
+            if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password1.isEmpty() || password2.isEmpty()) {
+                throw new Exception("Not all fields are complete.");
+            }
+            else if (!email.contains("@") || !email.contains(".")) {
+                throw new Exception("The email is not valid.");
+            }
+            else if (!password1.equals(password2)) {
+                throw new Exception("Password mismatching!");
+            }
+            else {
+                User user = new User(firstName, lastName, email, password1, 2);
                 addUser(user);
                 return new Status();
             }

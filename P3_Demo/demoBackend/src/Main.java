@@ -9,15 +9,17 @@ import java.util.List;
 public class Main {
 
     public static void main (String[] args) throws IOException{
-        List<User> users = UserManagement.getUsers();
-        List<Customer> customers = new ArrayList<>();
-        for (User tempUser : users) {
-            if (tempUser.getUserType() == 1) {
-                customers.add((Customer) tempUser);
-            }
-        }
-        List<Order> orders = OrderManagment.getOrders();
-        List<Meal> meals = MealsManagment.getMeals();
+        System.out.println(OrderManagment.countOrdersForToday());
+//        List<User> users = UserManagement.getUsers();
+//        List<Customer> customers = new ArrayList<>();
+//        for (User tempUser : users) {
+//            if (tempUser.getUserType() == 1) {
+//                Customer c = (Customer) tempUser;
+//                customers.add(c);
+//            }
+//        }
+//        List<Order> orders = OrderManagment.getOrders();
+//        List<Meal> meals = MealsManagment.getMeals();
 
 
 //        System.out.println(MealsManagment.createMeal("Burger", "Tomato, ", 900).getMsg());
@@ -30,13 +32,13 @@ public class Main {
 //        UserManagement.addUser(u2);
 
 //        System.out.println(u1.toString());
-        List<OrderItem> orderItems = new ArrayList<>();
-        for (Meal meal : meals) {
-            OrderItem o1 = new OrderItem(meal, 2);
-            orderItems.add(o1);
-//            System.out.println(meal.getName());
-        }
-        OrderManagment.addOrder((Customer) users.get(1), orderItems);
+//        List<OrderItem> orderItems = new ArrayList<>();
+//        for (Meal meal : meals) {
+//            OrderItem o1 = new OrderItem(meal, 2);
+//            orderItems.add(o1);
+////            System.out.println(meal.getName());
+//        }
+//        OrderManagment.addOrder((Customer) users.get(1), orderItems);
 //
 //        System.out.println(UserManagement.logIn("m.zakaria@sanadyouth.org", "123"));
 

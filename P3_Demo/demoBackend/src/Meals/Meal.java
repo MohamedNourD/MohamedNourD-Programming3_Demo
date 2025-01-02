@@ -22,6 +22,7 @@ public class Meal {
     public String getName () {
         return mealName;
     }
+    public double getPrice() {return price;}
 
     public void addCnt (int num) {
         orderCnt+=num;

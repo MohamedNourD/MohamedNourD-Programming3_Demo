@@ -12,7 +12,7 @@ public class MealsManagment {
         }
     }
     
-    public static void updateMeal(String mealName, Meal updatedMeal) throws IOException {
+    private static void updateMeal(String mealName, Meal updatedMeal) throws IOException {
         List<Meal> meals = getMeals();
         try (FileWriter writer = new FileWriter("Files\\meals.txt")) {
             for (Meal meal : meals) {
@@ -62,5 +62,21 @@ public class MealsManagment {
             return new Status("Not all fields are complete.");
         }
     }
+    public static Status updateMeal (String lastMealName, String mealName, String ingredients, double price) {
+        try{
+            if (mealName.isEmpty() || ingredients.isEmpty() || price == 0.0) {
+                throw new Exception();
+            }
+            else {
+                Meal meal = new Meal(mealName, ingredients, price);
+                updateMeal(lastMealName, meal);
+                return new Status();
+            }
+        }
+        catch (Exception e) {
+            return new Status("Not all fields are complete.");
+        }
+    }
+
 
 }

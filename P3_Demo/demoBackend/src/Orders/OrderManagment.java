@@ -3,6 +3,7 @@ package Orders;
 import Users.Customer;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 
 public class OrderManagment {
@@ -23,5 +24,12 @@ public class OrderManagment {
             }
         }
         return orders;
+    }
+    public static long countOrdersForToday() throws IOException {
+        List<Order> orders = getOrders();
+        LocalDate today = LocalDate.now();
+        return orders.stream()
+                .filter(order -> order.getOrderDate().equals(today))
+                .count();
     }
 }
