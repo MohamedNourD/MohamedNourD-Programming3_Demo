@@ -1,15 +1,9 @@
 package loginInterface;
 
 
-import java.awt.Color;
-import java.awt.Font;
 import java.nio.file.Paths;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import Users.User;
 
 //import Users.*;
 
@@ -280,7 +274,7 @@ public class SignUp extends javax.swing.JFrame {
     //      JLabel messageLabel = new JLabel("An error occurred while signing up");
     //     messageLabel.setForeground(Color.decode("#fb8500")); // Set text color
     //     messageLabel.setFont(new Font("Arial", Font.PLAIN, 14)); // Optional: Set font and size
-
+            //
     //     // Display the JOptionPane with the custom label
     //     JOptionPane.showMessageDialog(
     //         null,

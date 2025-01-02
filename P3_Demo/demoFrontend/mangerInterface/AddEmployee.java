@@ -3,6 +3,9 @@ package mangerInterface;
 
 
 
+import java.awt.Color;
+import java.awt.Font;
+
 import javax.swing.*;
 
 public class AddEmployee extends javax.swing.JFrame {
@@ -180,7 +183,10 @@ public class AddEmployee extends javax.swing.JFrame {
         String confirmPasswordText = new String(re_PasswordField.getPassword());
 
         // Add logic for handling form submission, e.g., validation and saving employee data
-        JOptionPane.showMessageDialog(this, "Employee added successfully!");
+        // JDialog dialog = new JOptionPane();
+        // optionPane.setForeground(Color.decode("#fb8500")); // Set text color
+        // optionPane.setFont(new Font("Arial", Font.PLAIN, 14)); // Optional: Set
+        // optionPane.showMessageDialog(this, "Employee added successfully!");
     }
 
     // Variables declaration - do not modify                     
