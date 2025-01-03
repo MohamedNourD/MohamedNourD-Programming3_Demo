@@ -1,7 +1,5 @@
 package Users;
 
-import Execptions.Status;
-
 public abstract class User {
     private String firstName;
     private String lastName;
@@ -39,6 +37,6 @@ public abstract class User {
     }
 
     public int getUserType() {return userType;}
+    abstract public int getId();
     public abstract String toString();
-
 }

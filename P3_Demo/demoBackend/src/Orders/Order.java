@@ -12,6 +12,7 @@ public class Order {
     private LocalDateTime orderDate;
     private List<OrderItem> orderItems;
     private double orderPrice;
+    private int orderType;
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 

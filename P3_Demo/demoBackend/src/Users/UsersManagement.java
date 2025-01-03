@@ -133,4 +133,25 @@ public class UsersManagement {
             return new Status(e.getMessage());
         }
     }
+
+    public static String loyalCustomer() throws IOException {
+        List<Customer> customers = getCustomers();
+        String loyalCustomer;
+        int max;
+
+        loyalCustomer = customers.get(0).getName();
+        max = customers.get(0).getCntOrders();
+
+        for (Customer customer : customers) {
+            if(max < customer.getCntOrders()) {
+                loyalCustomer = customer.getName();
+                max = customer.getCntOrders();
+            }
+        }
+
+        if (max == 0)
+            return "No one";
+        else
+            return loyalCustomer;
+    }
 }

@@ -30,7 +30,7 @@ public class MealsManagment {
         }
     }
     
-    private static void updateMeal(int mealId, Meal updatedMeal) throws IOException {
+    private static void editMeal(int mealId, Meal updatedMeal) throws IOException {
         List<Meal> meals = getMeals();
         try (FileWriter writer = new FileWriter("Files\\meals.txt")) {
             for (Meal meal : meals) {
@@ -50,7 +50,7 @@ public class MealsManagment {
             }
             else {
                 Meal meal = new Meal(mealID ,mealName, ingredients, price);
-                updateMeal(mealID, meal);
+                editMeal(mealID, meal);
                 return new Status();
             }
         }
@@ -79,6 +79,27 @@ public class MealsManagment {
             }
         }
         return meals;
+    }
+
+    public static String mostOrderedMeal() throws IOException {
+        List<Meal> meals = getMeals();
+        String mostOrderedMeal;
+        int max;
+
+        mostOrderedMeal = meals.get(0).getName();
+        max = meals.get(0).getOrderCnt();
+
+        for (Meal meal : meals) {
+            if (max < meal.getOrderCnt()) {
+                mostOrderedMeal = meal.getName();
+                max = meal.getOrderCnt();
+            }
+        }
+
+        if (max == 0)
+            return "No one";
+        else
+            return mostOrderedMeal;
     }
 
 }
