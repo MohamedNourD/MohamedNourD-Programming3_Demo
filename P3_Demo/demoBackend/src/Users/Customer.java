@@ -8,7 +8,7 @@ import java.util.*;
 public class Customer extends User {
     private int customerId;
     private List<Integer> ordersID;
-    public Customer (String firstName, String lastName, String email, String password, int userType) {
+    public Customer (int customerId, String firstName, String lastName, String email, String password, int userType) {
         super(firstName, lastName, email, password, userType);
     }
     public Customer (int customerId, String firstName, String lastName, String email, String password, int userType, List<Integer> ordersID) {
@@ -16,6 +16,7 @@ public class Customer extends User {
         this.customerId = customerId;
         this.ordersID = ordersID;
     }
+    public int getId() {return customerId;}
     public void newOrder(int orderId) {
         ordersID.add(orderId);
     }

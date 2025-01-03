@@ -2,15 +2,7 @@ package Users;
 
 import Execptions.Status;
 
-public class User {
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
+public abstract class User {
     private String firstName;
     private String lastName;
     private String email;
@@ -26,6 +18,14 @@ public class User {
 
     public User() {}
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
     public String getName() {
         return firstName + " " + lastName;
     }
@@ -39,12 +39,6 @@ public class User {
     }
 
     public int getUserType() {return userType;}
-    public String toString() {
-        return firstName + "," + lastName + "," + email + "," + password + "," + userType;
-    }
-    public static User fromString(String line) {
-        String[] parts = line.split(",", 5);
-        return new User(parts[0], parts[1], parts[2], parts[3], Integer.parseInt(parts[4]));
-    }
+    public abstract String toString();
 
 }

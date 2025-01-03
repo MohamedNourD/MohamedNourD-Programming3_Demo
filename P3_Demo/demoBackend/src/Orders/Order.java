@@ -11,6 +11,7 @@ public class Order {
     private String customerName;
     private LocalDateTime orderDate;
     private List<OrderItem> orderItems;
+    private double orderPrice;
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
@@ -54,7 +55,7 @@ public class Order {
             }
         }
 
-        return orderId + "," + customerName + "," + orderDate.format(DATE_FORMATTER) + "," + itemsString;
+        return orderId + "," + customerName + "," + orderDate.format(DATE_FORMATTER) + "," + orderPrice + "," + itemsString;
     }
 
     public static Order fromString(String line) {

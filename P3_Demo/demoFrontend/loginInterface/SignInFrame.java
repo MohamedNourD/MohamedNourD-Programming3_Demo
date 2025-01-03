@@ -1,18 +1,11 @@
 package loginInterface;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.io.IOException;
 import java.nio.file.Paths;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
-import Users.UserManagement;
-import employee_Interface.showOrder;
 import mangerInterface.MealsManagmentInterface;
-import mangerInterface.WelcomeManger;
 
 public class SignInFrame extends javax.swing.JFrame {
 
