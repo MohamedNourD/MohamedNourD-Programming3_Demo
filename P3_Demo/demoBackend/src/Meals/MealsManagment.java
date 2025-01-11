@@ -11,6 +11,7 @@ public class MealsManagment {
             writer.write(meal.toString() + "\n");
         }
     }
+
     public static void updateMeal(String mealName, Meal updatedMeal) throws IOException {
         List<Meal> meals = getMeals();
         try (FileWriter writer = new FileWriter("Files\\meals.txt")) {
@@ -23,6 +24,7 @@ public class MealsManagment {
             }
         }
     }
+
     public static void deleteMeal(String mealName) throws IOException {
         List<Meal> meals = getMeals();
         try (FileWriter writer = new FileWriter("Files\\meals.txt")) {
@@ -33,6 +35,7 @@ public class MealsManagment {
             }
         }
     }
+
     public static List<Meal> getMeals() throws IOException {
         List<Meal> meals = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("Files\\meals.txt"))) {
@@ -44,20 +47,21 @@ public class MealsManagment {
         return meals;
     }
 
-    public static Status createMeal (String mealName, String ingredients, double price) {
-        try{
+    public static Status createMeal(String mealName, String ingredients, double price) {
+        try {
             if (mealName.isEmpty() || ingredients.isEmpty() || price == 0.0) {
                 throw new Exception();
-            }
-            else {
+            } else {
                 Meal meal = new Meal(mealName, ingredients, price);
                 addMeal(meal);
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return new Status("Not all fields are complete.");
         }
         return new Status();
     }
 
+    public static void updateMeals(List<Meal> meals) {
+
+    }
 }

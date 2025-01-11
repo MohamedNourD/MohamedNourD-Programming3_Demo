@@ -23,7 +23,7 @@ public class GetStarted extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         // Logo Image
-        String iconPath  = "icons/fastfood.png";
+        String iconPath  = "DemoProject\\icons\\fastfood.png";
         ImageIcon icon = new ImageIcon(iconPath);
 
         jLabel1.setIcon(icon);

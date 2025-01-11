@@ -2,12 +2,12 @@ package mangerInterface;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -21,9 +21,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
-
 import Meals.Meal;
-
+import Meals.MealsManagment;
+import Execptions.Status;
+import java.awt.Component;
 public class MealsManagmentInterface extends JFrame {
 
     private JPanel mainPanel;
@@ -31,12 +32,14 @@ public class MealsManagmentInterface extends JFrame {
     private JScrollPane scrollPane;
     private JButton addMealButton;
     private JButton backButton;
+    private JButton saveButton;
     private int panelWidth = 300;
     private int panelHeight = 300;
     private final Color fontColor = new Color(102, 102, 102); // Font color for labels and text fields
 
     public MealsManagmentInterface() {
         initComponents();
+        loadMeals();
     }
 
     private void initComponents() {
@@ -44,6 +47,7 @@ public class MealsManagmentInterface extends JFrame {
         mealsPanel = new JPanel();
         addMealButton = new JButton("Add New Meal");
         backButton = new JButton("Back");
+        saveButton = new JButton("Save");
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(1010, 640));
@@ -64,14 +68,19 @@ public class MealsManagmentInterface extends JFrame {
         // Create a bottom panel for buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(251, 133, 0));
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10)); // Center-align buttons with 20px horizontal
-                                                                          // gap
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10)); // Center-align buttons with 20px horizontal gap
 
         addMealButton.setBackground(new Color(251, 133, 0));
         addMealButton.setForeground(Color.WHITE);
         addMealButton.setFont(new Font("Segoe UI", Font.PLAIN, 18));
         addMealButton.addActionListener(evt -> onAddMealButtonClicked());
         buttonPanel.add(addMealButton);
+
+        saveButton.setBackground(new Color(251, 133, 0));
+        saveButton.setForeground(Color.WHITE);
+        saveButton.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        saveButton.addActionListener(evt -> saveMealsToFile());
+        buttonPanel.add(saveButton);
 
         backButton.setBackground(new Color(251, 133, 0));
         backButton.setForeground(Color.WHITE);
@@ -85,12 +94,22 @@ public class MealsManagmentInterface extends JFrame {
         pack();
     }
 
+    private void loadMeals() {
+        try {
+            List<Meal> meals = MealsManagment.getMeals();
+            addMealsToPanel(meals);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Failed to load meals: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     private void onBackButtonClicked() {
+        saveMealsToFile();
         new WelcomeManger().setVisible(true);
         this.dispose();
     }
 
-    private JPanel createMealItemPanel() {
+    private JPanel createMealItemPanel(Meal meal) {
         JPanel mealItemPanel = new JPanel();
         mealItemPanel.setBackground(Color.WHITE);
         mealItemPanel.setPreferredSize(new Dimension(panelWidth, panelHeight)); // Fixed size for meal item panel
@@ -106,7 +125,7 @@ public class MealsManagmentInterface extends JFrame {
         mealNameLabel.setForeground(fontColor);
         mealItemPanel.add(mealNameLabel);
 
-        JTextField mealNameField = new JTextField();
+        JTextField mealNameField = new JTextField(meal != null ? meal.getMealName() : "");
         mealNameField.setBounds(100, 120, 180, 20);
         mealNameField.setForeground(fontColor);
         mealNameField.setEnabled(false);
@@ -117,7 +136,7 @@ public class MealsManagmentInterface extends JFrame {
         priceLabel.setForeground(fontColor);
         mealItemPanel.add(priceLabel);
 
-        JTextField priceField = new JTextField();
+        JTextField priceField = new JTextField(meal != null ? String.valueOf(meal.getPrice()) : "");
         priceField.setBounds(100, 150, 180, 20);
         priceField.setForeground(fontColor);
         priceField.setEnabled(false);
@@ -128,7 +147,7 @@ public class MealsManagmentInterface extends JFrame {
         ingredientsLabel.setForeground(fontColor);
         mealItemPanel.add(ingredientsLabel);
 
-        JTextArea ingredientsArea = new JTextArea();
+        JTextArea ingredientsArea = new JTextArea(meal != null ? meal.getIngredients() : "");
         ingredientsArea.setBounds(100, 180, 180, 60);
         ingredientsArea.setForeground(fontColor);
         ingredientsArea.setEnabled(false);
@@ -145,7 +164,7 @@ public class MealsManagmentInterface extends JFrame {
         removeButton.setBounds(190, 250, 80, 30);
         removeButton.setBackground(new Color(251, 133, 0));
         removeButton.setForeground(Color.WHITE);
-        removeButton.addActionListener(evt -> onRemoveMealButtonClicked(mealItemPanel));
+        removeButton.addActionListener(evt -> onRemoveMealButtonClicked(mealItemPanel, meal));
         mealItemPanel.add(removeButton);
 
         mealIconLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -165,16 +184,23 @@ public class MealsManagmentInterface extends JFrame {
     }
 
     private void onAddMealButtonClicked() {
-        JPanel newMealPanel = createMealItemPanel();
+        JPanel newMealPanel = createMealItemPanel(null);
         mealsPanel.add(newMealPanel);
         mealsPanel.revalidate();
         mealsPanel.repaint();
     }
 
-    private void onRemoveMealButtonClicked(JPanel mealPanel) {
-        mealsPanel.remove(mealPanel);
-        mealsPanel.revalidate();
-        mealsPanel.repaint();
+    private void onRemoveMealButtonClicked(JPanel mealPanel, Meal meal) {
+        try {
+            if (meal != null) {
+                MealsManagment.deleteMeal(meal.getMealName());
+            }
+            mealsPanel.remove(mealPanel);
+            mealsPanel.revalidate();
+            mealsPanel.repaint();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Failed to remove meal: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void onMealIconClicked(JLabel mealIconLabel) {
@@ -193,20 +219,7 @@ public class MealsManagmentInterface extends JFrame {
 
     public void addMealsToPanel(List<Meal> meals) {
         for (Meal meal : meals) {
-            JPanel mealPanel = createMealItemPanel();
-
-            for (Component component : mealPanel.getComponents()) {
-                if (component instanceof JTextField textField) {
-                    if (textField.getBounds().y == 120) {
-                        textField.setText(meal.getName());
-                    } else if (textField.getBounds().y == 150) {
-                        textField.setText(String.valueOf(meal.getPrice()));
-                    }
-                } else if (component instanceof JTextArea textArea) {
-                    textArea.setText(meal.getIngredients());
-                }
-            }
-
+            JPanel mealPanel = createMealItemPanel(meal);
             mealsPanel.add(mealPanel);
         }
 
@@ -214,7 +227,49 @@ public class MealsManagmentInterface extends JFrame {
         mealsPanel.repaint();
     }
 
+    private void saveMealsToFile() {
+        List<Meal> meals = new ArrayList<>();
+        // Extract meal information from each panel
+        for (Component component : mealsPanel.getComponents()) {
+            if (component instanceof JPanel) {
+                JPanel mealPanel = (JPanel) component;
+                String mealName = "";
+                double price = 0.0;
+                String ingredients = "";
+
+                for (Component innerComponent : mealPanel.getComponents()) {
+                    if (innerComponent instanceof JTextField) {
+                        JTextField textField = (JTextField) innerComponent;
+                        if (textField.getBounds().y == 120) { // Meal Name
+                            mealName = textField.getText();
+                        } else if (textField.getBounds().y == 150) { // Price
+                            price = Double.parseDouble(textField.getText());
+                        }
+                    } else if (innerComponent instanceof JTextArea) {
+                        JTextArea textArea = (JTextArea) innerComponent;
+                        ingredients = textArea.getText();
+                    }
+                }
+
+                if (!mealName.isEmpty() && price > 0 && !ingredients.isEmpty()) {
+                    meals.add(new Meal(mealName, ingredients, price));
+                }
+            }
+        }
+
+        // Save meals to file
+        try {
+            MealsManagment.updateMeals(meals);
+            JOptionPane.showMessageDialog(this, "Meals saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Failed to save meals: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new MealsManagmentInterface().setVisible(true));
+        SwingUtilities.invokeLater(() -> {
+            MealsManagmentInterface frame = new MealsManagmentInterface();
+            frame.setVisible(true);
+        });
     }
 }

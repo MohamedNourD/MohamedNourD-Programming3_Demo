@@ -1,179 +1,163 @@
 package mangerInterface;
 
-
-
-
-import java.awt.Color;
-import java.awt.Font;
+import Users.UserManagement;
+import loginInterface.SignInFrame;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class AddEmployee extends javax.swing.JFrame {
 
     public AddEmployee() {
         initComponents();
-        addActionListeners();  // Add action listeners for button
+        addActionListeners(); // Add action listeners for buttons
     }
 
     private void initComponents() {
+        // Main Panel
         jPanel1 = new javax.swing.JPanel();
+        jPanel1.setBackground(new Color(255, 255, 255));
+        jPanel1.setLayout(new BorderLayout());
+
+        // Left Panel with Image
+        JPanel leftPanel = new JPanel();
+        leftPanel.setBackground(new Color(251, 133, 0));
+        leftPanel.setPreferredSize(new Dimension(400, 600));
+        JLabel imageLabel = new JLabel();
+        imageLabel.setIcon(new ImageIcon("DemoProject\\icons\\BURGUR.png")); // Replace with your image path
+        imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        leftPanel.add(imageLabel);
+        jPanel1.add(leftPanel, BorderLayout.WEST);
+
+        // Right Panel (Form)
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        firstName = new javax.swing.JLabel();
-        lastNameLabel = new javax.swing.JLabel();
-        firstNamefield = new javax.swing.JTextField();
-        lastNameFileld = new javax.swing.JTextField();
-        emailLabel = new javax.swing.JLabel();
-        emailField = new javax.swing.JTextField();
-        PasswordField = new javax.swing.JPasswordField();
-        paswordLabel = new javax.swing.JLabel();
-        re_PasswordField = new javax.swing.JPasswordField();
-        jLabel6 = new javax.swing.JLabel();
-        addEmployeeButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        jPanel2.setBackground(new Color(255, 255, 255));
+        jPanel2.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        // Title Label
+        jLabel1 = new javax.swing.JLabel("Add New Employee");
+        jLabel1.setFont(new Font("Georgia", Font.BOLD, 24));
+        jLabel1.setForeground(new Color(251, 133, 0));
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        jPanel2.add(jLabel1, gbc);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        // First Name
+        firstName = new javax.swing.JLabel("First Name");
+        firstName.setForeground(new Color(153, 153, 153));
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        jPanel2.add(firstName, gbc);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setPreferredSize(new java.awt.Dimension(800, 600));
+        firstNamefield = new javax.swing.JTextField(20);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        jPanel2.add(firstNamefield, gbc);
 
-        jLabel1.setBackground(new java.awt.Color(251, 133, 0));
-        jLabel1.setFont(new java.awt.Font("Georgia", 3, 24));
-        jLabel1.setForeground(new java.awt.Color(251, 133, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Add new Employee");
+        // Last Name
+        lastNameLabel = new javax.swing.JLabel("Last Name");
+        lastNameLabel.setForeground(new Color(153, 153, 153));
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        jPanel2.add(lastNameLabel, gbc);
 
-        firstName.setForeground(new java.awt.Color(153, 153, 153));
-        firstName.setText("First name");
+        lastNameFileld = new javax.swing.JTextField(20);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        jPanel2.add(lastNameFileld, gbc);
 
-        lastNameLabel.setForeground(new java.awt.Color(153, 153, 153));
-        lastNameLabel.setText("Last name");
+        // Email
+        emailLabel = new javax.swing.JLabel("Email");
+        emailLabel.setForeground(new Color(153, 153, 153));
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        jPanel2.add(emailLabel, gbc);
 
-        firstNamefield.setForeground(new java.awt.Color(153, 153, 153));
+        emailField = new javax.swing.JTextField(20);
+        emailField.setPreferredSize(new Dimension(200, 30));
+        JLabel emailIcon = new JLabel(new ImageIcon("DemoProject\\icons\\user_icon.png")); // Replace with your email icon path
+        emailField.setBorder(BorderFactory.createCompoundBorder(
+                emailField.getBorder(),
+                BorderFactory.createEmptyBorder(5, 30, 5, 5)));
+        emailField.add(emailIcon);
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        jPanel2.add(emailField, gbc);
 
-        lastNameFileld.setForeground(new java.awt.Color(153, 153, 153));
+        // Password
+        paswordLabel = new javax.swing.JLabel("Password");
+        paswordLabel.setForeground(new Color(153, 153, 153));
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        jPanel2.add(paswordLabel, gbc);
 
-        emailLabel.setForeground(new java.awt.Color(153, 153, 153));
-        emailLabel.setText("Email");
+        PasswordField = new javax.swing.JPasswordField(20);
+        PasswordField.setBorder(BorderFactory.createCompoundBorder(
+                PasswordField.getBorder(),
+                BorderFactory.createEmptyBorder(5, 30, 5, 5)));
+        JLabel passwordIcon = new JLabel(new ImageIcon("DemoProject\\icons\\lock_icon.png")); // Replace with your password icon path
+        PasswordField.add(passwordIcon);
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        jPanel2.add(PasswordField, gbc);
 
-        emailField.setForeground(new java.awt.Color(153, 153, 153));
+        // Confirm Password
+        jLabel6 = new javax.swing.JLabel("Confirm Password");
+        jLabel6.setForeground(new Color(153, 153, 153));
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        jPanel2.add(jLabel6, gbc);
 
-        PasswordField.setForeground(new java.awt.Color(153, 153, 153));
+        re_PasswordField = new javax.swing.JPasswordField(20);
+        re_PasswordField.setBorder(BorderFactory.createCompoundBorder(
+                re_PasswordField.getBorder(),
+                BorderFactory.createEmptyBorder(5, 30, 5, 5)));
+        JLabel confirmPasswordIcon = new JLabel(new ImageIcon("DemoProject\\icons\\lock_icon.png")); // Replace with your password icon path
+        re_PasswordField.add(confirmPasswordIcon);
+        gbc.gridx = 1;
+        gbc.gridy = 5;
+        jPanel2.add(re_PasswordField, gbc);
 
-        paswordLabel.setForeground(new java.awt.Color(153, 153, 153));
-        paswordLabel.setText("Password");
-
-        re_PasswordField.setForeground(new java.awt.Color(153, 153, 153));
-
-        jLabel6.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel6.setText("Rewrite password");
-
-        addEmployeeButton.setBackground(new java.awt.Color(251, 133, 1));
-        addEmployeeButton.setFont(new java.awt.Font("Serif", 3, 24));
-        addEmployeeButton.setForeground(new java.awt.Color(255, 255, 255));
-        addEmployeeButton.setText("Create Account");
+        // Add Employee Button
+        addEmployeeButton = new javax.swing.JButton("Create Account");
+        addEmployeeButton.setBackground(new Color(251, 133, 0));
+        addEmployeeButton.setForeground(Color.WHITE);
+        addEmployeeButton.setFont(new Font("Serif", Font.BOLD, 18));
         addEmployeeButton.setBorder(null);
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        gbc.gridwidth = 2;
+        jPanel2.add(addEmployeeButton, gbc);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(PasswordField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(emailField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(firstNamefield, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                                    .addComponent(firstName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(46, 46, 46)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lastNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lastNameFileld)))
-                            .addComponent(re_PasswordField)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
-                        .addGap(62, 62, 62))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(paswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(87, 87, 87)
-                .addComponent(addEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lastNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lastNameFileld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(firstNamefield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
-                .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(paswordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(re_PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(addEmployeeButton)
-                .addContainerGap(78, Short.MAX_VALUE))
-        );
+        // Back Button
+        JButton backButton = new JButton("Back");
+        backButton.setBackground(new Color(251, 133, 0));
+        backButton.setForeground(Color.WHITE);
+        backButton.setFont(new Font("Serif", Font.BOLD, 18));
+        backButton.setBorder(null);
+        backButton.addActionListener(evt -> onBackButtonClick());
+        gbc.gridx = 0;
+        gbc.gridy = 7;
+        gbc.gridwidth = 2;
+        jPanel2.add(backButton, gbc);
 
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(jPanel2, BorderLayout.CENTER);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
+        // Frame Settings
+        setContentPane(jPanel1);
         pack();
-    } 
+        setLocationRelativeTo(null); // Center the window
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
 
     private void addActionListeners() {
         addEmployeeButton.addActionListener(evt -> onAddEmployeeButtonClick());
     }
-// mehtode to link with backend during the add employee
 
     private void onAddEmployeeButtonClick() {
         String firstNameText = firstNamefield.getText();
@@ -182,14 +166,33 @@ public class AddEmployee extends javax.swing.JFrame {
         String passwordText = new String(PasswordField.getPassword());
         String confirmPasswordText = new String(re_PasswordField.getPassword());
 
-        // Add logic for handling form submission, e.g., validation and saving employee data
-        // JDialog dialog = new JOptionPane();
-        // optionPane.setForeground(Color.decode("#fb8500")); // Set text color
-        // optionPane.setFont(new Font("Arial", Font.PLAIN, 14)); // Optional: Set
-        // optionPane.showMessageDialog(this, "Employee added successfully!");
+        boolean isDone = UserManagement
+                .createCustomerAccount(firstNameText, lastNameText, emailText,
+                        passwordText, confirmPasswordText, 2)
+                .isDone();
+
+        if (!isDone) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    UserManagement.createCustomerAccount(firstNameText, lastNameText, emailText,
+                            passwordText, confirmPasswordText, 2).getMsg(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Employee added successfully!",
+                    "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
-    // Variables declaration - do not modify                     
+    private void onBackButtonClick() {
+        new SignInFrame().setVisible(true);
+        this.dispose();
+    }
+
+    // Variables declaration - do not modify
     private javax.swing.JPasswordField PasswordField;
     private javax.swing.JButton addEmployeeButton;
     private javax.swing.JTextField emailField;
@@ -197,7 +200,6 @@ public class AddEmployee extends javax.swing.JFrame {
     private javax.swing.JLabel firstName;
     private javax.swing.JTextField firstNamefield;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -205,5 +207,11 @@ public class AddEmployee extends javax.swing.JFrame {
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JLabel paswordLabel;
     private javax.swing.JPasswordField re_PasswordField;
-    // End of variables declaration                   
+    // End of variables declaration
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new AddEmployee().setVisible(true);
+        });
+    }
 }

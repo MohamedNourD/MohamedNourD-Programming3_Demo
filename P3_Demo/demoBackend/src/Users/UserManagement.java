@@ -6,6 +6,9 @@ import java.io.*;
 import java.util.*;
 
 public class UserManagement {
+
+   
+
     private static void addUser(User user) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt", true))) {
             writer.write(user.toString());
@@ -23,6 +26,7 @@ public class UserManagement {
         }
         return users;
     }
+
     public static User getUserByEmail(String email) throws IOException {
         List<User> users = getUsers();
         System.out.println("Searching for email: " + email);
@@ -38,33 +42,32 @@ public class UserManagement {
         System.out.println("Email not found: " + email);
         return null;
     }
-    public Status createCustomerAccount(String firstName, String lastName, String email, String password1, String password2, int userType) {
+
+    public static  Status createCustomerAccount(String firstName, String lastName, String email, String password1,
+            String password2, int userType) {
         try {
-            if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password1.isEmpty() || password2.isEmpty()) {
+            if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password1.isEmpty()
+                    || password2.isEmpty()) {
                 throw new Exception("Not all fields are complete.");
-            }
-            else if (!email.contains("@") && !email.contains(".")) {
+            } else if (!email.contains("@") && !email.contains(".")) {
                 throw new Exception("The email is not valid.");
-            }
-            else if (!password1.equals(password2)) {
+            } else if (!password1.equals(password2)) {
                 throw new Exception("Password mismatching!");
-            }
-            else {
+            } else {
                 User user = new User(firstName, lastName, email, password1, 1);
                 addUser(user);
                 return new Status();
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return new Status(e.getMessage());
         }
     }
 
-    public static boolean logIn (String email, String password) throws IOException {
+    public boolean logIn(String email, String password) throws IOException {
         try {
             User currentUser = getUserByEmail(email);
             if (currentUser == null)
-                    throw new NullPointerException();
+                throw new NullPointerException();
             if (email.isEmpty())
                 throw new EmptyString();
             else {
@@ -73,27 +76,27 @@ public class UserManagement {
                         System.out.println("Oh hi " + currentUser.getName() + "!");
                     else
                         throw new PasswordMismatching();
-                }
-                else
+                } else
                     throw new NotValidEmail();
             }
-        }
-        catch (EmptyString e) {
+        } catch (EmptyString e) {
             System.out.println("The email is empty!");
+            
             return false;
-        }
-        catch (NotValidEmail e) {
+        } catch (NotValidEmail e) {
             System.out.println("The email is Invalid!");
+            
             return false;
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             System.out.println("There is no user with that email!");
+           
             return false;
-        }
-        catch (PasswordMismatching e) {
+        } catch (PasswordMismatching e) {
+           
             System.out.println("Password isn't correct");
             return false;
         }
+        
         return true;
     }
 }

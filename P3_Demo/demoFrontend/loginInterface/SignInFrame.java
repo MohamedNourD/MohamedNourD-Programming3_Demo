@@ -1,17 +1,12 @@
 package loginInterface;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.io.IOException;
 import java.nio.file.Paths;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import Users.UserManagement;
-import employee_Interface.showOrder;
-import mangerInterface.MealsManagmentInterface;
 import mangerInterface.WelcomeManger;
 
 public class SignInFrame extends javax.swing.JFrame {
@@ -48,12 +43,11 @@ public class SignInFrame extends javax.swing.JFrame {
 
                 // Username field
                 jTextField1.setForeground(new java.awt.Color(153, 153, 153));
-                jTextField1.setText("Email");
+
                 jTextField1.addActionListener(evt -> jTextField1ActionPerformed(evt));
 
                 // Password field
                 jPasswordField1.setForeground(new java.awt.Color(153, 153, 153));
-                jPasswordField1.setText("Password");
                 jPasswordField1.addActionListener(evt -> jPasswordField1ActionPerformed(evt));
 
                 // Checkbox for showing password
@@ -62,12 +56,12 @@ public class SignInFrame extends javax.swing.JFrame {
                 jCheckBox1.setFont(new java.awt.Font("Georgia", 1, 11));
                 jCheckBox1.addActionListener(evt -> jCheckBox1ActionPerformed(evt));
                 // Labels for icons
-                String iconPath = Paths.get("icons", "user_icon.png").toString();
+                String iconPath = "DemoProject\\icons\\lock_icon.png";
                 ImageIcon icon = new ImageIcon(iconPath);
                 // Side panel icon
                 jLabel4.setIcon(icon);
 
-                String iconPath2 = Paths.get("icons", "lock_icon.png").toString();
+                String iconPath2 = "DemoProject\\icons\\user_icon.png";
                 ImageIcon icon2 = new ImageIcon(iconPath2);
                 jLabel3.setIcon(icon2);
 
@@ -266,10 +260,47 @@ public class SignInFrame extends javax.swing.JFrame {
         }
 
         private void signinActionPerformed(java.awt.event.ActionEvent evt) {
-                int key = 0;  // from user type
 
+                UserManagement oldUser = new UserManagement();
+                boolean z = false;
 
-                // if there is an error in Entered  during signIn process
+                try {
+                        z = oldUser.logIn(jTextField1.getText(), new String(jPasswordField1.getPassword()));
+                } catch (Exception e) {
+                        JOptionPane.showMessageDialog(
+                                        null,
+                                        "The Username or password is incorrect",
+                                        "Error",
+                                        JOptionPane.ERROR_MESSAGE);
+                }
+                if (true) {
+
+                        int userType = 0;
+
+                        // key = UserManagement.getUserByEmail(jTextField1.getText()).getUserType();
+                        switch (userType) {
+                                case 0:
+                                        // manger
+                                         new WelcomeManger().setVisible(true);
+                                        
+                                        this.dispose();
+                                        break;
+                                case 1:
+                                        // employee
+                                        // new showOrder().setVisible(true);
+                                        // this.dispose();
+
+                                        break;
+                                case 2:
+                                        // customer
+                                        // new MenuItem().setVisible(isExist);
+                                        // this.disable();
+                                        break;
+                        }
+
+                }
+                // from user type
+                // if there is an error in Entered during signIn process
                 /*
                  * JLabel messageLabel = new JLabel("An error occurred while signing up");
                  * messageLabel.setForeground(Color.decode("#fb8500")); // Set text color
@@ -281,28 +312,6 @@ public class SignInFrame extends javax.swing.JFrame {
                  * "Error",JOptionPane.ERROR_MESSAGE);
                  * 
                  */
-
-
-                switch (key) {
-                        case 0:
-                                // manger
-                              //  new WelcomeManger().setVisible(true);
-                               new MealsManagmentInterface().setVisible(true);
-                                this.dispose();
-                                break;
-                        case 1:
-                                // employee
-                                // new showOrder().setVisible(true);
-                                // this.dispose();
-
-                                break;
-                        case 2:
-                                // customer
-                                // new MenuItem().setVisible(isExist);
-                                // this.disable();
-                                break;
-
-                }
 
         }
 

@@ -19,4 +19,10 @@ public class Status {
     public String getMsg() {
         return msg;
     }
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+    public void setDone(boolean done) {
+        this.done = done;
+    }
 }

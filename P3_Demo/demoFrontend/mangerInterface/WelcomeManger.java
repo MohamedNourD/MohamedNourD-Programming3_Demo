@@ -45,7 +45,7 @@ public class WelcomeManger extends javax.swing.JFrame {
                 iconPanel.setLayout(new BorderLayout());
 
                 // Load pet-themed icon
-                String iconPath = Paths.get("icons", "BURGUR.png").toString(); // Replace with your pet icon path
+                String iconPath ="DemoProject\\icons\\fastfood.png"; // Replace with your pet icon path
                 ImageIcon icon = new ImageIcon(iconPath);
                 iconLabel = new JLabel(icon);
                 iconLabel.setHorizontalAlignment(SwingConstants.CENTER);
