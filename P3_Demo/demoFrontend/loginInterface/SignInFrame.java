@@ -4,10 +4,15 @@ import java.awt.Color;
 import java.nio.file.Paths;
 
 import javax.swing.ImageIcon;
+<<<<<<< HEAD
 import javax.swing.JOptionPane;
 
 import Users.UserManagement;
 import mangerInterface.WelcomeManger;
+=======
+
+import mangerInterface.MealsManagmentInterface;
+>>>>>>> b0d4284ebad66531dc97e52ccf787a0b1e082618
 
 public class SignInFrame extends javax.swing.JFrame {
 

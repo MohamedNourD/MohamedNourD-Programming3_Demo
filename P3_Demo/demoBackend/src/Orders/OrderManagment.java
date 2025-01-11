@@ -3,12 +3,13 @@ package Orders;
 import Users.Customer;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 
 public class OrderManagment {
     public static void addOrder(Customer customer, List<OrderItem> items) throws IOException {
         Order order = new Order(0 ,customer.getName(), items);
-        customer.newOrder(order);
+        customer.newOrder(order.getId());
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\orders.txt", true))) {
             writer.write(order.toString());
             writer.newLine();
@@ -23,5 +24,12 @@ public class OrderManagment {
             }
         }
         return orders;
+    }
+    public static long countOrdersForToday() throws IOException {
+        List<Order> orders = getOrders();
+        LocalDate today = LocalDate.now();
+        return orders.stream()
+                .filter(order -> order.getOrderDate().equals(today))
+                .count();
     }
 }

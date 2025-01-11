@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package Users;
 
 import Execptions.Status;
@@ -41,4 +42,47 @@ public class User {
         return new User(parts[0], parts[1], parts[2], parts[3], Integer.parseInt(parts[4]));
     }
 
+=======
+package Users;
+
+public abstract class User {
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
+    private int userType;
+    public User(String firstName, String lastName, String email, String password, int userType) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.userType = userType;
+    }
+
+    public User() {}
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getName() {
+        return firstName + " " + lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public int getUserType() {return userType;}
+    abstract public int getId();
+    public abstract String toString();
+>>>>>>> b0d4284ebad66531dc97e52ccf787a0b1e082618
 }
