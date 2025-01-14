@@ -1,12 +1,13 @@
 package mangerInterface;
 
+import java.awt.*;
+
+import javax.swing.*;
+
 import Users.UserManagement;
 import loginInterface.SignInFrame;
 
-import javax.swing.*;
-import java.awt.*;
-
-public class AddEmployee extends javax.swing.JFrame {
+public class AddEmployee extends JFrame {
 
     public AddEmployee() {
         initComponents();
@@ -24,7 +25,7 @@ public class AddEmployee extends javax.swing.JFrame {
         leftPanel.setBackground(new Color(251, 133, 0));
         leftPanel.setPreferredSize(new Dimension(400, 600));
         JLabel imageLabel = new JLabel();
-        imageLabel.setIcon(new ImageIcon("DemoProject\\icons\\BURGUR.png")); // Replace with your image path
+        imageLabel.setIcon(new ImageIcon("DemoProject\\icons\\BURGUR.png")); 
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         leftPanel.add(imageLabel);
         jPanel1.add(leftPanel, BorderLayout.WEST);
@@ -80,11 +81,11 @@ public class AddEmployee extends javax.swing.JFrame {
 
         emailField = new javax.swing.JTextField(20);
         emailField.setPreferredSize(new Dimension(200, 30));
-        JLabel emailIcon = new JLabel(new ImageIcon("DemoProject\\icons\\user_icon.png")); // Replace with your email icon path
+       
         emailField.setBorder(BorderFactory.createCompoundBorder(
                 emailField.getBorder(),
                 BorderFactory.createEmptyBorder(5, 30, 5, 5)));
-        emailField.add(emailIcon);
+       // emailField.add(emailIcon);
         gbc.gridx = 1;
         gbc.gridy = 3;
         jPanel2.add(emailField, gbc);
@@ -100,8 +101,6 @@ public class AddEmployee extends javax.swing.JFrame {
         PasswordField.setBorder(BorderFactory.createCompoundBorder(
                 PasswordField.getBorder(),
                 BorderFactory.createEmptyBorder(5, 30, 5, 5)));
-        JLabel passwordIcon = new JLabel(new ImageIcon("DemoProject\\icons\\lock_icon.png")); // Replace with your password icon path
-        PasswordField.add(passwordIcon);
         gbc.gridx = 1;
         gbc.gridy = 4;
         jPanel2.add(PasswordField, gbc);
@@ -117,8 +116,6 @@ public class AddEmployee extends javax.swing.JFrame {
         re_PasswordField.setBorder(BorderFactory.createCompoundBorder(
                 re_PasswordField.getBorder(),
                 BorderFactory.createEmptyBorder(5, 30, 5, 5)));
-        JLabel confirmPasswordIcon = new JLabel(new ImageIcon("DemoProject\\icons\\lock_icon.png")); // Replace with your password icon path
-        re_PasswordField.add(confirmPasswordIcon);
         gbc.gridx = 1;
         gbc.gridy = 5;
         jPanel2.add(re_PasswordField, gbc);
@@ -133,6 +130,7 @@ public class AddEmployee extends javax.swing.JFrame {
         gbc.gridy = 6;
         gbc.gridwidth = 2;
         jPanel2.add(addEmployeeButton, gbc);
+        addEmployeeButton.addActionListener(evt -> onAddEmployeeButtonClick());
 
         // Back Button
         JButton backButton = new JButton("Back");
@@ -158,7 +156,6 @@ public class AddEmployee extends javax.swing.JFrame {
     private void addActionListeners() {
         addEmployeeButton.addActionListener(evt -> onAddEmployeeButtonClick());
     }
-
     private void onAddEmployeeButtonClick() {
         String firstNameText = firstNamefield.getText();
         String lastNameText = lastNameFileld.getText();
@@ -170,7 +167,6 @@ public class AddEmployee extends javax.swing.JFrame {
                 .createCustomerAccount(firstNameText, lastNameText, emailText,
                         passwordText, confirmPasswordText, 2)
                 .isDone();
-
         if (!isDone) {
             JOptionPane.showMessageDialog(
                     this,
@@ -188,7 +184,7 @@ public class AddEmployee extends javax.swing.JFrame {
     }
 
     private void onBackButtonClick() {
-        new SignInFrame().setVisible(true);
+        new WelcomeManger().setVisible(true);
         this.dispose();
     }
 
@@ -208,7 +204,6 @@ public class AddEmployee extends javax.swing.JFrame {
     private javax.swing.JLabel paswordLabel;
     private javax.swing.JPasswordField re_PasswordField;
     // End of variables declaration
-
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             new AddEmployee().setVisible(true);

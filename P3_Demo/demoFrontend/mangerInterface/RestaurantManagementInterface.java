@@ -130,7 +130,7 @@ public class RestaurantManagementInterface extends JFrame {
         pack();
     }
 
-    // Private methods to handle report generation
+    // methods to handle report generation
     private void showDailyOrders() {
         reportPanel.removeAll(); // Clear previous content
 
@@ -147,7 +147,6 @@ public class RestaurantManagementInterface extends JFrame {
             orderLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             contentPanel.add(orderLabel);
         }
-
         reportPanel.add(new JScrollPane(contentPanel), BorderLayout.CENTER);
         reportPanel.revalidate();
         reportPanel.repaint();
@@ -182,7 +181,6 @@ public class RestaurantManagementInterface extends JFrame {
 
     private void showDailyRevenues() {
         reportPanel.removeAll(); // Clear previous content
-
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setBackground(Color.WHITE);
@@ -229,9 +227,9 @@ public class RestaurantManagementInterface extends JFrame {
     private void onBackButtonClicked() {
         new WelcomeManger().setVisible(true);
         this.dispose();
-        //reportPanel.removeAll(); // Clear the report panel and go to welcome interface in manger 
-        //reportPanel.revalidate();
-       // reportPanel.repaint();
+        reportPanel.removeAll(); // Clear the report panel and go to welcome interface in manger 
+        reportPanel.revalidate();
+        reportPanel.repaint();
     }
 
     // Create a meal item panel
@@ -281,8 +279,7 @@ public class RestaurantManagementInterface extends JFrame {
 
         return mealItemPanel;
     }
-
-    // Populate sample data for demonstration to delet  
+    // Populate sample data for demonstration to delet  this data for 2 mulhams for backend 
     private void populateSampleData() {
         dailyOrders.put("2023-10-01", 50);
         dailyOrders.put("2023-10-02", 60);
@@ -300,7 +297,6 @@ public class RestaurantManagementInterface extends JFrame {
         customerVisits.put("Jane Smith", 15);
         customerVisits.put("Alice Johnson", 8);
     }
-
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new RestaurantManagementInterface().setVisible(true));
     }

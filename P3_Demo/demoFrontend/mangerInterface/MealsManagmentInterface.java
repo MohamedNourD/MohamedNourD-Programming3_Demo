@@ -125,7 +125,7 @@ public class MealsManagmentInterface extends JFrame {
         mealNameLabel.setForeground(fontColor);
         mealItemPanel.add(mealNameLabel);
 
-        JTextField mealNameField = new JTextField(meal != null ? meal.getMealName() : "");
+        JTextField mealNameField = new JTextField(meal != null ? meal.getName() : "");
         mealNameField.setBounds(100, 120, 180, 20);
         mealNameField.setForeground(fontColor);
         mealNameField.setEnabled(false);
@@ -193,7 +193,7 @@ public class MealsManagmentInterface extends JFrame {
     private void onRemoveMealButtonClicked(JPanel mealPanel, Meal meal) {
         try {
             if (meal != null) {
-                MealsManagment.deleteMeal(meal.getMealName());
+                MealsManagment.deleteMeal(meal.getName());
             }
             mealsPanel.remove(mealPanel);
             mealsPanel.revalidate();
@@ -252,7 +252,8 @@ public class MealsManagmentInterface extends JFrame {
                 }
 
                 if (!mealName.isEmpty() && price > 0 && !ingredients.isEmpty()) {
-                    meals.add(new Meal(mealName, ingredients, price));
+                    meals.add(new Meal(0,mealName, ingredients,price));
+                    // Meal(int mealId, String mealName, String ingredients, double price)
                 }
             }
         }

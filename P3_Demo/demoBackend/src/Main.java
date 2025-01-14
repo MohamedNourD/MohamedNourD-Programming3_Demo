@@ -12,7 +12,7 @@ public class Main {
         System.out.println(MealsManagment.createMeal("Piz", "fdk, Tomato", 5).getMsg());
         System.out.println(MealsManagment.createMeal("fsl", "ato", 53).getMsg());
 
-        MealsManagment.deleteMeal(1);
+        MealsManagment.deleteMeal("hhh");
         List<Meal> meals = MealsManagment.getMeals();
         for (Meal meal: meals) {
             System.out.println(meal.getId() + " " + meal.getName());
