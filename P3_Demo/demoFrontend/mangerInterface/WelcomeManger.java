@@ -23,7 +23,6 @@ public class WelcomeManger extends javax.swing.JFrame {
         private void initComponents() {
                 // Frame settings
                 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                setTitle("Pet-Friendly Manager Interface");
                 setPreferredSize(new Dimension(800, 600));
                 setBackground(Color.WHITE);
 
@@ -45,7 +44,7 @@ public class WelcomeManger extends javax.swing.JFrame {
                 iconPanel.setLayout(new BorderLayout());
 
                 // Load pet-themed icon
-                String iconPath ="DemoProject\\icons\\fastfood.png"; // Replace with your pet icon path
+                String iconPath ="Project-Programming3_Demo\\icons\\BURGUR.png"; // Replace with your pet icon path
                 ImageIcon icon = new ImageIcon(iconPath);
                 iconLabel = new JLabel(icon);
                 iconLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -95,7 +94,6 @@ public class WelcomeManger extends javax.swing.JFrame {
                 button.setPreferredSize(new Dimension(120, 40)); // Smaller button size
                 return button;
         }
-
         // Action for Add Employee button
         private void addEmployeeAction(ActionEvent evt) {
                 new AddEmployee().setVisible(true);

@@ -4,7 +4,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import Users.UserManagement;
+import Users.UsersManagement;
 import loginInterface.SignInFrame;
 
 public class AddEmployee extends JFrame {
@@ -162,7 +162,7 @@ public class AddEmployee extends JFrame {
         String emailText = emailField.getText();
         String passwordText = new String(PasswordField.getPassword());
         String confirmPasswordText = new String(re_PasswordField.getPassword());
-
+        UsersManagement UserManagement = new UsersManagement();
         boolean isDone = UserManagement
                 .createCustomerAccount(firstNameText, lastNameText, emailText,
                         passwordText, confirmPasswordText, 2)

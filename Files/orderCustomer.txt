@@ -1,0 +1,14 @@
+Order Details - 2025-01-16 17:01:01
+-------------
+Order Type: Special
+
+Selected Meals:
+Pasta x 1 = $7.49
+Burger x 1 = $5.99
+
+Subtotal: $13.48
+Tip: $0.00
+Total: $13.48
+
+Thank you for your order!
+

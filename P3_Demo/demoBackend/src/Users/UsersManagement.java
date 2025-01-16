@@ -7,14 +7,14 @@ import java.util.*;
 
 public class UsersManagement {
     private static void addCustomer(Customer customer) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\customers.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("D:\\FolderProject_in\\Project-Programming3_Demo\\Files\\users.txt", true))) {
             writer.write(customer.toString());
             writer.newLine();
         }
     }
     public static List<Customer> getCustomers() throws IOException {
         List<Customer> customers = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("Files\\customers.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("Project-Programming3_Demo\\Files\\users.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 customers.add(Customer.fromString(line));
@@ -24,7 +24,7 @@ public class UsersManagement {
     }
 
     private static void addEmployee(Employee employee) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\staff.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Project-Programming3_Demo\\Files\\users.txt", true))) {
             writer.write(employee.toString());
             writer.newLine();
         }
@@ -32,7 +32,7 @@ public class UsersManagement {
 
     public static List<Employee> getEmployees() throws IOException {
         List<Employee> employees = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("Files\\staff.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("Project-Programming3_Demo\\Files\\users.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 employees.add(Employee.fromString(line));
@@ -113,7 +113,9 @@ public class UsersManagement {
         }
     }
 
-    public static Status logIn (String email, String password) throws IOException {
+    public static Status logIn (String email, String password)  {
+        System.out.println(email);
+        System.out.println(password);
         try {
             User currentUser = getUserByEmail(email);
             if (currentUser == null)
@@ -154,4 +156,6 @@ public class UsersManagement {
         else
             return loyalCustomer;
     }
+
+    
 }

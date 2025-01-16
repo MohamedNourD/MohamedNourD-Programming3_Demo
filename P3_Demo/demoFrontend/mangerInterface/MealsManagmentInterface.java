@@ -25,6 +25,7 @@ import Meals.Meal;
 import Meals.MealsManagment;
 import Execptions.Status;
 import java.awt.Component;
+
 public class MealsManagmentInterface extends JFrame {
 
     private JPanel mainPanel;
@@ -39,7 +40,7 @@ public class MealsManagmentInterface extends JFrame {
 
     public MealsManagmentInterface() {
         initComponents();
-        loadMeals();
+        // loadMeals();
     }
 
     private void initComponents() {
@@ -68,7 +69,8 @@ public class MealsManagmentInterface extends JFrame {
         // Create a bottom panel for buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(251, 133, 0));
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10)); // Center-align buttons with 20px horizontal gap
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10)); // Center-align buttons with 20px horizontal
+                                                                          // gap
 
         addMealButton.setBackground(new Color(251, 133, 0));
         addMealButton.setForeground(Color.WHITE);
@@ -99,7 +101,8 @@ public class MealsManagmentInterface extends JFrame {
             List<Meal> meals = MealsManagment.getMeals();
             addMealsToPanel(meals);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Failed to load meals: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Failed to load meals: " + e.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -199,7 +202,8 @@ public class MealsManagmentInterface extends JFrame {
             mealsPanel.revalidate();
             mealsPanel.repaint();
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Failed to remove meal: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Failed to remove meal: " + e.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -248,22 +252,26 @@ public class MealsManagmentInterface extends JFrame {
                     } else if (innerComponent instanceof JTextArea) {
                         JTextArea textArea = (JTextArea) innerComponent;
                         ingredients = textArea.getText();
+
+                        if (!mealName.isEmpty() && price > 0 && !ingredients.isEmpty()) {
+                            try {
+                                MealsManagment.updateMeal(mealName ,new Meal(0, mealName, ingredients, price));
+                                JOptionPane.showMessageDialog(this, "Meals saved successfully!", "Success",
+                                        JOptionPane.INFORMATION_MESSAGE);
+                            } catch (Exception e) {
+                                JOptionPane.showMessageDialog(this, "Failed to save meals: " + e.getMessage(), "Error",
+                                        JOptionPane.ERROR_MESSAGE);
+                            }
+                            //meals.add(new Meal(0, mealName, ingredients, price));
+                            // Meal(int mealId, String mealName, String ingredients, double price)
+                        }
                     }
                 }
-
-                if (!mealName.isEmpty() && price > 0 && !ingredients.isEmpty()) {
-                    meals.add(new Meal(0,mealName, ingredients,price));
-                    // Meal(int mealId, String mealName, String ingredients, double price)
-                }
+                // if (!mealName.isEmpty() && price > 0 && !ingredients.isEmpty()) {
+                //     meals.add(new Meal(0, mealName, ingredients, price));
+                //     // Meal(int mealId, String mealName, String ingredients, double price)
+                // }
             }
-        }
-
-        // Save meals to file
-        try {
-            MealsManagment.updateMeals(meals);
-            JOptionPane.showMessageDialog(this, "Meals saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Failed to save meals: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 

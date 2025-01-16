@@ -5,8 +5,8 @@ import java.nio.file.Paths;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import Users.UserManagement;
-
+import Users.UsersManagement;
+import Execptions.Status;
 //import Users.*;
 
 public class SignUp extends javax.swing.JFrame {
@@ -95,7 +95,7 @@ public class SignUp extends javax.swing.JFrame {
         jButton1.setText("Create new Account");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton1ActionPerformed();
             }
         });
 
@@ -290,37 +290,24 @@ public class SignUp extends javax.swing.JFrame {
 
         pack();
     }
+    private void jButton1ActionPerformed() {
+        String firstName = firstNameText.getText();
+        String lastName = lastNameText.getText();
+        String email = emailText.getText();
+        String password1 = new String(jPasswordField1.getPassword());
+        String password2 = new String(jPasswordField2.getPassword());
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        // Call the backend method to create a customer account
+        UsersManagement usersManagement = new UsersManagement();
+        Status status ; 
+        status = usersManagement.createCustomerAccount(firstName, lastName, email, password1, password2, 3); // 3 for customer
 
-        UserManagement newUser = new UserManagement();
-
-        boolean isDone = newUser
-                .createCustomerAccount(firstNameText.getText(), lastNameText.getText(), emailText.getText(),
-                        new String(jPasswordField1.getPassword()), new String(jPasswordField2.getPassword()), 3)
-                .isDone();
-        if (isDone) {
-            new SignInFrame().setVisible(true);
-            this.dispose();
+        if (status.isDone()) {
+            JOptionPane.showMessageDialog(null, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose(); // Close the registration window
         } else {
-
-        //     JLabel messageLabel = new JLabel( newUser.createCustomerAccount(firstNameText.getText(), lastNameText.getText(), emailText.getText(),
-        //                   new String(jPasswordField1.getPassword()), new String(jPasswordField2.getPassword()), 1)
-        //                 .getMsg());
-        //  messageLabel.setForeground(Color.decode("#fb8500")); // Set text color
-        //  messageLabel.setFont(new Font("Arial", Font.PLAIN, 14)); 
-        //  messageLabel.setVisible(true);
-         // Optional: Set
-            JOptionPane.showMessageDialog(
-                    null,
-                    newUser.createCustomerAccount(firstNameText.getText(), lastNameText.getText(), emailText.getText(),
-                            new String(jPasswordField1.getPassword()), new String(jPasswordField2.getPassword()), 1)
-                            .getMsg(),
-                    "",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, status.getMsg(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    
-   
     }
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {

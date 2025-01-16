@@ -1,12 +1,14 @@
 package loginInterface;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.nio.file.Paths;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import Users.UserManagement;
+import Users.UsersManagement;
+import Execptions.Status;
 import mangerInterface.WelcomeManger;
 
 public class SignInFrame extends javax.swing.JFrame {
@@ -260,59 +262,39 @@ public class SignInFrame extends javax.swing.JFrame {
         }
 
         private void signinActionPerformed(java.awt.event.ActionEvent evt) {
+                String email = jTextField1.getText();
+                String password = new String(jPasswordField1.getPassword());
 
-                UserManagement oldUser = new UserManagement();
-                boolean z = false;
+                Status loginStatus = UsersManagement.logIn(email, password);
 
-                try {
-                        z = oldUser.logIn(jTextField1.getText(), new String(jPasswordField1.getPassword()));
-                } catch (Exception e) {
-                        JOptionPane.showMessageDialog(
-                                        null,
-                                        "The Username or password is incorrect",
-                                        "Error",
-                                        JOptionPane.ERROR_MESSAGE);
-                }
-                if (true) {
-
-                        int userType = 0;
-
-                        // key = UserManagement.getUserByEmail(jTextField1.getText()).getUserType();
-                        switch (userType) {
-                                case 0:
-                                        // manger
-                                         new WelcomeManger().setVisible(true);
-                                        
-                                        this.dispose();
-                                        break;
-                                case 1:
-                                        // employee
-                                        // new showOrder().setVisible(true);
-                                        // this.dispose();
-
-                                        break;
-                                case 2:
-                                        // customer
-                                        // new MenuItem().setVisible(isExist);
-                                        // this.disable();
-                                        break;
+                if (loginStatus.isDone()) {
+                        try {
+                                int userType = UsersManagement.getUserByEmail(email).getUserType();
+                                System.out.println(userType);
+                                // Redirect based on user type
+                                switch (userType) {
+                                        case 1: // Manager
+                                                new WelcomeManger().setVisible(true);
+                                                this.dispose();
+                                                break;
+                                        case 2: // Employee
+                                                // new ShowOrder().setVisible(true); // Uncomment and implement if
+                                                // needed
+                                                this.dispose();
+                                                break;
+                                        case 3: // Customer
+                                                // new MenuItem().setVisible(true); // Uncomment and implement if needed
+                                                this.dispose();
+                                                break;
+                                }
+                        } catch (IOException e) {
+                                e.printStackTrace();
+                                JOptionPane.showMessageDialog(this, "An error occurred while fetching user details.",
+                                                "Error", JOptionPane.ERROR_MESSAGE);
                         }
-
+                } else {
+                        JOptionPane.showMessageDialog(this, loginStatus.getMsg(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                // from user type
-                // if there is an error in Entered during signIn process
-                /*
-                 * JLabel messageLabel = new JLabel("An error occurred while signing up");
-                 * messageLabel.setForeground(Color.decode("#fb8500")); // Set text color
-                 * messageLabel.setFont(new Font("Arial", Font.PLAIN, 14)); // Optional: Set
-                 * font and size
-                 * 
-                 * // Display the JOptionPane with the custom label
-                 * JOptionPane.showMessageDialog(null,messageLabel,
-                 * "Error",JOptionPane.ERROR_MESSAGE);
-                 * 
-                 */
-
         }
 
         private void registerActionPerformed(java.awt.event.ActionEvent evt) {

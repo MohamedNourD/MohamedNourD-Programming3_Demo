@@ -1,0 +1,199 @@
+[33mcommit 34474ef68929f494e56a8f117f6b65cc1ac5b7e3[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: MohamedNourD <mohamed.nour.diab.eng@gmail.com>
+Date:   Tue Jan 14 20:02:04 2025 +0300
+
+    some updates
+
+[33mcommit 2edc6aaabaa4456267de5e7d3e6bc0e6259e9ef5[m
+Merge: f5dc989 b0d4284
+Author: MohamedNourD <mohamed.nour.diab.eng@gmail.com>
+Date:   Sat Jan 11 21:13:01 2025 +0300
+
+     some updates in manger interface with resizeable interface and link with backend
+
+[33mcommit f5dc9891427e01c034237fbf92d91cce222be4fb[m
+Author: MohamedNourD <mohamed.nour.diab.eng@gmail.com>
+Date:   Sat Jan 11 21:08:28 2025 +0300
+
+     some updates in manger interface with resizeable interface and link with backend
+
+[33mcommit b0d4284ebad66531dc97e52ccf787a0b1e082618[m
+Author: mulhamzak <mulhamzak@gmail.com>
+Date:   Fri Jan 3 22:01:27 2025 +0300
+
+    Another updates after separating the employee class from the customer class.
+
+[33mcommit f3c98eb7b9001a87ec1c1029cf06a43a81c03ad2[m
+Author: mulhamzak <mulhamzak@gmail.com>
+Date:   Fri Jan 3 18:54:47 2025 +0300
+
+    The Employee class was separated from the Customer class, and the appropriate modifications were made.
+
+[33mcommit 7e272e35823ee25a43dbc66827d77bc13188da7a[m
+Author: mulhamzak <mulhamzak@gmail.com>
+Date:   Thu Jan 2 21:24:04 2025 +0300
+
+    Some new updates
+
+[33mcommit 3f5db8f07144af1dd6054c14c640036bafe2e983[m
+Author: mulhamzak <mulhamzak@gmail.com>
+Date:   Thu Jan 2 21:23:43 2025 +0300
+
+    Some new updates
+
+[33mcommit f8a6d0dc2b2b9b549cfe99ac96e55309d304478f[m
+Merge: 50f459f 44e58a4
+Author: mulhamzak <mulhamzak@gmail.com>
+Date:   Thu Jan 2 21:23:31 2025 +0300
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       P3_Demo/demoBackend/src/Main.java
+    #       P3_Demo/demoBackend/src/Meals/Meal.java
+    #       P3_Demo/demoBackend/src/Meals/MealsManagment.java
+    #       P3_Demo/demoBackend/src/Orders/Order.java
+    #       P3_Demo/demoBackend/src/Orders/OrderItem.java
+    #       P3_Demo/demoBackend/src/Orders/OrderManagment.java
+    #       P3_Demo/demoBackend/src/Users/Customer.java
+    #       P3_Demo/demoBackend/src/Users/User.java
+    #       P3_Demo/demoBackend/src/Users/UserManagement.java
+
+[33mcommit 50f459fe2361d45b905a0ebba61d10be29828e36[m
+Author: mulhamzak <mulhamzak@gmail.com>
+Date:   Thu Jan 2 21:22:22 2025 +0300
+
+    Some new updates
+
+[33mcommit 44e58a490c52062708c425cbc267253845f229b5[m
+Author: MohamedNourD <mohamed.nour.diab.eng@gmail.com>
+Date:   Thu Jan 2 20:56:46 2025 +0300
+
+     creat RestaurantMangementInterface
+
+[33mcommit 0798e26b2e3582cfc5c167ba752f1e41b05861f5[m
+Merge: 885ff07 e9593e0
+Author: mulhamzak <mulhamzak@gmail.com>
+Date:   Thu Jan 2 17:03:39 2025 +0300
+
+    Merge branch 'main' of https://github.com/MohamedNourD/Project-Programming3_Demo
+    
+    # Conflicts:
+    #       P3_Demo/demoBackend/src/Main.java
+    #       P3_Demo/demoBackend/src/Meals/Meal.java
+    #       P3_Demo/demoBackend/src/Meals/MealsManagment.java
+    #       P3_Demo/demoBackend/src/Orders/OrderItem.java
+    #       P3_Demo/demoBackend/src/Orders/OrderManagment.java
+    #       P3_Demo/demoBackend/src/Users/Customer.java
+    #       P3_Demo/demoBackend/src/Users/User.java
+    #       P3_Demo/demoBackend/src/Users/UserManagement.java
+
+[33mcommit 885ff07ebd40611faac27bdf4f25a4b48a06cc5c[m
+Author: mulhamzak <mulhamzak@gmail.com>
+Date:   Thu Jan 2 17:02:53 2025 +0300
+
+    Spme new updates
+
+[33mcommit e9593e033cef0059c0afcf211ab60e7c8cde0016[m
+Merge: 56dad52 46c045c
+Author: MohamedNourD <mohamed.nour.diab.eng@gmail.com>
+Date:   Wed Jan 1 20:41:35 2025 +0300
+
+     finsh the manger interface
+    
+    go to manger interface and in the file mealsMealsManagmentInterface run the main mehtode
+
+[33mcommit 56dad5299a79169f395b70fb2c86ec51cf4df28e[m
+Author: MohamedNourD <mohamed.nour.diab.eng@gmail.com>
+Date:   Wed Jan 1 20:33:07 2025 +0300
+
+     finsh the manger interface
+    
+    go to manger interface and in the file mealsMealsManagmentInterface run the main mehtode
+
+[33mcommit bee40e4ff4d9e85dd2494569cba4057df966a880[m
+Author: MohamedNourD <mohamed.nour.diab.eng@gmail.com>
+Date:   Wed Jan 1 20:24:46 2025 +0300
+
+     finsh the manger interface
+    
+    go to manger interface and in the file mealsMealsManagmentInterface run the main mehtode
+
+[33mcommit 46c045cff2f9432d444d013d858ce590c6f58777[m
+Author: mulhamzak <mulhamzak@gmail.com>
+Date:   Mon Dec 30 23:19:41 2024 +0300
+
+    Some updates
+
+[33mcommit 5816ca33a833f1b997438d863f6ea730605a88bb[m
+Author: mulhamzak <mulhamzak@gmail.com>
+Date:   Mon Dec 30 23:18:48 2024 +0300
+
+    Some updates
+
+[33mcommit 7dd308e51899bf7564dfddffba50e0f019bdf5b6[m
+Author: mulhamzak <mulhamzak@gmail.com>
+Date:   Sat Dec 28 21:14:10 2024 +0300
+
+    Upload Status.java
+
+[33mcommit 7bfe26377bad17b29a9c157f7b4c8b2e72740a2a[m
+Author: MohamedNourD <mohamed.nour.diab.eng@gmail.com>
+Date:   Thu Dec 26 16:31:41 2024 +0300
+
+     working with manger interface
+
+[33mcommit bd6a8d03a8922e7f65cf5dca65dab6d029494379[m
+Author: MohamedNourD <mohamed.nour.diab.eng@gmail.com>
+Date:   Thu Dec 26 14:45:30 2024 +0300
+
+     create manger interface and add employee interface
+
+[33mcommit 1eaa7a005a35e775e9c1ad4ec30e923c388cba6d[m
+Merge: 386ed92 88c1f11
+Author: MohamedNourD <mohamed.nour.diab.eng@gmail.com>
+Date:   Thu Dec 26 00:34:41 2024 +0300
+
+     add error massage during the login
+
+[33mcommit 386ed9280a0572a602d00d0b2c500438010c6713[m
+Author: MohamedNourD <mohamed.nour.diab.eng@gmail.com>
+Date:   Thu Dec 26 00:28:45 2024 +0300
+
+     modifi the error massege during the login
+
+[33mcommit 88c1f1173ac0b75104204bb5573a0ca9aa6c9e75[m
+Author: mulhamzak <mulhamzak@gmail.com>
+Date:   Wed Dec 25 22:54:55 2024 +0300
+
+    Some updates in users and meals.
+
+[33mcommit d283cff06e43200c9bab7661e8a21b105ca00a40[m
+Author: mulhamzak <mulhamzak@gmail.com>
+Date:   Wed Dec 25 21:36:46 2024 +0300
+
+    Improve code in terms of text files
+
+[33mcommit 73654e6398d40043733a83df1043c22a23c92ea5[m
+Author: mulhamzak <164308164+mulhamzak@users.noreply.github.com>
+Date:   Tue Dec 24 08:40:43 2024 +0300
+
+    Upload the new Backend files
+
+[33mcommit 20e8df85545b8f9a76e4305f8e646b53d9ed700f[m
+Author: mulhamzak <164308164+mulhamzak@users.noreply.github.com>
+Date:   Tue Dec 24 08:38:18 2024 +0300
+
+    Delete P3_Demo/demoBackend directory to upload the new one
+
+[33mcommit c8a69aca2c3d3db67455be7b1c4cf3033fa2d46d[m
+Author: MohamedNourD <mohamed.nour.diab.eng@gmail.com>
+Date:   Mon Dec 23 22:28:44 2024 +0300
+
+    simple rename to dirictory
+
+[33mcommit 16ad23a805c0ffa713bb63edf23cffadd4f86a44[m
+Author: MohamedNourD <mohamed.nour.diab.eng@gmail.com>
+Date:   Mon Dec 23 22:06:52 2024 +0300
+
+    Initial commit

@@ -108,12 +108,10 @@ public class GetStarted extends javax.swing.JFrame {
         this.setVisible(true);
     }
 
-    /**
-     * Action performed for "Get Started" button.
-     */
+ 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         new SignInFrame().setVisible(true);
-        this.dispose();// it simply closes the window 
+        this.dispose();// it simply to close the window 
     }
 
     // Variables declaration
