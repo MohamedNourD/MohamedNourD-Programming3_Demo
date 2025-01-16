@@ -12,7 +12,61 @@ public class Order {
     private LocalDateTime orderDate;
     private List<OrderItem> orderItems;
     private double orderPrice;
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+    public double getOrderPrice() {
+        return orderPrice;
+    }
+
+    public void setOrderPrice(double orderPrice) {
+        this.orderPrice = orderPrice;
+    }
+
+    public int getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(int orderType) {
+        this.orderType = orderType;
+    }
+
+    public String getStatusOrder() {
+        return statusOrder;
+    }
+
+    public void setStatusOrder(String statusOrder) {
+        this.statusOrder = statusOrder;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
     private int orderType;
+    private String statusOrder;
+    private String details;
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
@@ -23,6 +77,7 @@ public class Order {
         this.orderItems = orderItems;
         customer.newOrder(orderId);
     }
+
     public Order(int orderId, String customerName, List<OrderItem> orderItems) {
         this.orderId = orderId;
         this.customerName = customerName;
@@ -56,7 +111,8 @@ public class Order {
             }
         }
 
-        return orderId + "," + customerName + "," + orderDate.format(DATE_FORMATTER) + "," + orderPrice + "," + itemsString;
+        return orderId + "," + customerName + "," + orderDate.format(DATE_FORMATTER) + "," + orderPrice + ","
+                + itemsString;
     }
 
     public static Order fromString(String line) {
@@ -74,5 +130,22 @@ public class Order {
         Order order = new Order(orderId, customerName, items);
         order.setOrderDate(orderDate);
         return order;
+    }
+
+    public Order(String details) {
+        this.details = details;
+        this.statusOrder = "Preparing"; // Default status
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public String getStatus() {
+        return statusOrder;
+    }
+
+    public void setStatus(String statusOrder) {
+        this.statusOrder = statusOrder;
     }
 }

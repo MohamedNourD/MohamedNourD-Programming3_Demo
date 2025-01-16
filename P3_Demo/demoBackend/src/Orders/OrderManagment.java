@@ -17,7 +17,7 @@ public class OrderManagment {
     }
     public static List<Order> getOrders() throws IOException {
         List<Order> orders = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("Files\\orders.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("Project-Programming3_Demo\\Files\\orders.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 orders.add(Order.fromString(line));
@@ -32,4 +32,13 @@ public class OrderManagment {
                 .filter(order -> order.getOrderDate().equals(today))
                 .count();
     }
+    
+    public static void updateOrderStatus(Order updatedOrder) throws IOException {
+        List<Order> orders = getOrders();
+        for (Order order : orders) {
+            if (order.getId() == updatedOrder.getId()) {
+                order.setStatus(updatedOrder.getStatus());
+                break;
+            }
+        }}
 }

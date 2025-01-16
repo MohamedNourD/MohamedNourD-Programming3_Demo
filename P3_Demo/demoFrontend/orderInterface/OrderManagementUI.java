@@ -42,11 +42,11 @@ public class OrderManagementUI extends JFrame {
     // Meals data (replace with backend service in production)
     private final Meal[] meals = {
             new Meal("Burger", 5.99, "Beef, Cheese, Lettuce, Tomato",
-                    "Project-Programming3_Demo\\icons\\mnueBurgerIcon2.png"),
+                    "icons\\mnueBurgerIcon2.png"),
             new Meal("Pizza", 8.99, "Pepperoni, Cheese, Tomato Sauce",
-                    "Project-Programming3_Demo\\icons\\pizaMeal.png"),
+                    "icons\\pizaMeal.png"),
             new Meal("Pasta", 7.49, "Pasta, Alfredo Sauce, Chicken", 
-            "Project-Programming3_Demo\\icons\\pastMeal.png")
+            "icons\\pastMeal.png")
     
         };
 
@@ -57,7 +57,7 @@ public class OrderManagementUI extends JFrame {
     private String orderType = "";
 
     // Path to the order file
-    private static final String ORDER_FILE_PATH = "Project-Programming3_Demo\\Files\\orderCustomer.txt";
+    private static final String ORDER_FILE_PATH = "Files\\orderCustomer.txt";
 
     public OrderManagementUI() {
         // Frame setup

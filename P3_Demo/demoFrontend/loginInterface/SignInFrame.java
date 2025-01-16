@@ -12,6 +12,7 @@ import Execptions.Status;
 import mangerInterface.WelcomeManger;
 
 public class SignInFrame extends javax.swing.JFrame {
+        
 
         public SignInFrame() {
                 initComponents();

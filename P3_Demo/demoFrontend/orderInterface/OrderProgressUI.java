@@ -6,6 +6,7 @@ import java.awt.*;
 
 public class OrderProgressUI extends JFrame {
     
+    
 
     private JTable statusTable;
     private DefaultTableModel tableModel;
