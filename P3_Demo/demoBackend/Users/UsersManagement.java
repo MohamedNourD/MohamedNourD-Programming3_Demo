@@ -9,11 +9,7 @@ import java.util.*;
 
 public class UsersManagement {
     private static void addCustomer(Customer customer) throws IOException {
-<<<<<<< HEAD:P3_Demo/demoBackend/src/Users/UsersManagement.java
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\users.txt", true))) {
-=======
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\customers.txt", true))) {
->>>>>>> ff1ec1bac172ab34936e08dff2445b3dc0aa9bac:P3_Demo/demoBackend/Users/UsersManagement.java
             writer.write(customer.toString());
             writer.newLine();
         }
@@ -21,11 +17,7 @@ public class UsersManagement {
 
     static List<Customer> getCustomers() throws IOException {
         List<Customer> customers = new ArrayList<>();
-<<<<<<< HEAD:P3_Demo/demoBackend/src/Users/UsersManagement.java
-        try (BufferedReader reader = new BufferedReader(new FileReader("Files\\users.txt"))) {
-=======
         try (BufferedReader reader = new BufferedReader(new FileReader("Files\\customers.txt"))) {
->>>>>>> ff1ec1bac172ab34936e08dff2445b3dc0aa9bac:P3_Demo/demoBackend/Users/UsersManagement.java
             String line;
             while ((line = reader.readLine()) != null) {
                 customers.add(Customer.fromString(line));
@@ -35,11 +27,7 @@ public class UsersManagement {
     }
 
     private static void addEmployee(Employee employee) throws IOException {
-<<<<<<< HEAD:P3_Demo/demoBackend/src/Users/UsersManagement.java
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\users.txt", true))) {
-=======
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\employees.txt", true))) {
->>>>>>> ff1ec1bac172ab34936e08dff2445b3dc0aa9bac:P3_Demo/demoBackend/Users/UsersManagement.java
             writer.write(employee.toString());
             writer.newLine();
         }
@@ -47,11 +35,7 @@ public class UsersManagement {
 
     static List<Employee> getEmployees() throws IOException {
         List<Employee> employees = new ArrayList<>();
-<<<<<<< HEAD:P3_Demo/demoBackend/src/Users/UsersManagement.java
-        try (BufferedReader reader = new BufferedReader(new FileReader("Files\\users.txt"))) {
-=======
         try (BufferedReader reader = new BufferedReader(new FileReader("Files\\employees.txt"))) {
->>>>>>> ff1ec1bac172ab34936e08dff2445b3dc0aa9bac:P3_Demo/demoBackend/Users/UsersManagement.java
             String line;
             while ((line = reader.readLine()) != null) {
                 employees.add(Employee.fromString(line));
@@ -82,11 +66,7 @@ public class UsersManagement {
         return null;
     }
 
-<<<<<<< HEAD:P3_Demo/demoBackend/src/Users/UsersManagement.java
-    public Status createCustomerAccount(String firstName, String lastName, String email, String password1, String password2) {
-=======
     public static Status createCustomerAccount(String firstName, String lastName, String email, String password1, String password2) {
->>>>>>> ff1ec1bac172ab34936e08dff2445b3dc0aa9bac:P3_Demo/demoBackend/Users/UsersManagement.java
         try {
             if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password1.isEmpty() || password2.isEmpty()) {
                 throw new Exception("Not all fields are complete.");
@@ -107,7 +87,7 @@ public class UsersManagement {
 
                 Notification n = new Notification("Welcome!", "Your account has been created successfully ❤️");
                 n.run();
-                
+
                 return new Status();
             }
         }
@@ -116,11 +96,7 @@ public class UsersManagement {
         }
     }
 
-<<<<<<< HEAD:P3_Demo/demoBackend/src/Users/UsersManagement.java
-    public Status createEmployeeAccount(String firstName, String lastName, String email, String password1, String password2) {
-=======
     public static Status createEmployeeAccount(String firstName, String lastName, String email, String password1, String password2) {
->>>>>>> ff1ec1bac172ab34936e08dff2445b3dc0aa9bac:P3_Demo/demoBackend/Users/UsersManagement.java
         try {
             if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password1.isEmpty() || password2.isEmpty()) {
                 throw new Exception("Not all fields are complete.");
@@ -150,7 +126,7 @@ public class UsersManagement {
     }
 
     public static Status logIn (String email, String password)  {
-       System.out.println(email);
+        System.out.println(email);
         System.out.println(password);
         try {
             User currentUser = getUserByEmail(email);

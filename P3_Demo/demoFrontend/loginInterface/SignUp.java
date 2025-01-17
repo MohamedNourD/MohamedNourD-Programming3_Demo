@@ -243,7 +243,7 @@ public class SignUp extends javax.swing.JPanel {
                 UsersManagement usersManagement = new UsersManagement();
                 Status status = usersManagement.createCustomerAccount(firstName, lastName, email, password1, password2);
 
-                if (usersManagement.createCustomerAccount(firstName, lastName, email, password1, password2).isDone()== true ) {
+                if (status.isDone()) {
                         JOptionPane.showMessageDialog(this, "Registration successful!", "Success",
                                         JOptionPane.INFORMATION_MESSAGE);
                         ((javax.swing.JFrame) getTopLevelAncestor()).dispose();

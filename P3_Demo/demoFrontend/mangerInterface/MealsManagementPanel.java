@@ -131,17 +131,12 @@ public class MealsManagementPanel extends JPanel {
     }
 
     private void onRemoveMealButtonClicked(JPanel mealPanel, Meal meal) {
-        try {
-            if (meal != null) {
-                MealsManagment.deleteMeal(meal.getName());
-            }
-            mealsPanel.remove(mealPanel);
-            mealsPanel.revalidate();
-            mealsPanel.repaint();
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Failed to remove meal: " + e.getMessage(), "Error",
-                    JOptionPane.ERROR_MESSAGE);
+        if (meal != null) {
+            MealsManagment.deleteMeal(meal.getId());
         }
+        mealsPanel.remove(mealPanel);
+        mealsPanel.revalidate();
+        mealsPanel.repaint();
     }
 
     private void saveMealsToFile() {
