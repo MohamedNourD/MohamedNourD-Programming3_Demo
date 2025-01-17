@@ -4,6 +4,7 @@ import Execptions.Status;
 import Meals.Meal;
 import Notifications.Notification;
 
+import javax.swing.event.ListDataEvent;
 import java.io.*;
 import java.util.*;
 
@@ -44,6 +45,17 @@ public class UsersManagement {
         return employees;
     }
 
+    public static Customer getCustomerById(int customerId) throws IOException {
+        List<Customer> customers = getCustomers();
+
+        for (Customer customer : customers) {
+            if (customer.getId() == customerId) {
+                return customer;
+            }
+        }
+        return null;
+    }
+
     public static User getUserByEmail(String email) throws IOException {
         List<Customer> customers = getCustomers();
         List<Employee> employees = getEmployees();
@@ -79,9 +91,8 @@ public class UsersManagement {
             }
             else {
                 List<Customer> customers = getCustomers();
-                int nextCustomerId = customers.isEmpty() ? 0 : customers.get(customers.size() - 1).getId() + 1;
-                System.out.println(nextCustomerId);
-                System.out.println(customers.get(customers.size() - 1).getId());
+                int nextCustomerId = customers.isEmpty() ? 1 : customers.get(customers.size() - 1).getId() + 1;
+
                 Customer customer = new Customer(nextCustomerId, firstName, lastName, email, password1, 1);
                 addCustomer(customer);
 
@@ -109,7 +120,7 @@ public class UsersManagement {
             }
             else {
                 List<Employee> employees = getEmployees();
-                int nextEmployeeId = employees.isEmpty() ? 0 : employees.get(employees.size() - 1).getId() + 1;
+                int nextEmployeeId = employees.isEmpty() ? 1 : employees.get(employees.size() - 1).getId() + 1;
 
                 Employee employee = new Employee(nextEmployeeId, firstName, lastName, email, password1, 2);
                 addEmployee(employee);

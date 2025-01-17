@@ -15,9 +15,13 @@ public class Meal {
         this.ingredients = ingredients;
         this.price = price;
         this.orderCnt = orderCnt;
+<<<<<<< HEAD
 
         this.iconPath = iconPath;
 
+=======
+        this.iconPath = iconPath;
+>>>>>>> 0b5b64a8121d32dbccd1a4d843a809bbfa61f65f
     }
 
     public Meal(int mealId, String mealName, String ingredients, double price, String iconPath) {
@@ -26,9 +30,13 @@ public class Meal {
         this.ingredients = ingredients;
         this.price = price;
         this.orderCnt = 0;
+<<<<<<< HEAD
 
         this.iconPath = iconPath;
 
+=======
+        this.iconPath = iconPath;
+>>>>>>> 0b5b64a8121d32dbccd1a4d843a809bbfa61f65f
     }
 
     public int getId() {

@@ -1,92 +1,51 @@
 package Orders;
 
 import Users.Customer;
+import Users.UsersManagement;
 
+import java.io.IOException;
 import java.util.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 public class Order {
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
     private int orderId;
-    private String customerName;
+    private int customerID;
     private LocalDateTime orderDate;
     private List<OrderItem> orderItems;
     private double orderPrice;
+    private double tip;
+    private int orderType;
+    private String orderStatus;
+
     public int getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public int getCustomerID() {
+        return customerID;
     }
 
     public List<OrderItem> getOrderItems() {
         return orderItems;
     }
 
-    public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
-    }
-
     public double getOrderPrice() {
         return orderPrice;
-    }
-
-    public void setOrderPrice(double orderPrice) {
-        this.orderPrice = orderPrice;
     }
 
     public int getOrderType() {
         return orderType;
     }
 
-    public void setOrderType(int orderType) {
-        this.orderType = orderType;
+    public String getOrderStatus() {
+        return orderStatus;
     }
 
-    public String getStatusOrder() {
-        return statusOrder;
-    }
-
-    public void setStatusOrder(String statusOrder) {
-        this.statusOrder = statusOrder;
-    }
-
-    public void setDetails(String details) {
-        this.details = details;
-    }
-
-    private int orderType;
-    private String statusOrder;
-    private String details;
-
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
-    public Order(int orderId, Customer customer, List<OrderItem> orderItems) {
-        this.orderId = orderId;
-        this.customerName = customer.getName();
-        this.orderDate = LocalDateTime.now();
-        this.orderItems = orderItems;
-        customer.newOrder(orderId);
-    }
-
-    public Order(int orderId, String customerName, List<OrderItem> orderItems) {
-        this.orderId = orderId;
-        this.customerName = customerName;
-        this.orderDate = LocalDateTime.now();
-        this.orderItems = orderItems;
-    }
-
-    public Order() {
-        this.orderDate = LocalDateTime.now();
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public int getId() {
@@ -101,6 +60,64 @@ public class Order {
         this.orderDate = orderDate;
     }
 
+
+
+    public Order(int orderId, Customer customer, List<OrderItem> orderItems, int orderType, double tip) {
+        this.orderId = orderId;
+        this.customerID = customer.getId();
+        this.orderDate = LocalDateTime.now();
+        this.orderItems = orderItems;
+        this.orderType = orderType;
+        this.orderStatus = "pending";
+        this.tip = tip;
+
+        orderPrice = 0;
+        for (OrderItem orderItem : orderItems) {
+            orderPrice += orderItem.getPrice();
+        }
+        customer.newOrder(orderId);
+    }
+
+    public Order(int orderId, int customerID, List<OrderItem> orderItems, int orderType, double tip) throws IOException {
+        this.orderId = orderId;
+        this.customerID = customerID;
+        this.orderDate = LocalDateTime.now();
+        this.orderItems = orderItems;
+        this.orderType = orderType;
+        this.orderStatus = "pending";
+        this.tip = tip;
+
+        orderPrice = 0;
+        for (OrderItem orderItem : orderItems) {
+            orderPrice += orderItem.getPrice();
+        }
+        UsersManagement.getCustomerById(customerID).newOrder(orderId);
+    }
+
+    private Order (int orderId, int customerID, LocalDateTime orderDate, List<OrderItem> orderItems, int orderType, String statusOrder, double tip) throws IOException {
+        this.orderId = orderId;
+        this.customerID = customerID;
+        this.orderDate = orderDate;
+        this.orderItems = orderItems;
+        this.orderType = orderType;
+        this.orderStatus = statusOrder;
+        this.tip = tip;
+
+        orderPrice = 0;
+        for (OrderItem orderItem : orderItems) {
+            orderPrice += orderItem.getPrice();
+        }
+    }
+
+    public String getStatus() {
+        return orderStatus;
+    }
+
+    public void setStatus(String statusOrder) {
+        this.orderStatus = statusOrder;
+    }
+
+
     @Override
     public String toString() {
         String itemsString = "";
@@ -111,41 +128,27 @@ public class Order {
             }
         }
 
-        return orderId + "," + customerName + "," + orderDate.format(DATE_FORMATTER) + "," + orderPrice + ","
-                + itemsString;
+        return orderId + "," + customerID + "," + orderDate.format(DATE_FORMATTER) + "," + orderType + "," + orderStatus + "," + tip + "," + itemsString;
     }
 
-    public static Order fromString(String line) {
-        String[] parts = line.split(",", 4);
+    public static Order fromString(String line) throws IOException {
+        String[] parts = line.split(",", 7);
         int orderId = Integer.parseInt(parts[0]);
-        String customerName = parts[1];
-        LocalDateTime orderDate = LocalDateTime.parse(parts[2], DATE_FORMATTER); // Parse the orderDate
+        int customerId = Integer.parseInt(parts[1]);
+        LocalDateTime orderDate = LocalDateTime.parse(parts[2], DATE_FORMATTER);
+        int orderType = Integer.parseInt(parts[3]);
+        String orderStatus = parts[4];
+        double tip = Double.parseDouble(parts[5]);
+
         List<OrderItem> items = new ArrayList<>();
 
-        String[] itemParts = parts[3].split("\\|\\|");
+        String[] itemParts = parts[6].split("\\|\\|");
         for (String item : itemParts) {
             items.add(OrderItem.fromString(item));
         }
 
-        Order order = new Order(orderId, customerName, items);
-        order.setOrderDate(orderDate);
+        Order order = new Order(orderId, customerId, orderDate, items, orderType, orderStatus, tip);
         return order;
     }
 
-    public Order(String details) {
-        this.details = details;
-        this.statusOrder = "Preparing"; // Default status
-    }
-
-    public String getDetails() {
-        return details;
-    }
-
-    public String getStatus() {
-        return statusOrder;
-    }
-
-    public void setStatus(String statusOrder) {
-        this.statusOrder = statusOrder;
-    }
 }
