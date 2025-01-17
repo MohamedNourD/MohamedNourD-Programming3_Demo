@@ -246,7 +246,6 @@ public class SignUp extends javax.swing.JPanel {
                 if (status.isDone()) {
                         JOptionPane.showMessageDialog(this, "Registration successful!", "Success",
                                         JOptionPane.INFORMATION_MESSAGE);
-                        ((javax.swing.JFrame) getTopLevelAncestor()).dispose();
                         SwingUtilities.invokeLater(() -> {
 
                                 MainFrame.setPanel(new SignInPanel());

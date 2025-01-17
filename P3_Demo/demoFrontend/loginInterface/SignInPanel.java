@@ -221,8 +221,6 @@ public class SignInPanel extends javax.swing.JPanel {
                         
             
                     });
-            
-                        ((javax.swing.JFrame) getTopLevelAncestor()).dispose();
                         break;
                     case 2: // Employee
                     SwingUtilities.invokeLater(() -> {
@@ -231,16 +229,16 @@ public class SignInPanel extends javax.swing.JPanel {
                         
             
                     });
-                        ((javax.swing.JFrame) getTopLevelAncestor()).dispose();
+                       
                         break;
-                    case 3: // manger
+                    case 0: // manger
                     SwingUtilities.invokeLater(() -> {
                        
                         MainFrame.setPanel(new WelcomeMangerPanel());
                         
             
                     });
-                        ((javax.swing.JFrame) getTopLevelAncestor()).dispose();
+                      
                         break;
                 }
             } catch (IOException e) {

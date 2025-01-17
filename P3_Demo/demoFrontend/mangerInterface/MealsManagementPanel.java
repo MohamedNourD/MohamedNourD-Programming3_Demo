@@ -1,5 +1,4 @@
 package mangerInterface;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -9,6 +8,7 @@ import Meals.Meal;
 import Meals.MealsManagment;
 
 public class MealsManagementPanel extends JPanel {
+    
 
     private JPanel mealsPanel;
     private JScrollPane scrollPane;
@@ -18,7 +18,7 @@ public class MealsManagementPanel extends JPanel {
 
     public MealsManagementPanel() {
         initComponents();
-        // loadMeals(); // Uncomment if you have meals data to load on startup
+        loadMeals(); // Load and display existing meals
     }
 
     private void initComponents() {
@@ -61,6 +61,8 @@ public class MealsManagementPanel extends JPanel {
         mealsPanel.add(newMealPanel);
         mealsPanel.revalidate();
         mealsPanel.repaint();
+        scrollPane.revalidate(); // Force the scroll pane to update its view
+        scrollPane.repaint();
     }
 
     private JPanel createMealItemPanel(Meal meal) {
@@ -73,6 +75,22 @@ public class MealsManagementPanel extends JPanel {
         mealIconLabel.setBounds(10, 10, 280, 100);
         mealIconLabel.setForeground(fontColor);
         mealItemPanel.add(mealIconLabel);
+
+        // Add a mouse listener to the icon label to open a file chooser
+        mealIconLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setDialogTitle("Select Meal Icon");
+                int result = fileChooser.showOpenDialog(mealItemPanel);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    String iconPath = fileChooser.getSelectedFile().getAbsolutePath();
+                    mealIconLabel.setIcon(new ImageIcon(iconPath));
+                    mealIconLabel.setToolTipText(iconPath); // Store the icon path in the tooltip
+                    mealIconLabel.setText("");
+                }
+            }
+        });
 
         JLabel mealNameLabel = new JLabel("Meal Name:");
         mealNameLabel.setBounds(10, 120, 80, 20);
@@ -132,15 +150,103 @@ public class MealsManagementPanel extends JPanel {
 
     private void onRemoveMealButtonClicked(JPanel mealPanel, Meal meal) {
         if (meal != null) {
-            MealsManagment.deleteMeal(meal.getId());
+            try {
+                MealsManagment.deleteMeal(meal.getId());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Failed to remove meal: " + e.getMessage(), "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
         }
         mealsPanel.remove(mealPanel);
         mealsPanel.revalidate();
         mealsPanel.repaint();
+        scrollPane.revalidate(); // Force the scroll pane to update its view
+        scrollPane.repaint();
     }
 
     private void saveMealsToFile() {
-        // Logic for saving meals to a file
-        JOptionPane.showMessageDialog(this, "Meals saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        List<Meal> meals = new ArrayList<>();
+        boolean allFieldsFilled = true;
+
+        for (Component component : mealsPanel.getComponents()) {
+            if (component instanceof JPanel) {
+                JPanel mealPanel = (JPanel) component;
+                String mealName = "";
+                double price = 0.0;
+                String ingredients = "";
+                String iconPath = "";
+
+                for (Component innerComponent : mealPanel.getComponents()) {
+                    if (innerComponent instanceof JTextField) {
+                        JTextField textField = (JTextField) innerComponent;
+                        if (textField.getBounds().y == 120) { // Meal Name
+                            mealName = textField.getText();
+                        } else if (textField.getBounds().y == 150) { // Price
+                            price = Double.parseDouble(textField.getText());
+                        }
+                    } else if (innerComponent instanceof JTextArea) {
+                        JTextArea textArea = (JTextArea) innerComponent;
+                        ingredients = textArea.getText();
+                    } else if (innerComponent instanceof JLabel) {
+                        JLabel label = (JLabel) innerComponent;
+                        if (label.getToolTipText() != null) {
+                            iconPath = label.getToolTipText(); // Get the icon path from the tooltip
+                        }
+                    }
+                }
+
+                // Check if any field is empty
+                if (mealName.isEmpty() || price <= 0 || ingredients.isEmpty() || iconPath.isEmpty()) {
+                    allFieldsFilled = false;
+                    break;
+                }
+
+                // Add the meal to the list
+                meals.add(new Meal(0, mealName, ingredients, price, iconPath));
+            }
+        }
+
+        if (!allFieldsFilled) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields for each meal.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                for (Meal meal : meals) {
+                    MealsManagment.createMeal(meal.getName(), meal.getIngredients(), meal.getPrice(), meal.getIconPath());
+                }
+                JOptionPane.showMessageDialog(this, "Meals saved successfully!", "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Failed to save meals: " + e.getMessage(), "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void loadMeals() {
+        try {
+            List<Meal> meals = MealsManagment.getMeals(); // Fetch the list of meals
+            for (Meal meal : meals) {
+                JPanel mealPanel = createMealItemPanel(meal);
+                mealsPanel.add(mealPanel);
+            }
+            mealsPanel.revalidate();
+            mealsPanel.repaint();
+            scrollPane.revalidate(); // Force the scroll pane to update its view
+            scrollPane.repaint();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Failed to load meals: " + e.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Meals Management Test");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 600);
+
+        MealsManagementPanel mealsPanel = new MealsManagementPanel();
+        frame.add(mealsPanel);
+        frame.setVisible(true);
     }
 }

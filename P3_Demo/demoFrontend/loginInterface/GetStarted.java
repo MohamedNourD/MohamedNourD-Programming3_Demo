@@ -5,6 +5,7 @@ import java.awt.*;
 import mainFrame.MainFrame;
 
 public class GetStarted extends JPanel {
+    
 
     // Variables declaration
     private JButton getStartedButton;
@@ -94,7 +95,7 @@ public class GetStarted extends JPanel {
         });
     }
 
-    // Test the panel by embedding it into a frame
+   
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
            MainFrame mainFrame = new MainFrame();

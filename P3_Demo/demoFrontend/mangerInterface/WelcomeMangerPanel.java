@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 
+import mainFrame.MainFrame;
+
 public class WelcomeMangerPanel extends JPanel {
 
     // Components
@@ -82,21 +84,33 @@ public class WelcomeMangerPanel extends JPanel {
 
     // Action for Add Employee button
     private void addEmployeeAction(ActionEvent evt) {
-        JOptionPane.showMessageDialog(this, "Add Employee Clicked");
-        // You can replace this with: new AddEmployee().setVisible(true);
+
+        SwingUtilities.invokeLater(() -> {
+            MainFrame.setPanel(new AddEmployee());
+
+        });
+        
     }
 
     private void controlButtonAction(ActionEvent evt) {
-        JOptionPane.showMessageDialog(this, "Control Menu Clicked");
-        // You can replace this with: new MealsManagementPanel().setVisible(true);
+     
+        SwingUtilities.invokeLater(() -> {
+
+            MainFrame.setPanel(new MealsManagementPanel());
+
+        });
+      
     }
 
     private void statisticsInformationAction(ActionEvent evt) {
-        JOptionPane.showMessageDialog(this, "Show Statistics Clicked");
-        // You can replace this with: new RestaurantManagementPanel().setVisible(true);
+        SwingUtilities.invokeLater(() -> {
+
+            MainFrame.setPanel(new RestaurantManagementPanel());
+
+        });
     }
 
-    // Test the panel by embedding it into a frame
+   
     public static void main(String[] args) {
         JFrame testFrame = new JFrame("Welcome Manager Test");
         testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

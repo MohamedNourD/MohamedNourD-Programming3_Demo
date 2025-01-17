@@ -1,2 +1,3 @@
-0||Burger||Toma||54.0||0||icons\\Burger.png
-1||Buer||Tomato||65.0||57368453||icons\\Bug.png
+0||piza||teste||55.0||0||icons\\C:\Users\Mohamed Nour diab\Desktop\pizaMeal.png.png
+1||pasta||tester||66.0||0||icons\\C:\Users\Mohamed Nour diab\Desktop\pastMeal.png.png
+2||burgur||tester||55.0||0||icons\\C:\Users\Mohamed Nour diab\Desktop\mnueBurgerIcon2.png.png

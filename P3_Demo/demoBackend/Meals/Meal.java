@@ -15,11 +15,8 @@ public class Meal {
         this.ingredients = ingredients;
         this.price = price;
         this.orderCnt = orderCnt;
-        if (iconPath.startsWith("icons\\\\")) {
-            this.iconPath = iconPath;
-        } else {
-            this.iconPath = "icons\\\\" + iconPath + ".png";
-        }
+
+        this.iconPath = iconPath;
 
     }
 
@@ -29,11 +26,8 @@ public class Meal {
         this.ingredients = ingredients;
         this.price = price;
         this.orderCnt = 0;
-        if (iconPath.startsWith("icons\\\\")) {
-            this.iconPath = iconPath;
-        } else {
-            this.iconPath = "icons\\\\" + iconPath + ".png";
-        }
+
+        this.iconPath = iconPath;
 
     }
 
@@ -67,7 +61,7 @@ public class Meal {
 
     @Override
     public String toString() {
-        return mealId  + "||" + mealName + "||" + ingredients + "||" + price + "||" + orderCnt + "||" + iconPath;
+        return mealId + "||" + mealName + "||" + ingredients + "||" + price + "||" + orderCnt + "||" + iconPath;
     }
 
     public static Meal fromString(String line) {
@@ -78,7 +72,6 @@ public class Meal {
                 parts[2],
                 Double.parseDouble(parts[3]),
                 Integer.parseInt(parts[4]),
-                parts[5]
-        );
+                parts[5]);
     }
 }

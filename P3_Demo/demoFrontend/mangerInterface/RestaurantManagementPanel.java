@@ -4,6 +4,8 @@ import java.awt.*;
 import java.util.*;
 import javax.swing.*;
 
+import mainFrame.MainFrame;
+
 public class RestaurantManagementPanel extends JPanel {
 
     private JPanel reportPanel;
@@ -182,8 +184,9 @@ public class RestaurantManagementPanel extends JPanel {
 
     // Back button action
     private void onBackButtonClicked() {
-        // Navigate back to the previous screen (e.g., WelcomeManger)
-        // This logic depends on your application's navigation structure
+       SwingUtilities.invokeLater(() -> {
+          MainFrame.setPanel(new WelcomeMangerPanel());
+        });
         reportPanel.removeAll(); // Clear the report panel
         reportPanel.revalidate();
         reportPanel.repaint();
