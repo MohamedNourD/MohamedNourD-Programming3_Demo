@@ -18,7 +18,7 @@ public class Order {
     private double orderPrice;
     private double tip;
     private int orderType;
-    private String statusOrder;
+    private String orderStatus;
 
     public int getOrderId() {
         return orderId;
@@ -40,12 +40,12 @@ public class Order {
         return orderType;
     }
 
-    public String getStatusOrder() {
-        return statusOrder;
+    public String getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setStatusOrder(String statusOrder) {
-        this.statusOrder = statusOrder;
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public int getId() {
@@ -68,7 +68,7 @@ public class Order {
         this.orderDate = LocalDateTime.now();
         this.orderItems = orderItems;
         this.orderType = orderType;
-        this.statusOrder = "pending";
+        this.orderStatus = "pending";
         this.tip = tip;
 
         orderPrice = 0;
@@ -84,7 +84,7 @@ public class Order {
         this.orderDate = LocalDateTime.now();
         this.orderItems = orderItems;
         this.orderType = orderType;
-        this.statusOrder = "pending";
+        this.orderStatus = "pending";
         this.tip = tip;
 
         orderPrice = 0;
@@ -100,7 +100,7 @@ public class Order {
         this.orderDate = orderDate;
         this.orderItems = orderItems;
         this.orderType = orderType;
-        this.statusOrder = statusOrder;
+        this.orderStatus = statusOrder;
         this.tip = tip;
 
         orderPrice = 0;
@@ -110,11 +110,11 @@ public class Order {
     }
 
     public String getStatus() {
-        return statusOrder;
+        return orderStatus;
     }
 
     public void setStatus(String statusOrder) {
-        this.statusOrder = statusOrder;
+        this.orderStatus = statusOrder;
     }
 
 
@@ -128,7 +128,7 @@ public class Order {
             }
         }
 
-        return orderId + "," + customerID + "," + orderDate.format(DATE_FORMATTER) + "," + orderType + "," + statusOrder + "," + tip + "," + itemsString;
+        return orderId + "," + customerID + "," + orderDate.format(DATE_FORMATTER) + "," + orderType + "," + orderStatus + "," + tip + "," + itemsString;
     }
 
     public static Order fromString(String line) throws IOException {

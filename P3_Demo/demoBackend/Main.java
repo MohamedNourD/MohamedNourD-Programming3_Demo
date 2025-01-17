@@ -11,6 +11,7 @@ import java.util.List;
 
 public class Main {
     public static void main (String[] args) throws IOException {
+        System.out.println(MealsManagment.createMeal("Pizza", "Cheese", 25.0, "icons\\\\Pizza.png").getMsg());
 //        List<Meal> meals = MealsManagment.getMeals();
 //
 //        List<OrderItem> orderItems = new ArrayList<>();
