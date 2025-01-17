@@ -12,7 +12,8 @@ public class UsersManagement {
             writer.newLine();
         }
     }
-    default static List<Customer> getCustomers() throws IOException {
+
+    static List<Customer> getCustomers() throws IOException {
         List<Customer> customers = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("Project-Programming3_Demo\\Files\\users.txt"))) {
             String line;
@@ -30,7 +31,7 @@ public class UsersManagement {
         }
     }
 
-    default static List<Employee> getEmployees() throws IOException {
+    static List<Employee> getEmployees() throws IOException {
         List<Employee> employees = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("Project-Programming3_Demo\\Files\\users.txt"))) {
             String line;
@@ -41,7 +42,7 @@ public class UsersManagement {
         return employees;
     }
 
-    default static User getUserByEmail(String email) throws IOException {
+    static User getUserByEmail(String email) throws IOException {
         List<Customer> customers = getCustomers();
         List<Employee> employees = getEmployees();
 
@@ -80,8 +81,7 @@ public class UsersManagement {
 
                 Customer customer = new Customer(nextCustomerId, firstName, lastName, email, password1, 1);
                 addCustomer(customer);
-                Notification n = new Notififcation("Welcome", "Your acconunt has been created sucessfuly");
-                n.run();
+                
                 return new Status();
             }
         }
