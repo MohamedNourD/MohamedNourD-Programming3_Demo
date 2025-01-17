@@ -1,0 +1,2 @@
+0||Burger||Toma||54.0||0||icons\\Burger.png
+1||Burger||Tomato||65.0||0||icons\\Bug.png

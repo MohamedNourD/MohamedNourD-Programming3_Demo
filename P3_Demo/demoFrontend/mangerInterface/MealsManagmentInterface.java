@@ -194,17 +194,12 @@ public class MealsManagmentInterface extends JFrame {
     }
 
     private void onRemoveMealButtonClicked(JPanel mealPanel, Meal meal) {
-        try {
-            if (meal != null) {
-                MealsManagment.deleteMeal(meal.getName());
-            }
-            mealsPanel.remove(mealPanel);
-            mealsPanel.revalidate();
-            mealsPanel.repaint();
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Failed to remove meal: " + e.getMessage(), "Error",
-                    JOptionPane.ERROR_MESSAGE);
+        if (meal != null) {
+            MealsManagment.deleteMeal(meal.getId());
         }
+        mealsPanel.remove(mealPanel);
+        mealsPanel.revalidate();
+        mealsPanel.repaint();
     }
 
     private void onMealIconClicked(JLabel mealIconLabel) {
@@ -255,7 +250,7 @@ public class MealsManagmentInterface extends JFrame {
 
                         if (!mealName.isEmpty() && price > 0 && !ingredients.isEmpty()) {
                             try {
-                                MealsManagment.updateMeal(mealName ,new Meal(0, mealName, ingredients, price));
+//                                MealsManagment.updateMeal(mealName ,new Meal(0, mealName, ingredients, price));
                                 JOptionPane.showMessageDialog(this, "Meals saved successfully!", "Success",
                                         JOptionPane.INFORMATION_MESSAGE);
                             } catch (Exception e) {
