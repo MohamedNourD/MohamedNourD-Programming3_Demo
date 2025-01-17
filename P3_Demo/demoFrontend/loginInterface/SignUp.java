@@ -1,343 +1,279 @@
 package loginInterface;
 
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.nio.file.Paths;
-
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import Users.UsersManagement;
+import mainFrame.MainFrame;
 import Execptions.Status;
-//import Users.*;
 
-public class SignUp extends javax.swing.JFrame {
+public class SignUp extends javax.swing.JPanel {
 
-    public SignUp() {
-        initComponents();
-    }
+        // Components
+        private javax.swing.JButton jButton1;
+        private javax.swing.JCheckBox jCheckBox1;
+        private javax.swing.JLabel welcomeMassage;
+        private javax.swing.JLabel firstNameLabel;
+        private javax.swing.JLabel lastNameLabel;
+        private javax.swing.JLabel emailLabel;
+        private javax.swing.JLabel passwordLabel;
+        private javax.swing.JLabel password2Label;
+        private javax.swing.JLabel prettyMassage;
+        private javax.swing.JLabel bigIcon;
+        private javax.swing.JPanel jPanel1;
+        private javax.swing.JPanel jPanel2;
+        private javax.swing.JPanel jPanel3;
+        private javax.swing.JPanel jPanel4;
+        private javax.swing.JPanel jPanel5;
+        private javax.swing.JPasswordField jPasswordField1;
+        private javax.swing.JPasswordField jPasswordField2;
+        private javax.swing.JTextField firstNameText;
+        private javax.swing.JTextField lastNameText;
+        private javax.swing.JTextField emailText;
 
-    private void initComponents() {
-
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        welcomeMassage = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        firstName = new javax.swing.JLabel();
-        lastName = new javax.swing.JLabel();
-        email = new javax.swing.JLabel();
-        password = new javax.swing.JLabel();
-        password2 = new javax.swing.JLabel();
-        firstNameText = new javax.swing.JTextField();
-        lastNameText = new javax.swing.JTextField();
-        emailText = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jPanel4 = new javax.swing.JPanel();
-        prettyMassage = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        bigIcon = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
-        welcomeMassage.setFont(new java.awt.Font("Goudy Old Style", 3, 36)); // NOI18N
-        welcomeMassage.setForeground(new java.awt.Color(255, 96, 18));
-        welcomeMassage.setText("Welcome to orange restaurant");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(welcomeMassage)
-                                .addGap(0, 24, Short.MAX_VALUE)));
-        jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(welcomeMassage)
-                                .addContainerGap()));
-
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-
-        firstName.setForeground(new java.awt.Color(102, 102, 102));
-        firstName.setText("First name");
-
-        lastName.setForeground(new java.awt.Color(102, 102, 102));
-        lastName.setText("Last name");
-
-        email.setForeground(new java.awt.Color(102, 102, 102));
-        email.setText("Email");
-
-        password.setForeground(new java.awt.Color(102, 102, 102));
-        password.setText("Password");
-
-        password2.setForeground(new java.awt.Color(102, 102, 102));
-        password2.setText("Rewrite Password");
-
-        firstNameText.setForeground(new java.awt.Color(102, 102, 102));
-
-        lastNameText.setForeground(new java.awt.Color(102, 102, 102));
-
-        emailText.setForeground(new java.awt.Color(102, 102, 102));
-
-        jPasswordField1.setForeground(new java.awt.Color(102, 102, 102));
-
-        jPasswordField2.setForeground(new java.awt.Color(102, 102, 102));
-
-        jButton1.setBackground(new java.awt.Color(255, 96, 18));
-        jButton1.setFont(new java.awt.Font("Dubai", 3, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Create new Account");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed();
-            }
-        });
-
-        jCheckBox1.setForeground(new java.awt.Color(102, 102, 102));
-        jCheckBox1.setText("show password");
-        jCheckBox1.addActionListener(evt -> jCheckBox1ActionPerformed(evt));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jPasswordField2)
-                                        .addComponent(jPasswordField1)
-                                        .addComponent(emailText)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addGroup(jPanel3Layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(firstNameText)
-                                                        .addComponent(firstName, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(email, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(password, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(password2, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                110, Short.MAX_VALUE))
-                                                .addGroup(jPanel3Layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                                .addGap(39, 39, 39)
-                                                                .addGroup(jPanel3Layout.createParallelGroup(
-                                                                        javax.swing.GroupLayout.Alignment.LEADING,
-                                                                        false)
-                                                                        .addComponent(lastNameText,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                105, Short.MAX_VALUE)
-                                                                        .addComponent(lastName,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                Short.MAX_VALUE)))
-                                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                                .addPreferredGap(
-                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                .addComponent(jCheckBox1)))))
-                                .addGap(72, 72, 72))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addComponent(jButton1)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-        jPanel3Layout.setVerticalGroup(
-                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(82, 82, 82)
-                                .addGroup(jPanel3Layout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(firstName, javax.swing.GroupLayout.DEFAULT_SIZE, 30,
-                                                Short.MAX_VALUE)
-                                        .addComponent(lastName, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lastNameText, javax.swing.GroupLayout.DEFAULT_SIZE, 26,
-                                                Short.MAX_VALUE)
-                                        .addComponent(firstNameText))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(16, 16, 16)
-                                                .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 31,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jCheckBox1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(password2, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 33,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(75, Short.MAX_VALUE)));
-
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-
-        prettyMassage.setBackground(new java.awt.Color(255, 255, 255));
-        prettyMassage.setFont(new java.awt.Font("Sitka Text", 3, 18)); // NOI18N
-        prettyMassage.setForeground(new java.awt.Color(255, 96, 18));
-        prettyMassage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        prettyMassage.setText("Embark on a Culinary Adventure");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(prettyMassage, javax.swing.GroupLayout.PREFERRED_SIZE, 331,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(63, Short.MAX_VALUE)));
-        jPanel4Layout.setVerticalGroup(
-                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(prettyMassage, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                                .addContainerGap()));
-
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-
-        bigIcon.setBackground(new java.awt.Color(255, 255, 255));
-
-        String iconPath = Paths.get("icons", "fastfood.png").toString();
-        ImageIcon icon = new ImageIcon(iconPath);
-        // Side panel icon
-        bigIcon.setIcon(icon);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(bigIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
-                                .addContainerGap()));
-        jPanel5Layout.setVerticalGroup(
-                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(bigIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                                .addContainerGap()));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(210, 210, 210)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addGap(21, 21, 21)))));
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap(18, Short.MAX_VALUE)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE));
-
-        pack();
-    }
-    private void jButton1ActionPerformed() {
-        String firstName = firstNameText.getText();
-        String lastName = lastNameText.getText();
-        String email = emailText.getText();
-        String password1 = new String(jPasswordField1.getPassword());
-        String password2 = new String(jPasswordField2.getPassword());
-
-        // Call the backend method to create a customer account
-        UsersManagement usersManagement = new UsersManagement();
-        Status status ; 
-        status = usersManagement.createCustomerAccount(firstName, lastName, email, password1, password2, 3); // 3 for customer
-
-        if (status.isDone()) {
-            JOptionPane.showMessageDialog(null, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            this.dispose(); // Close the registration window
-        } else {
-            JOptionPane.showMessageDialog(null, status.getMsg(), "Error", JOptionPane.ERROR_MESSAGE);
+        public SignUp() {
+                initComponents();
         }
-    }
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {
-        if (jCheckBox1.isSelected()) {
-            jPasswordField1.setEchoChar((char) 0);
-        } else {
-            jPasswordField1.setEchoChar('*');
+        private void initComponents() {
+                jPanel1 = new JPanel();
+                jPanel2 = new JPanel();
+                welcomeMassage = new javax.swing.JLabel();
+                jPanel3 = new JPanel();
+                firstNameLabel = new javax.swing.JLabel();
+                lastNameLabel = new javax.swing.JLabel();
+                emailLabel = new javax.swing.JLabel();
+                passwordLabel = new javax.swing.JLabel();
+                password2Label = new javax.swing.JLabel();
+                firstNameText = new javax.swing.JTextField();
+                lastNameText = new javax.swing.JTextField();
+                emailText = new javax.swing.JTextField();
+                jPasswordField1 = new javax.swing.JPasswordField();
+                jPasswordField2 = new javax.swing.JPasswordField();
+                jButton1 = new javax.swing.JButton();
+                jCheckBox1 = new javax.swing.JCheckBox();
+                jPanel4 = new JPanel();
+                prettyMassage = new javax.swing.JLabel();
+                jPanel5 = new JPanel();
+                bigIcon = new javax.swing.JLabel();
+
+                // Main panel setup
+                jPanel1.setBackground(new Color(255, 255, 255));
+                jPanel1.setLayout(new GridBagLayout());
+                GridBagConstraints gbc = new GridBagConstraints();
+
+                // Welcome message panel
+                jPanel2.setBackground(new Color(255, 255, 255));
+                welcomeMassage.setFont(new java.awt.Font("Goudy Old Style", 3, 36));
+                welcomeMassage.setForeground(new Color(255, 96, 18));
+                welcomeMassage.setText("Welcome to Orange Restaurant");
+
+                jPanel2.setLayout(new GridBagLayout());
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.insets = new Insets(20, 10, 20, 10);
+                jPanel2.add(welcomeMassage, gbc);
+
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.gridwidth = 2;
+                jPanel1.add(jPanel2, gbc);
+                // Input fields panel
+                jPanel3.setBackground(new Color(255, 255, 255));
+                jPanel3.setLayout(new GridBagLayout());
+
+                gbc = new GridBagConstraints();
+                gbc.insets = new Insets(5, 10, 5, 10); // Padding for all components
+                gbc.fill = GridBagConstraints.HORIZONTAL; // Allow text fields to expand horizontally
+
+                // First Name
+                firstNameLabel.setForeground(new Color(102, 102, 102));
+                firstNameLabel.setText("First Name:");
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.anchor = GridBagConstraints.LINE_END; // Align label to the right
+                jPanel3.add(firstNameLabel, gbc);
+
+                firstNameText.setForeground(new Color(102, 102, 102));
+                firstNameText.setColumns(20);
+                gbc.gridx = 1;
+                gbc.anchor = GridBagConstraints.LINE_START; // Align field to the left
+                jPanel3.add(firstNameText, gbc);
+
+                // Last Name
+                lastNameLabel.setForeground(new Color(102, 102, 102));
+                lastNameLabel.setText("Last Name:");
+                gbc.gridx = 0;
+                gbc.gridy = 1;
+                gbc.anchor = GridBagConstraints.LINE_END;
+                jPanel3.add(lastNameLabel, gbc);
+
+                lastNameText.setForeground(new Color(102, 102, 102));
+                lastNameText.setColumns(20);
+                gbc.gridx = 1;
+                gbc.anchor = GridBagConstraints.LINE_START;
+                jPanel3.add(lastNameText, gbc);
+
+                // Email
+                emailLabel.setForeground(new Color(102, 102, 102));
+                emailLabel.setText("Email:");
+                gbc.gridx = 0;
+                gbc.gridy = 2;
+                gbc.anchor = GridBagConstraints.LINE_END;
+                jPanel3.add(emailLabel, gbc);
+
+                emailText.setForeground(new Color(102, 102, 102));
+                emailText.setColumns(20);
+                gbc.gridx = 1;
+                gbc.anchor = GridBagConstraints.LINE_START;
+                jPanel3.add(emailText, gbc);
+
+                // Password
+                passwordLabel.setForeground(new Color(102, 102, 102));
+                passwordLabel.setText("Password:");
+                gbc.gridx = 0;
+                gbc.gridy = 3;
+                gbc.anchor = GridBagConstraints.LINE_END;
+                jPanel3.add(passwordLabel, gbc);
+
+                jPasswordField1.setForeground(new Color(102, 102, 102));
+                jPasswordField1.setColumns(20);
+                gbc.gridx = 1;
+                gbc.anchor = GridBagConstraints.LINE_START;
+                jPanel3.add(jPasswordField1, gbc);
+
+                // Rewrite Password
+                password2Label.setForeground(new Color(102, 102, 102));
+                password2Label.setText("Rewrite Password:");
+                gbc.gridx = 0;
+                gbc.gridy = 4;
+                gbc.anchor = GridBagConstraints.LINE_END;
+                jPanel3.add(password2Label, gbc);
+
+                jPasswordField2.setForeground(new Color(102, 102, 102));
+                jPasswordField2.setColumns(20);
+                gbc.gridx = 1;
+                gbc.anchor = GridBagConstraints.LINE_START;
+                jPanel3.add(jPasswordField2, gbc);
+
+                // Show Password Checkbox
+                jCheckBox1.setForeground(new Color(102, 102, 102));
+                jCheckBox1.setText("Show Password");
+                gbc.gridx = 1;
+                gbc.gridy = 5;
+                gbc.anchor = GridBagConstraints.LINE_START;
+                jPanel3.add(jCheckBox1, gbc);
+                jCheckBox1.addActionListener(evt -> jCheckBox1ActionPerformed(evt));
+
+                // Create Account Button
+                jButton1.setBackground(new Color(255, 96, 18));
+                jButton1.setFont(new java.awt.Font("Dubai", 3, 18));
+                jButton1.setForeground(Color.WHITE);
+                jButton1.setText("Create New Account");
+                jButton1.addActionListener(evt -> jButton1ActionPerformed());
+                gbc.gridx = 0;
+                gbc.gridy = 6;
+                gbc.gridwidth = 2; // Center the button by spanning two columns
+                gbc.insets = new Insets(20, 10, 10, 10);
+                jPanel3.add(jButton1, gbc);
+
+                // Add the jPanel3 to jPanel1
+                gbc.gridx = 0;
+                gbc.gridy = 1;
+                gbc.gridwidth = 1;
+                jPanel1.add(jPanel3, gbc);
+
+                gbc.gridx = 0;
+                gbc.gridy = 1;
+                gbc.gridwidth = 1;
+                jPanel1.add(jPanel3, gbc);
+
+                // Restaurant logo panel
+                jPanel5.setBackground(new Color(255, 255, 255));
+                String iconPath = Paths.get("icons", "fastfood.png").toString();
+                ImageIcon icon = new ImageIcon(iconPath);
+                bigIcon.setIcon(icon);
+
+                jPanel5.setLayout(new GridBagLayout());
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.insets = new Insets(20, 20, 20, 20);
+                jPanel5.add(bigIcon, gbc);
+
+                gbc.gridx = 1;
+                gbc.gridy = 1;
+                jPanel1.add(jPanel5, gbc);
+
+                // Pretty message panel
+                jPanel4.setBackground(new Color(255, 255, 255));
+                prettyMassage.setFont(new java.awt.Font("Sitka Text", 3, 18));
+                prettyMassage.setForeground(new Color(255, 96, 18));
+                prettyMassage.setText("Embark on a Culinary Adventure");
+
+                jPanel4.setLayout(new GridBagLayout());
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                jPanel4.add(prettyMassage, gbc);
+
+                gbc.gridx = 1;
+                gbc.gridy = 2;
+                jPanel1.add(jPanel4, gbc);
+
+                // Final panel layout
+                setLayout(new java.awt.BorderLayout());
+                add(jPanel1, java.awt.BorderLayout.CENTER);
         }
-    }
 
-    // Variables declaration - do not modify
-    private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel welcomeMassage;
-    private javax.swing.JLabel firstName;
-    private javax.swing.JLabel lastName;
-    private javax.swing.JLabel email;
-    private javax.swing.JLabel password;
-    private javax.swing.JLabel password2;
-    private javax.swing.JLabel prettyMassage;
-    private javax.swing.JLabel bigIcon;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField firstNameText;
-    private javax.swing.JTextField lastNameText;
-    private javax.swing.JTextField emailText;
-    // End of variables declaration
+        private void jButton1ActionPerformed() {
+                String firstName = firstNameText.getText();
+                String lastName = lastNameText.getText();
+                String email = emailText.getText();
+                String password1 = new String(jPasswordField1.getPassword());
+                String password2 = new String(jPasswordField2.getPassword());
+
+                
+                UsersManagement usersManagement = new UsersManagement();
+                Status status = usersManagement.createCustomerAccount(firstName, lastName, email, password1, password2);
+
+                if (usersManagement.createCustomerAccount(firstName, lastName, email, password1, password2).isDone()== true ) {
+                        JOptionPane.showMessageDialog(this, "Registration successful!", "Success",
+                                        JOptionPane.INFORMATION_MESSAGE);
+                        ((javax.swing.JFrame) getTopLevelAncestor()).dispose();
+                        SwingUtilities.invokeLater(() -> {
+
+                                MainFrame.setPanel(new SignInPanel());
+
+                        });
+
+                        
+                } else {
+                        JOptionPane.showMessageDialog(this, status.getMsg(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+        }
+
+        private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {
+                if (jCheckBox1.isSelected()) {
+                        jPasswordField1.setEchoChar((char) 0); // Show password
+                } else {
+                        jPasswordField1.setEchoChar('*'); // Hide password
+                }
+        }
+
+        public static void main(String[] args) {
+                javax.swing.SwingUtilities.invokeLater(() -> {
+                        JFrame frame = new JFrame("Sign Up");
+                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        frame.setSize(800, 600);
+                        frame.add(new SignUp());
+                        frame.setVisible(true);
+                });
+        }
 }

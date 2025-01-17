@@ -12,16 +12,14 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class OrderManagementUI extends JFrame {
-
-
+public class OrderManagementUI extends JPanel {
 
     // Meal class to represent meal details
-    static class Meal {
-        String name;
-        double price;
-        String ingredients;
-        ImageIcon icon;
+    public static class Meal {
+        private String name;
+        private double price;
+        private String ingredients;
+        private ImageIcon icon;
 
         public Meal(String name, double price, String ingredients, String iconPath) {
             this.name = name;
@@ -37,18 +35,30 @@ public class OrderManagementUI extends JFrame {
                 System.err.println("Image not found: " + iconPath);
             }
         }
+
+        public String getName() {
+            return name;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        public String getIngredients() {
+            return ingredients;
+        }
+
+        public ImageIcon getIcon() {
+            return icon;
+        }
     }
 
     // Meals data (replace with backend service in production)
     private final Meal[] meals = {
-            new Meal("Burger", 5.99, "Beef, Cheese, Lettuce, Tomato",
-                    "icons\\mnueBurgerIcon2.png"),
-            new Meal("Pizza", 8.99, "Pepperoni, Cheese, Tomato Sauce",
-                    "icons\\pizaMeal.png"),
-            new Meal("Pasta", 7.49, "Pasta, Alfredo Sauce, Chicken", 
-            "icons\\pastMeal.png")
-    
-        };
+            new Meal("Burger", 5.99, "Beef, Cheese, Lettuce, Tomato", "icons/mnueBurgerIcon2.png"),
+            new Meal("Pizza", 8.99, "Pepperoni, Cheese, Tomato Sauce", "icons/pizaMeal.png"),
+            new Meal("Pasta", 7.49, "Pasta, Alfredo Sauce, Chicken", "icons/pastMeal.png")
+    };
 
     // Selected meals and their quantities
     private final Map<Meal, Integer> selectedMeals = new HashMap<>();
@@ -57,15 +67,11 @@ public class OrderManagementUI extends JFrame {
     private String orderType = "";
 
     // Path to the order file
-    private static final String ORDER_FILE_PATH = "Files\\orderCustomer.txt";
+    private static final String ORDER_FILE_PATH = "Files/orderCustomer.txt";
 
     public OrderManagementUI() {
-        // Frame setup
-        setTitle("Order Management System");
-        setSize(1000, 800);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-        getContentPane().setBackground(new Color(240, 240, 240)); // Light gray background
+        setBackground(new Color(240, 240, 240)); // Light gray background
 
         // Welcome panel
         JPanel welcomePanel = new JPanel();
@@ -151,8 +157,6 @@ public class OrderManagementUI extends JFrame {
         bottomPanel.add(placeOrderPanel, BorderLayout.SOUTH);
 
         add(bottomPanel, BorderLayout.SOUTH);
-
-        setVisible(true);
     }
 
     private JButton createStyledButton(String text) {
@@ -172,24 +176,24 @@ public class OrderManagementUI extends JFrame {
         card.setPreferredSize(new Dimension(900, 150));
 
         // Icon
-        JLabel iconLabel = new JLabel(meal.icon);
+        JLabel iconLabel = new JLabel(meal.getIcon());
         iconLabel.setBounds(20, 10, 130, 130);
         card.add(iconLabel);
 
         // Name
-        JLabel nameLabel = new JLabel(meal.name);
+        JLabel nameLabel = new JLabel(meal.getName());
         nameLabel.setFont(new Font("Arial", Font.BOLD, 16));
         nameLabel.setBounds(170, 10, 200, 20);
         card.add(nameLabel);
 
         // Price
-        JLabel priceLabel = new JLabel("$" + String.format("%.2f", meal.price));
+        JLabel priceLabel = new JLabel("$" + String.format("%.2f", meal.getPrice()));
         priceLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         priceLabel.setBounds(170, 40, 100, 20);
         card.add(priceLabel);
 
         // Ingredients
-        JTextArea ingredientsArea = new JTextArea(meal.ingredients);
+        JTextArea ingredientsArea = new JTextArea(meal.getIngredients());
         ingredientsArea.setEditable(false);
         ingredientsArea.setLineWrap(true);
         ingredientsArea.setWrapStyleWord(true);
@@ -211,7 +215,7 @@ public class OrderManagementUI extends JFrame {
             } else {
                 selectedMeals.remove(meal);
             }
-            JOptionPane.showMessageDialog(this, quantity + " " + meal.name + " added to order!");
+            JOptionPane.showMessageDialog(this, quantity + " " + meal.getName() + " added to order!");
         });
         card.add(addButton);
 
@@ -219,7 +223,8 @@ public class OrderManagementUI extends JFrame {
     }
 
     private void showBillDialog() {
-        JDialog billDialog = new JDialog(this, "Bill Summary", true);
+        JDialog billDialog = new JDialog();
+        billDialog.setTitle("Bill Summary");
         billDialog.setSize(400, 300);
         billDialog.setLocationRelativeTo(this);
         billDialog.getContentPane().setBackground(Color.WHITE);
@@ -236,8 +241,7 @@ public class OrderManagementUI extends JFrame {
         for (Map.Entry<Meal, Integer> entry : selectedMeals.entrySet()) {
             Meal meal = entry.getKey();
             int quantity = entry.getValue();
-            JLabel mealLabel = new JLabel(
-                    meal.name + " x " + quantity + " = $" + String.format("%.2f", meal.price * quantity));
+            JLabel mealLabel = new JLabel(meal.getName() + " x " + quantity + " = $" + String.format("%.2f", meal.getPrice() * quantity));
             billPanel.add(mealLabel);
         }
 
@@ -295,16 +299,14 @@ public class OrderManagementUI extends JFrame {
             for (Map.Entry<Meal, Integer> entry : selectedMeals.entrySet()) {
                 Meal meal = entry.getKey();
                 int quantity = entry.getValue();
-                writer.write(
-                        meal.name + " x " + quantity + " = $" + String.format("%.2f", meal.price * quantity) + "\n");
+                writer.write(meal.getName() + " x " + quantity + " = $" + String.format("%.2f", meal.getPrice() * quantity) + "\n");
             }
             writer.write("\nSubtotal: $" + String.format("%.2f", subtotal) + "\n");
             writer.write("Tip: $" + String.format("%.2f", tip) + "\n");
             writer.write("Total: $" + String.format("%.2f", total) + "\n");
             writer.write("\nThank you for your order!\n\n");
 
-            // JOptionPane.showMessageDialog(this, "Order details saved to " +
-            // ORDER_FILE_PATH);
+            JOptionPane.showMessageDialog(this, "Order details saved to " + ORDER_FILE_PATH);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error saving order details: " + e.getMessage());
         }
@@ -340,12 +342,18 @@ public class OrderManagementUI extends JFrame {
     private double calculateSubtotal() {
         double subtotal = 0;
         for (Map.Entry<Meal, Integer> entry : selectedMeals.entrySet()) {
-            subtotal += entry.getKey().price * entry.getValue();
+            subtotal += entry.getKey().getPrice() * entry.getValue();
         }
         return subtotal;
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(OrderManagementUI::new);
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Order Management System");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(1000, 800);
+            frame.add(new OrderManagementUI());
+            frame.setVisible(true);
+        });
     }
 }

@@ -5,7 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import Users.UsersManagement;
-import loginInterface.SignInFrame;
+import loginInterface.SignInPanel;
 
 public class AddEmployee extends JFrame {
 
@@ -164,14 +164,14 @@ public class AddEmployee extends JFrame {
         String confirmPasswordText = new String(re_PasswordField.getPassword());
         UsersManagement UserManagement = new UsersManagement();
         boolean isDone = UserManagement
-                .createCustomerAccount(firstNameText, lastNameText, emailText,
-                        passwordText, confirmPasswordText, 2)
+                .createEmployeeAccount(firstNameText, lastNameText, emailText,
+                        passwordText, confirmPasswordText)
                 .isDone();
         if (!isDone) {
             JOptionPane.showMessageDialog(
                     this,
                     UserManagement.createCustomerAccount(firstNameText, lastNameText, emailText,
-                            passwordText, confirmPasswordText, 2).getMsg(),
+                            passwordText, confirmPasswordText).getMsg(),
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
         } else {
@@ -184,7 +184,7 @@ public class AddEmployee extends JFrame {
     }
 
     private void onBackButtonClick() {
-        new WelcomeManger().setVisible(true);
+        new WelcomeMangerPanel().setVisible(true);
         this.dispose();
     }
 

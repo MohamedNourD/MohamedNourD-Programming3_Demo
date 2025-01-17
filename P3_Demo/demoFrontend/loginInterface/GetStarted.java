@@ -1,123 +1,106 @@
 package loginInterface;
 
+import javax.swing.*;
+import java.awt.*;
+import mainFrame.MainFrame;
 
-import javax.swing.ImageIcon;
+public class GetStarted extends JPanel {
 
-public class GetStarted extends javax.swing.JFrame {
+    // Variables declaration
+    private JButton getStartedButton;
+    private JLabel logoLabel;
+    private JLabel titleLabel;
+    private JLabel subtitleLabel;
 
     public GetStarted() {
         initComponents();
-        
     }
 
     private void initComponents() {
+        setBackground(Color.WHITE);
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        // Title Label
+        titleLabel = new JLabel("Start Your Delicious Journey Now");
+        titleLabel.setFont(new Font("Georgia", Font.BOLD | Font.ITALIC, 32));
+        titleLabel.setForeground(new Color(255, 96, 18));
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        // Logo Image
-        String iconPath  = "DemoProject\\icons\\fastfood.png";
+        // Logo Label
+        String iconPath = "icons/fastfood.png"; // Update the path as needed
         ImageIcon icon = new ImageIcon(iconPath);
+        logoLabel = new JLabel(icon);
+        logoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        jLabel1.setIcon(icon);
+        // Subtitle Label
+        subtitleLabel = new JLabel("No Line. No Waiting");
+        subtitleLabel.setFont(new Font("Georgia", Font.ITALIC, 20));
+        subtitleLabel.setForeground(new Color(120, 120, 120));
+        subtitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Get Started Button
-        jButton1.setBackground(new java.awt.Color(255, 96, 18));
-        jButton1.setFont(new java.awt.Font("Georgia", 3, 22));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Get Started");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        getStartedButton = new JButton("Get Started");
+        getStartedButton.setFont(new Font("Georgia", Font.BOLD, 22));
+        getStartedButton.setBackground(new Color(255, 96, 18));
+        getStartedButton.setForeground(Color.WHITE);
+        getStartedButton.setFocusPainted(false);
+        getStartedButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        getStartedButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        getStartedButton.addActionListener(evt -> onGetStartedButtonClicked());
+
+        // Button hover effect
+        getStartedButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                getStartedButton.setBackground(new Color(255, 130, 50));
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                getStartedButton.setBackground(new Color(255, 96, 18));
             }
         });
 
-        // Title Label
-        jLabel2.setFont(new java.awt.Font("Georgia", 2, 28));
-        jLabel2.setForeground(new java.awt.Color(255, 96, 18));
-        jLabel2.setText("Start Your Delicious Journey Now");
+        // Layout Configuration
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(20, 20, 20, 20);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Subtitle Label
-        jLabel3.setFont(new java.awt.Font("Georgia", 2, 16));
-        jLabel3.setForeground(new java.awt.Color(255, 96, 18));
-        jLabel3.setText("No Line. No Waiting");
+        // Add Title Label
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        add(titleLabel, gbc);
 
-        // Layout Setup
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(184, 184, 184)
-                                .addGroup(jPanel1Layout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap(184, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(294, 294, 294))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(285, 285, 285)))));
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 365,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3)
-                                .addContainerGap(32, Short.MAX_VALUE)));
+        // Add Logo Label
+        gbc.gridy = 1;
+        gbc.insets = new Insets(40, 20, 20, 20);
+        add(logoLabel, gbc);
 
-        // Frame Layout
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE));
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+        // Add Subtitle Label
+        gbc.gridy = 2;
+        gbc.insets = new Insets(20, 20, 20, 20);
+        add(subtitleLabel, gbc);
 
-        pack();
-        this.setVisible(true);
+        // Add Get Started Button
+        gbc.gridy = 3;
+        gbc.insets = new Insets(40, 20, 40, 20);
+        add(getStartedButton, gbc);
     }
 
- 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        new SignInFrame().setVisible(true);
-        this.dispose();// it simply to close the window 
+    private void onGetStartedButtonClicked() {
+        SwingUtilities.invokeLater(() -> {
+           
+            MainFrame.setPanel(new SignInPanel());
+           // dispose(); // Close the current window to display the sign-in panel
+        });
     }
 
-    // Variables declaration
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
+    // Test the panel by embedding it into a frame
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+           MainFrame mainFrame = new MainFrame();
+           mainFrame.setPanel(new GetStarted());
+           mainFrame.setVisible(true);
+            
+        });
+    }
 }

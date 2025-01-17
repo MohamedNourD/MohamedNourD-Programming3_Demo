@@ -9,18 +9,15 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
-public class EmployeeOrderUI extends JFrame {
+public class EmployeeOrderUI extends JPanel {
 
     // List to store orders
     private List<Order> orders;
 
     public EmployeeOrderUI() {
-        // Frame setup
-        setTitle("Employee Order Management");
-        setSize(1000, 800);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // Panel setup
         setLayout(new BorderLayout());
-        getContentPane().setBackground(new Color(240, 240, 240)); // Light gray background
+        setBackground(new Color(240, 240, 240)); // Light gray background
 
         // Load orders from the file
         loadOrders();
@@ -59,8 +56,6 @@ public class EmployeeOrderUI extends JFrame {
         buttonPanel.setBackground(new Color(240, 240, 240));
         buttonPanel.add(refreshButton);
         add(buttonPanel, BorderLayout.SOUTH);
-
-        setVisible(true);
     }
 
     private void loadOrders() {
@@ -135,6 +130,12 @@ public class EmployeeOrderUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(EmployeeOrderUI::new);
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Employee Order Management");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(1000, 800);
+            frame.add(new EmployeeOrderUI());
+            frame.setVisible(true);
+        });
     }
 }

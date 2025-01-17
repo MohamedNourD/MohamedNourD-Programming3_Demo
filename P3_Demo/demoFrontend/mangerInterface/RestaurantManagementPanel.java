@@ -2,12 +2,10 @@ package mangerInterface;
 
 import java.awt.*;
 import java.util.*;
-
 import javax.swing.*;
 
-public class RestaurantManagementInterface extends JFrame {
+public class RestaurantManagementPanel extends JPanel {
 
-    private JPanel mainPanel;
     private JPanel reportPanel;
     private JButton dailyOrdersButton;
     private JButton mostRequestedMealButton;
@@ -21,26 +19,14 @@ public class RestaurantManagementInterface extends JFrame {
     private Map<String, Double> dailyRevenues = new HashMap<>(); // Date -> Revenue
     private Map<String, Integer> customerVisits = new HashMap<>(); // Customer -> Number of visits
 
-    public RestaurantManagementInterface() {
+    public RestaurantManagementPanel() {
         initComponents();
         populateSampleData(); // Populate sample data for demonstration
     }
 
     private void initComponents() {
-        mainPanel = new JPanel();
-        reportPanel = new JPanel();
-        dailyOrdersButton = new JButton("Daily Orders");
-        mostRequestedMealButton = new JButton("Most Requested Meal");
-        dailyRevenuesButton = new JButton("Daily Revenues");
-        regularCustomerButton = new JButton("Regular Customer");
-        backButton = new JButton("Back");
-
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(1000, 800));
-
-        // Main panel layout
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.setBackground(new Color(240, 240, 240));
+        setLayout(new BorderLayout());
+        setBackground(new Color(240, 240, 240));
 
         // Header panel with welcome message
         JPanel headerPanel = new JPanel();
@@ -50,9 +36,10 @@ public class RestaurantManagementInterface extends JFrame {
         welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
         welcomeLabel.setForeground(Color.WHITE);
         headerPanel.add(welcomeLabel);
-        mainPanel.add(headerPanel, BorderLayout.NORTH);
+        add(headerPanel, BorderLayout.NORTH);
 
         // Report panel
+        reportPanel = new JPanel();
         reportPanel.setLayout(new BorderLayout());
         reportPanel.setBackground(Color.WHITE);
         reportPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -63,7 +50,7 @@ public class RestaurantManagementInterface extends JFrame {
         reportLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         reportPanel.add(reportLabel, BorderLayout.NORTH);
 
-        mainPanel.add(reportPanel, BorderLayout.CENTER);
+        add(reportPanel, BorderLayout.CENTER);
 
         // Button panel
         JPanel buttonPanel = new JPanel();
@@ -75,30 +62,11 @@ public class RestaurantManagementInterface extends JFrame {
         Color buttonColor = new Color(251, 133, 0);
         Font buttonFont = new Font("Segoe UI", Font.BOLD, 14);
 
-        dailyOrdersButton.setBackground(buttonColor);
-        dailyOrdersButton.setForeground(Color.WHITE);
-        dailyOrdersButton.setFont(buttonFont);
-        dailyOrdersButton.addActionListener(e -> showDailyOrders());
-
-        mostRequestedMealButton.setBackground(buttonColor);
-        mostRequestedMealButton.setForeground(Color.WHITE);
-        mostRequestedMealButton.setFont(buttonFont);
-        mostRequestedMealButton.addActionListener(e -> showMostRequestedMeal());
-
-        dailyRevenuesButton.setBackground(buttonColor);
-        dailyRevenuesButton.setForeground(Color.WHITE);
-        dailyRevenuesButton.setFont(buttonFont);
-        dailyRevenuesButton.addActionListener(e -> showDailyRevenues());
-
-        regularCustomerButton.setBackground(buttonColor);
-        regularCustomerButton.setForeground(Color.WHITE);
-        regularCustomerButton.setFont(buttonFont);
-        regularCustomerButton.addActionListener(e -> showRegularCustomer());
-
-        backButton.setBackground(buttonColor);
-        backButton.setForeground(Color.WHITE);
-        backButton.setFont(buttonFont);
-        backButton.addActionListener(e -> onBackButtonClicked());
+        dailyOrdersButton = createButton("Daily Orders", buttonColor, buttonFont, e -> showDailyOrders());
+        mostRequestedMealButton = createButton("Most Requested Meal", buttonColor, buttonFont, e -> showMostRequestedMeal());
+        dailyRevenuesButton = createButton("Daily Revenues", buttonColor, buttonFont, e -> showDailyRevenues());
+        regularCustomerButton = createButton("Regular Customer", buttonColor, buttonFont, e -> showRegularCustomer());
+        backButton = createButton("Back", buttonColor, buttonFont, e -> onBackButtonClicked());
 
         buttonPanel.add(dailyOrdersButton);
         buttonPanel.add(mostRequestedMealButton);
@@ -106,13 +74,20 @@ public class RestaurantManagementInterface extends JFrame {
         buttonPanel.add(regularCustomerButton);
         buttonPanel.add(backButton);
 
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
-
-        add(mainPanel);
-        pack();
+        add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    // methods to handle report generation
+    // Helper method to create styled buttons
+    private JButton createButton(String text, Color color, Font font, java.awt.event.ActionListener listener) {
+        JButton button = new JButton(text);
+        button.setBackground(color);
+        button.setForeground(Color.WHITE);
+        button.setFont(font);
+        button.addActionListener(listener);
+        return button;
+    }
+
+    // Methods to handle report generation
     private void showDailyOrders() {
         reportPanel.removeAll(); // Clear previous content
 
@@ -207,9 +182,9 @@ public class RestaurantManagementInterface extends JFrame {
 
     // Back button action
     private void onBackButtonClicked() {
-        new WelcomeManger().setVisible(true);
-        this.dispose();
-        reportPanel.removeAll(); // Clear the report panel and go to welcome interface in manger 
+        // Navigate back to the previous screen (e.g., WelcomeManger)
+        // This logic depends on your application's navigation structure
+        reportPanel.removeAll(); // Clear the report panel
         reportPanel.revalidate();
         reportPanel.repaint();
     }
@@ -261,7 +236,8 @@ public class RestaurantManagementInterface extends JFrame {
 
         return mealItemPanel;
     }
-    // Populate sample data for demonstration to delet  this data for 2 mulhams for backend 
+
+    // Populate sample data for demonstration
     private void populateSampleData() {
         dailyOrders.put("2023-10-01", 50);
         dailyOrders.put("2023-10-02", 60);
@@ -279,7 +255,14 @@ public class RestaurantManagementInterface extends JFrame {
         customerVisits.put("Jane Smith", 15);
         customerVisits.put("Alice Johnson", 8);
     }
+
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new RestaurantManagementInterface().setVisible(true));
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Restaurant Management");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(1000, 800);
+            frame.add(new RestaurantManagementPanel());
+            frame.setVisible(true);
+        });
     }
 }

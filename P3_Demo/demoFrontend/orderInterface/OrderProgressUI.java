@@ -4,22 +4,15 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-public class OrderProgressUI extends JFrame {
-    
-    
+public class OrderProgressUI extends JPanel {
 
     private JTable statusTable;
     private DefaultTableModel tableModel;
     private JLabel messageLabel;
 
     public OrderProgressUI() {
-        setTitle("Order Progress");
-        setSize(500, 400); // Adjusted size for better layout
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        // Create the main panel with a white background
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBackground(Color.WHITE);
+        setLayout(new BorderLayout());
+        setBackground(Color.WHITE);
 
         // Create the table model with columns: Status and Time
         String[] columns = {"Status", "Time"};
@@ -45,11 +38,8 @@ public class OrderProgressUI extends JFrame {
         messageLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 
         // Add components to the main panel
-        mainPanel.add(scrollPane, BorderLayout.CENTER);
-        mainPanel.add(messageLabel, BorderLayout.SOUTH);
-
-        // Add the main panel to the frame
-        setContentPane(mainPanel);
+        add(scrollPane, BorderLayout.CENTER);
+        add(messageLabel, BorderLayout.SOUTH);
 
         // Simulate employee updating the order status
         simulateOrderProgress();
@@ -84,8 +74,11 @@ public class OrderProgressUI extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            OrderProgressUI ui = new OrderProgressUI();
-            ui.setVisible(true);
+            JFrame frame = new JFrame("Order Progress");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(500, 400);
+            frame.add(new OrderProgressUI());
+            frame.setVisible(true);
         });
     }
 }
