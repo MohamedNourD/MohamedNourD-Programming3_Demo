@@ -118,4 +118,9 @@ public class MealsManagment {
         return new Status();
     }
 
+    public static String mostOrderedMeal () throws IOException {
+        List<Meal> meals = getMeals();
+        return Collections.max(meals, Comparator.comparingInt(Meal::getOrderCnt)).getName();
+    }
+
 }

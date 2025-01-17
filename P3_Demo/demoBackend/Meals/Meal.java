@@ -45,6 +45,10 @@ public class Meal {
         return iconPath;
     }
 
+    public int getOrderCnt() {
+        return orderCnt;
+    }
+
     public String getName() {
         return mealName;
     }
