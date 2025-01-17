@@ -1,7 +1,14 @@
 import java.awt.*;
 
-public class Notififcation {
-    public void getNotification (String title, String description) {
+public class Notififcation extends Thread {
+    String title;
+    String description;
+
+    public Notififcation (String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+    public void run () {
         if (!SystemTray.isSupported()) {
             System.out.println("SystemTray is not supported on this system.");
             return;
@@ -10,7 +17,6 @@ public class Notififcation {
         SystemTray tray = SystemTray.getSystemTray();
         Image image = Toolkit.getDefaultToolkit().createImage("icon.png");
 
-        // Create a TrayIcon instance
         TrayIcon trayIcon = new TrayIcon(image, "Notification Example");
         trayIcon.setImageAutoSize(true);
         trayIcon.setToolTip("Java Notification");
