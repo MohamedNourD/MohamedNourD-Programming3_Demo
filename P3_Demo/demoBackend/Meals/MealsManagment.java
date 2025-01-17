@@ -33,7 +33,8 @@ public class MealsManagment {
         }
 
         if (!mealFound) {
-            return new Status("Meal with ID " + mealID + " not found!");
+            createMeal(updatedMeal.getName(), updatedMeal.getIngredients(), updatedMeal.getPrice(), updatedMeal.getIconPath());
+            return new Status("Meal with ID " + mealID + " not found! it will be added at the end");
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\meals.txt", false))) {
@@ -118,7 +119,7 @@ public class MealsManagment {
         return new Status();
     }
 
-    public static String mostOrderedMeal () throws IOException {
+    public static String mostOrderedMeal() throws IOException {
         List<Meal> meals = getMeals();
         return Collections.max(meals, Comparator.comparingInt(Meal::getOrderCnt)).getName();
     }

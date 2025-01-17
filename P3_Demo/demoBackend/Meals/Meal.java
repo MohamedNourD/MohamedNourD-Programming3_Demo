@@ -15,12 +15,7 @@ public class Meal {
         this.ingredients = ingredients;
         this.price = price;
         this.orderCnt = orderCnt;
-        if (iconPath.startsWith("icons\\\\")) {
-            this.iconPath = iconPath;
-        } else {
-            this.iconPath = "icons\\\\" + iconPath + ".png";
-        }
-
+        this.iconPath = iconPath;
     }
 
     public Meal(int mealId, String mealName, String ingredients, double price, String iconPath) {
@@ -29,12 +24,7 @@ public class Meal {
         this.ingredients = ingredients;
         this.price = price;
         this.orderCnt = 0;
-        if (iconPath.startsWith("icons\\\\")) {
-            this.iconPath = iconPath;
-        } else {
-            this.iconPath = "icons\\\\" + iconPath + ".png";
-        }
-
+        this.iconPath = iconPath;
     }
 
     public int getId() {

@@ -25,6 +25,7 @@ public class OrderManagment {
         }
         return orders;
     }
+
     public static long countOrdersForToday() throws IOException {
         List<Order> orders = getOrders();
         LocalDate today = LocalDate.now();
