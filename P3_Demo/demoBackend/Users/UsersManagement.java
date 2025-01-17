@@ -1,13 +1,14 @@
 package Users;
 
 import Execptions.Status;
+import Notifications.Notification;
 
 import java.io.*;
 import java.util.*;
 
 public class UsersManagement {
     private static void addCustomer(Customer customer) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("D:\\FolderProject_in\\Project-Programming3_Demo\\Files\\users.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\customers.txt", true))) {
             writer.write(customer.toString());
             writer.newLine();
         }
@@ -15,7 +16,7 @@ public class UsersManagement {
 
     static List<Customer> getCustomers() throws IOException {
         List<Customer> customers = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("Project-Programming3_Demo\\Files\\users.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("Files\\customers.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 customers.add(Customer.fromString(line));
@@ -25,7 +26,7 @@ public class UsersManagement {
     }
 
     private static void addEmployee(Employee employee) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Project-Programming3_Demo\\Files\\users.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\employees.txt", true))) {
             writer.write(employee.toString());
             writer.newLine();
         }
@@ -33,7 +34,7 @@ public class UsersManagement {
 
     static List<Employee> getEmployees() throws IOException {
         List<Employee> employees = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("Project-Programming3_Demo\\Files\\users.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("Files\\employees.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 employees.add(Employee.fromString(line));
@@ -42,7 +43,7 @@ public class UsersManagement {
         return employees;
     }
 
-    static User getUserByEmail(String email) throws IOException {
+    public static User getUserByEmail(String email) throws IOException {
         List<Customer> customers = getCustomers();
         List<Employee> employees = getEmployees();
 
@@ -64,7 +65,7 @@ public class UsersManagement {
         return null;
     }
 
-    public Status createCustomerAccount(String firstName, String lastName, String email, String password1, String password2, int userType) {
+    public static Status createCustomerAccount(String firstName, String lastName, String email, String password1, String password2) {
         try {
             if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password1.isEmpty() || password2.isEmpty()) {
                 throw new Exception("Not all fields are complete.");
@@ -77,10 +78,14 @@ public class UsersManagement {
             }
             else {
                 List<Customer> customers = getCustomers();
-                int nextCustomerId = customers.isEmpty() ? 1 : customers.get(customers.size() - 1).getId() + 1;
-
+                int nextCustomerId = customers.isEmpty() ? 0 : customers.get(customers.size() - 1).getId() + 1;
+                System.out.println(nextCustomerId);
+                System.out.println(customers.get(customers.size() - 1).getId());
                 Customer customer = new Customer(nextCustomerId, firstName, lastName, email, password1, 1);
                 addCustomer(customer);
+
+                Notification n = new Notification("Welcome!", "Your account has been created successfully ❤️");
+                n.run();
                 
                 return new Status();
             }
@@ -90,7 +95,7 @@ public class UsersManagement {
         }
     }
 
-    public Status createEmployeeAccount(String firstName, String lastName, String email, String password1, String password2, int userType) {
+    public static Status createEmployeeAccount(String firstName, String lastName, String email, String password1, String password2) {
         try {
             if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password1.isEmpty() || password2.isEmpty()) {
                 throw new Exception("Not all fields are complete.");
@@ -103,10 +108,14 @@ public class UsersManagement {
             }
             else {
                 List<Employee> employees = getEmployees();
-                int nextEmployeeId = employees.isEmpty() ? 1 : employees.get(employees.size() - 1).getId() + 1;
+                int nextEmployeeId = employees.isEmpty() ? 0 : employees.get(employees.size() - 1).getId() + 1;
 
                 Employee employee = new Employee(nextEmployeeId, firstName, lastName, email, password1, 2);
                 addEmployee(employee);
+
+                Notification n = new Notification("Done!", "The account has been created successfully ❤️");
+                n.run();
+
                 return new Status();
             }
         }
@@ -120,6 +129,7 @@ public class UsersManagement {
         System.out.println(password);
         try {
             User currentUser = getUserByEmail(email);
+            System.out.println("found");
             if (currentUser == null)
                 throw new Exception("There is no user with that email!");
             else if (email.isEmpty()) {
@@ -130,6 +140,15 @@ public class UsersManagement {
                 throw new Exception("Password isn't correct");
             } else {
                 System.out.println("Oh hi " + currentUser.getName() + "!");
+
+                if (currentUser.getUserType() == 1) {
+                    Notification n = new Notification("Welcome back!", "We miss you " + currentUser.getFirstName() + " \nready for a delicious meal? 😋");
+                    n.run();
+                }
+                else {
+                    Notification n = new Notification("Welcome back!", "Wish you a nice day 😎");
+                    n.run();
+                }
                 return new Status();
             }
         }

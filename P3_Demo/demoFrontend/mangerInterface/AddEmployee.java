@@ -164,14 +164,14 @@ public class AddEmployee extends JFrame {
         String confirmPasswordText = new String(re_PasswordField.getPassword());
         UsersManagement UserManagement = new UsersManagement();
         boolean isDone = UserManagement
-                .createCustomerAccount(firstNameText, lastNameText, emailText,
-                        passwordText, confirmPasswordText, 2)
+                .createEmployeeAccount(firstNameText, lastNameText, emailText,
+                        passwordText, confirmPasswordText)
                 .isDone();
         if (!isDone) {
             JOptionPane.showMessageDialog(
                     this,
-                    UserManagement.createCustomerAccount(firstNameText, lastNameText, emailText,
-                            passwordText, confirmPasswordText, 2).getMsg(),
+                    UserManagement.createEmployeeAccount(firstNameText, lastNameText, emailText,
+                            passwordText, confirmPasswordText).getMsg(),
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
         } else {

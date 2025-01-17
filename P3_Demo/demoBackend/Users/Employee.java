@@ -14,7 +14,7 @@ public class Employee extends User {
         return emplyeeId + "," + getFirstName() + "," + getLastName() + "," + getEmail() + "," + getPassword() + "," + getUserType();
     }
     public static Employee fromString(String line) {
-        String[] parts = line.split(",", 5);
+        String[] parts = line.split(",", 6);
         return new Employee(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4], Integer.parseInt(parts[5]));
     }
 }

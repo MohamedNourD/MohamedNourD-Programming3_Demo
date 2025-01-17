@@ -300,7 +300,7 @@ public class SignUp extends javax.swing.JFrame {
         // Call the backend method to create a customer account
         UsersManagement usersManagement = new UsersManagement();
         Status status ; 
-        status = usersManagement.createCustomerAccount(firstName, lastName, email, password1, password2, 3); // 3 for customer
+        status = usersManagement.createCustomerAccount(firstName, lastName, email, password1, password2); // 3 for customer
 
         if (status.isDone()) {
             JOptionPane.showMessageDialog(null, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
