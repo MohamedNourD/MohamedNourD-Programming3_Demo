@@ -1,6 +1,6 @@
 package employee_Interface;
 
-import Orders.OrderManagment;
+import Orders.OrderManagement;
 import Orders.Order;
 import Orders.OrderItem;
 
@@ -61,7 +61,7 @@ public class EmployeeOrderUI extends JPanel {
     private void loadOrders() {
         try {
             // Load orders using the OrderManagment class
-            orders = OrderManagment.getOrders();
+            orders = OrderManagement.getOrders();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error loading orders: " + e.getMessage());
         }
@@ -79,11 +79,11 @@ public class EmployeeOrderUI extends JPanel {
         // Order details
         StringBuilder details = new StringBuilder();
         details.append("Order ID: ").append(order.getId()).append("\n");
-        details.append("Customer: ").append(order.getCustomerName()).append("\n");
+        details.append("Customer ID: ").append(order.getCustomerID()).append("\n");
         details.append("Order Date: ").append(order.getOrderDate()).append("\n");
         details.append("\nSelected Meals:\n");
         for (OrderItem item : order.getOrderItems()) {
-            details.append(item.getMeal()).append(" x ").append(item.getQuantity()).append(" = $")
+            details.append(item.getMealName()).append(" x ").append(item.getQuantity()).append(" = $")
                     .append(String.format("%.2f", item.getPrice())).append("\n");
         }
         details.append("\nTotal: $").append(String.format("%.2f", order.getOrderPrice())).append("\n");
@@ -123,7 +123,7 @@ public class EmployeeOrderUI extends JPanel {
     private void saveOrderStatus(Order order) {
         try {
             // Save the updated status back to the file
-            OrderManagment.updateOrderStatus(order);
+            OrderManagement.updateOrderStatus(order);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error saving order status: " + e.getMessage());
         }

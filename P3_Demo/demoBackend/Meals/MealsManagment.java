@@ -104,7 +104,7 @@ public class MealsManagment {
                 throw new Exception();
             } else {
                 List<Meal> meals = getMeals();
-                int nextMealId = meals.isEmpty() ? 0 : meals.get(meals.size() - 1).getId() + 1;
+                int nextMealId = meals.isEmpty() ? 1 : meals.get(meals.size() - 1).getId() + 1;
 
                 Meal meal = new Meal(nextMealId, mealName, ingredients, price, iconPath);
                 addMeal(meal);
