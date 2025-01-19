@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-0||piza||teste||55.0||0||icons\\C:\Users\Mohamed Nour diab\Desktop\pizaMeal.png.png
-1||pasta||tester||66.0||0||icons\\C:\Users\Mohamed Nour diab\Desktop\pastMeal.png.png
-2||burgur||tester||55.0||0||icons\\C:\Users\Mohamed Nour diab\Desktop\mnueBurgerIcon2.png.png
-=======
-0||Burger||Toma||54.0||0||icons\\Burger.png
-1||Buer||Tomato||65.0||57368453||icons\\Bug.png
-2||Pizza||Cheese||25.0||0||icons\\Pizza.png
->>>>>>> 0b5b64a8121d32dbccd1a4d843a809bbfa61f65f
+1||past||chess,sald,water||55.0||0||C:\Users\Mohamed Nour diab\Desktop\pastMeal.png
+2||pizza||chesse ,bibrone , drinks||44.0||0||C:\Users\Mohamed Nour diab\Desktop\pizaMeal.png
+3||potato||frid potato,sos||10.0||0||C:\Users\Mohamed Nour diab\Desktop\ptato.png
+4||burger||chesse , letuc,drinks,potao||55.0||0||C:\Users\Mohamed Nour diab\Desktop\mnueBurgerIcon2.png

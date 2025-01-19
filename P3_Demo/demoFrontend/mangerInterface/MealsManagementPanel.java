@@ -1,4 +1,5 @@
 package mangerInterface;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -6,15 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 import Meals.Meal;
 import Meals.MealsManagment;
+import loginInterface.GetStarted;
+import mainFrame.MainFrame;
 
 public class MealsManagementPanel extends JPanel {
-    
 
     private JPanel mealsPanel;
     private JScrollPane scrollPane;
     private JButton addMealButton;
     private JButton saveButton;
     private final Color fontColor = new Color(102, 102, 102);
+    private final Color textFieldColor = new Color(51, 51, 153); // New font color for text fields and text areas
 
     public MealsManagementPanel() {
         initComponents();
@@ -23,16 +26,19 @@ public class MealsManagementPanel extends JPanel {
 
     private void initComponents() {
         this.setLayout(new BorderLayout());
-        this.setBackground(new Color(251, 133, 0)); // Main panel background color
+        this.setBackground(new Color(251, 133, 0));
 
         mealsPanel = new JPanel();
         mealsPanel.setBackground(new Color(251, 133, 8));
-        mealsPanel.setLayout(new WrapLayout(FlowLayout.LEFT, 10, 10)); // Custom layout for meal items
+        mealsPanel.setLayout(new WrapLayout(FlowLayout.LEFT, 10, 10)); // Use WrapLayout
+
+        // Set a preferred size for the mealsPanel to ensure it has a fixed width
+        mealsPanel.setPreferredSize(new Dimension(800, 600)); // Adjust as needed
 
         scrollPane = new JScrollPane(mealsPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        this.add(scrollPane, BorderLayout.CENTER); // Add scroll pane to the center
+        this.add(scrollPane, BorderLayout.CENTER);
 
         // Create a bottom panel for buttons
         JPanel buttonPanel = new JPanel();
@@ -53,6 +59,14 @@ public class MealsManagementPanel extends JPanel {
         saveButton.addActionListener(evt -> saveMealsToFile());
         buttonPanel.add(saveButton);
 
+        // Add Back Button
+        JButton backButton = new JButton("Back");
+        backButton.setBackground(new Color(251, 133, 0));
+        backButton.setForeground(Color.WHITE);
+        backButton.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+        backButton.addActionListener(evt -> onBackButtonClicked());
+        buttonPanel.add(backButton);
+
         this.add(buttonPanel, BorderLayout.SOUTH); // Add button panel at the bottom
     }
 
@@ -68,13 +82,23 @@ public class MealsManagementPanel extends JPanel {
     private JPanel createMealItemPanel(Meal meal) {
         JPanel mealItemPanel = new JPanel();
         mealItemPanel.setBackground(Color.WHITE);
-        mealItemPanel.setPreferredSize(new Dimension(300, 300));
-        mealItemPanel.setLayout(null); // For precise positioning
-
+        mealItemPanel.setPreferredSize(new Dimension(300, 300)); // Ensure this is consistent
+        mealItemPanel.setLayout(null);
         JLabel mealIconLabel = new JLabel("Icon Meal", SwingConstants.CENTER);
         mealIconLabel.setBounds(10, 10, 280, 100);
         mealIconLabel.setForeground(fontColor);
-        mealItemPanel.add(mealIconLabel);
+        mealItemPanel.add(mealIconLabel); // For precise positioning
+
+        if (meal != null) {
+            try {
+                ImageIcon icon = new ImageIcon(meal.getIconPath());
+                mealIconLabel.setIcon(icon);
+                mealIconLabel.setBounds(10, 10, 280, 100);
+                mealIconLabel.setText("");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         // Add a mouse listener to the icon label to open a file chooser
         mealIconLabel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -99,7 +123,7 @@ public class MealsManagementPanel extends JPanel {
 
         JTextField mealNameField = new JTextField(meal != null ? meal.getName() : "");
         mealNameField.setBounds(100, 120, 180, 20);
-        mealNameField.setForeground(fontColor);
+        mealNameField.setForeground(textFieldColor); // Set new font color
         mealNameField.setEnabled(false);
         mealItemPanel.add(mealNameField);
 
@@ -110,7 +134,7 @@ public class MealsManagementPanel extends JPanel {
 
         JTextField priceField = new JTextField(meal != null ? String.valueOf(meal.getPrice()) : "");
         priceField.setBounds(100, 150, 180, 20);
-        priceField.setForeground(fontColor);
+        priceField.setForeground(textFieldColor); // Set new font color
         priceField.setEnabled(false);
         mealItemPanel.add(priceField);
 
@@ -121,7 +145,7 @@ public class MealsManagementPanel extends JPanel {
 
         JTextArea ingredientsArea = new JTextArea(meal != null ? meal.getIngredients() : "");
         ingredientsArea.setBounds(100, 180, 180, 60);
-        ingredientsArea.setForeground(fontColor);
+        ingredientsArea.setForeground(textFieldColor); // Set new font color
         ingredientsArea.setEnabled(false);
         mealItemPanel.add(ingredientsArea);
 
@@ -167,15 +191,16 @@ public class MealsManagementPanel extends JPanel {
     private void saveMealsToFile() {
         List<Meal> meals = new ArrayList<>();
         boolean allFieldsFilled = true;
-
+    
+        // Collect data from the UI
         for (Component component : mealsPanel.getComponents()) {
             if (component instanceof JPanel) {
                 JPanel mealPanel = (JPanel) component;
                 String mealName = "";
                 double price = 0.0;
                 String ingredients = "";
-                String iconPath = "";
-
+                String iconPath ="";
+    
                 for (Component innerComponent : mealPanel.getComponents()) {
                     if (innerComponent instanceof JTextField) {
                         JTextField textField = (JTextField) innerComponent;
@@ -194,42 +219,57 @@ public class MealsManagementPanel extends JPanel {
                         }
                     }
                 }
-
-                // Check if any field is empty
-                if (mealName.isEmpty() || price <= 0 || ingredients.isEmpty() || iconPath.isEmpty()) {
+    
+                // Validate data
+                if (mealName.isEmpty() || price <= 0 || ingredients.isEmpty() ) {
                     allFieldsFilled = false;
                     break;
                 }
-
-                // Add the meal to the list
+    
+                // Add meal to the list
                 meals.add(new Meal(0, mealName, ingredients, price, iconPath));
             }
         }
-
+    
+        // Check if all fields are filled
         if (!allFieldsFilled) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields for each meal.", "Error",
                     JOptionPane.ERROR_MESSAGE);
-        } else {
-            try {
-                for (Meal meal : meals) {
-                    MealsManagment.createMeal(meal.getName(), meal.getIngredients(), meal.getPrice(), meal.getIconPath());
-                }
-                JOptionPane.showMessageDialog(this, "Meals saved successfully!", "Success",
-                        JOptionPane.INFORMATION_MESSAGE);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Failed to save meals: " + e.getMessage(), "Error",
-                        JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    
+        // Save meals to file
+        try {
+            for (Meal meal : meals) {
+                MealsManagment.createMeal(meal.getName(), meal.getIngredients(), meal.getPrice(), meal.getIconPath());
             }
+            JOptionPane.showMessageDialog(this, "Meals saved successfully!", "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Failed to save meals: " + e.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
+     
+    
 
     private void loadMeals() {
         try {
             List<Meal> meals = MealsManagment.getMeals(); // Fetch the list of meals
+            System.out.println("Loading meals. Number of meals: " + meals.size()); // Debugging
+
             for (Meal meal : meals) {
                 JPanel mealPanel = createMealItemPanel(meal);
                 mealsPanel.add(mealPanel);
             }
+
+            // Debugging: Print the mealsPanel size and layout
+            System.out.println("mealsPanel width: " + mealsPanel.getWidth()); // Debugging
+            System.out.println("mealsPanel layout: " + mealsPanel.getLayout()); // Debugging
+
+            // Force layout update
+            mealsPanel.doLayout();
+
             mealsPanel.revalidate();
             mealsPanel.repaint();
             scrollPane.revalidate(); // Force the scroll pane to update its view
@@ -238,6 +278,14 @@ public class MealsManagementPanel extends JPanel {
             JOptionPane.showMessageDialog(this, "Failed to load meals: " + e.getMessage(), "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void onBackButtonClicked() {
+        SwingUtilities.invokeLater(() -> {
+
+            MainFrame.setPanel(new WelcomeMangerPanel());
+
+        });
     }
 
     public static void main(String[] args) {

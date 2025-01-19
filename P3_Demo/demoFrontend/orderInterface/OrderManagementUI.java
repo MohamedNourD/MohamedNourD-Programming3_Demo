@@ -1,17 +1,42 @@
 package orderInterface;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import  java.util.List;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
+import Orders.OrderItem;
 public class OrderManagementUI extends JPanel {
 
     // Meal class to represent meal details
@@ -67,7 +92,7 @@ public class OrderManagementUI extends JPanel {
     private String orderType = "";
 
     // Path to the order file
-    private static final String ORDER_FILE_PATH = "Files/orderCustomer.txt";
+    private static final String ORDER_FILE_PATH = "Files\\orderCustomer.txt";
 
     public OrderManagementUI() {
         setLayout(new BorderLayout());
@@ -345,6 +370,22 @@ public class OrderManagementUI extends JPanel {
             subtotal += entry.getKey().getPrice() * entry.getValue();
         }
         return subtotal;
+    }
+
+     public List<OrderItem> getOrderItems() {
+        List<OrderItem> orderItems = new ArrayList<>();
+
+        for (Map.Entry<Meal, Integer> entry : selectedMeals.entrySet()) {
+            Meal meal = entry.getKey();
+            int quantity = entry.getValue();
+            double price = meal.getPrice();
+
+          
+            OrderItem orderItem = new OrderItem(meal.getName(), quantity, price);
+            orderItems.add(orderItem);
+        }
+
+        return orderItems;
     }
 
     public static void main(String[] args) {

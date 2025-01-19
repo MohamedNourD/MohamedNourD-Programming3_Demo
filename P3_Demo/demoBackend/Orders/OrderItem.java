@@ -10,17 +10,22 @@ public class OrderItem {
     public OrderItem(Meal meal, int quantity) {
         this.mealName = meal.getName();
         this.quantity = quantity;
-        this.price = meal.getPrice() * quantity;
+        this.price = meal.getPrice();
         meal.addCnt(quantity);
     }
-
-    private OrderItem(String mealName, int quantity, double price) {
+    public  OrderItem(String mealName, int quantity, double price) {
         this.mealName = mealName;
         this.quantity = quantity;
         this.price = price;
     }
+    private OrderItem(String mealName, int quantity) {
+        this.mealName = mealName;
+        this.quantity = quantity;
+        this.price = price;
+    }
+    public OrderItem () {}
 
-    public String getMealName() {
+    public String getMeal() {
         return mealName;
     }
 
@@ -31,16 +36,14 @@ public class OrderItem {
     public double getPrice() {
         return price;
     }
-
     public void setPrice(double price) {
         this.price = price;
     }
-
     public String toString() {
-        return mealName + "|" + quantity + "|" + price;
+        return mealName + "|" + quantity;
     }
     public static OrderItem fromString(String str) {
         String[] parts = str.split("\\|", 3);
-        return new OrderItem(parts[0], Integer.parseInt(parts[1]), Double.parseDouble(parts[2]));
+        return new OrderItem(parts[0], Integer.parseInt(parts[1]));
     }
 }

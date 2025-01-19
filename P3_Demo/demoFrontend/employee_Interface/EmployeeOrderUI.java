@@ -83,7 +83,7 @@ public class EmployeeOrderUI extends JPanel {
         details.append("Order Date: ").append(order.getOrderDate()).append("\n");
         details.append("\nSelected Meals:\n");
         for (OrderItem item : order.getOrderItems()) {
-            details.append(item.getMealName()).append(" x ").append(item.getQuantity()).append(" = $")
+            details.append(item.getMeal()).append(" x ").append(item.getQuantity()).append(" = $")
                     .append(String.format("%.2f", item.getPrice())).append("\n");
         }
         details.append("\nTotal: $").append(String.format("%.2f", order.getOrderPrice())).append("\n");

@@ -38,7 +38,7 @@ public class WelcomeMangerPanel extends JPanel {
         iconPanel.setLayout(new BorderLayout());
 
         // Load icon
-        String iconPath = "Project-Programming3_Demo\\icons\\BURGUR.png"; // Replace with your icon path
+        String iconPath = "icons\\restaurant.png"; 
         ImageIcon icon = new ImageIcon(iconPath);
         iconLabel = new JLabel(icon);
         iconLabel.setHorizontalAlignment(SwingConstants.CENTER);

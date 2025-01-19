@@ -25,20 +25,6 @@ Total: $30.99
 
 Thank you for your order!
 
-<<<<<<< HEAD
-Order Details - 2025-01-17 17:47:22
--------------
-Order Type: Delivery
-
-Selected Meals:
-Pasta x 2 = $14.98
-Burger x 2 = $11.98
-Pizza x 2 = $17.98
-
-Subtotal: $44.94
-Tip: $22.00
-Total: $66.94
-=======
 Order Details - 2025-01-17 19:32:47
 -------------
 Order Type: Special
@@ -50,7 +36,21 @@ Pizza x 1 = $8.99
 Subtotal: $14.98
 Tip: $5.00
 Total: $19.98
->>>>>>> 0b5b64a8121d32dbccd1a4d843a809bbfa61f65f
+
+Thank you for your order!
+
+Order Details - 2025-01-17 22:30:56
+-------------
+Order Type: Special
+
+Selected Meals:
+Burger x 2 = $11.98
+Pasta x 1 = $7.49
+Pizza x 2 = $17.98
+
+Subtotal: $37.45
+Tip: $23.00
+Total: $60.45
 
 Thank you for your order!
 
