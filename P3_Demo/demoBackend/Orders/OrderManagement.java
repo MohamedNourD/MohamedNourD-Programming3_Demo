@@ -15,28 +15,33 @@ public class OrderManagement {
             writer.write(order.toString());
             writer.newLine();
         }
+        System.out.println("added");
     }
 
-    public static Status createOrder(Customer customer, List<OrderItem> orderItems, int orderType, double tip) {
-        try {
-            if (customer == null || orderItems.isEmpty()) {
-                throw new Exception("Not all fields are complete.");
-            }
-            else {
-                List<Order> orders = getOrders();
-                int nextOrderId = orders.isEmpty() ? 0 : orders.get(orders.size() - 1).getId() + 1;
-
-                Order order = new Order(nextOrderId, customer, orderItems, orderType, tip);
-                addOrder(order);
-
-                Notification n = new Notification("Done!", "Your order has been successfully added ✅\nYou can follow up on the order via the history");
-                n.run();
+    private static List<Order> getOrders() throws IOException {
+        List<Order> orders = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("Files\\orders.txt"))) {
+            String line;
+            System.out.println("fdjfsdfsf");
+            while ((line = reader.readLine()) != null) {
+                orders.add(Order.fromString(line));
             }
         }
-        catch (Exception e) {
-            return new Status(e.getMessage());
+        return orders;
+    }
+
+    public static List<Order> getOrdersEmployee() throws IOException {
+        List<Order> orders = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader("Files\\orders.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                Order order = Order.fromString(line);
+                System.out.println(order.getOrderStatus());
+                if (order.getOrderStatus().equals("pending"))
+                    orders.add(order);
+            }
         }
-        return new Status();
+        return orders;
     }
 
     public static Status createOrder(int customerID, List<OrderItem> orderItems, int orderType, double tip) {
@@ -46,10 +51,10 @@ public class OrderManagement {
             }
             else {
                 List<Order> orders = getOrders();
-                System.out.println("hi");
                 int nextOrderId = orders.isEmpty() ? 0 : orders.get(orders.size() - 1).getId() + 1;
 
                 Order order = new Order(nextOrderId, customerID, orderItems, orderType, tip);
+                System.out.println("to add");
                 addOrder(order);
 
                 Notification n = new Notification("Done!", "Your order has been successfully added ✅\nYou can follow up on the order via the history");
@@ -62,24 +67,28 @@ public class OrderManagement {
         return new Status();
     }
 
-    public static List<Order> getOrders() throws IOException {
-        List<Order> orders = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("Files\\orders.txt"))) {
-            String line;
-            System.out.println("fdjf");
-            while ((line = reader.readLine()) != null) {
-                orders.add(Order.fromString(line));
-            }
+    public static HashMap<LocalDate, Integer> countOrdersForToday() throws IOException {
+        List<Order> orders = getOrders();
+        HashMap<LocalDate, Integer> cntMap = new HashMap<>();
+
+        for (Order order : orders) {
+            LocalDate dateKey = order.getOrderDate().toLocalDate();
+            cntMap.put(dateKey, cntMap.getOrDefault(dateKey, 0) + 1);
         }
-        return orders;
+
+        return cntMap;
     }
 
-    public static long countOrdersForToday() throws IOException {
+    public static HashMap<LocalDate, Double> dailyRevenues() throws IOException {
         List<Order> orders = getOrders();
-        LocalDate today = LocalDate.now();
-        return orders.stream()
-                .filter(order -> order.getOrderDate().toLocalDate().equals(today))
-                .count();
+        HashMap<LocalDate, Double> revenueMap = new HashMap<>();
+
+        for (Order order : orders) {
+            LocalDate dateKey = order.getOrderDate().toLocalDate();
+            revenueMap.put(dateKey, revenueMap.getOrDefault(dateKey, 0.0) + order.getOrderPrice());
+        }
+
+        return revenueMap;
     }
     
     public static void updateOrderStatus(Order updatedOrder) throws IOException {

@@ -61,7 +61,7 @@ public class EmployeeOrderUI extends JPanel {
     private void loadOrders() {
         try {
             // Load orders using the OrderManagment class
-            orders = OrderManagement.getOrders();
+            orders = OrderManagement.getOrdersEmployee();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error loading orders: " + e.getMessage());
         }
@@ -83,7 +83,7 @@ public class EmployeeOrderUI extends JPanel {
         details.append("Order Date: ").append(order.getOrderDate()).append("\n");
         details.append("\nSelected Meals:\n");
         for (OrderItem item : order.getOrderItems()) {
-            details.append(item.getMealName()).append(" x ").append(item.getQuantity()).append(" = $")
+            details.append(item.getMealId()).append(" x ").append(item.getQuantity()).append(" = $")
                     .append(String.format("%.2f", item.getPrice())).append("\n");
         }
         details.append("\nTotal: $").append(String.format("%.2f", order.getOrderPrice())).append("\n");

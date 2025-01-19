@@ -60,24 +60,6 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-
-
-    public Order(int orderId, Customer customer, List<OrderItem> orderItems, int orderType, double tip) {
-        this.orderId = orderId;
-        this.customerID = customer.getId();
-        this.orderDate = LocalDateTime.now();
-        this.orderItems = orderItems;
-        this.orderType = orderType;
-        this.orderStatus = "pending";
-        this.tip = tip;
-
-        orderPrice = 0;
-        for (OrderItem orderItem : orderItems) {
-            orderPrice += orderItem.getPrice();
-        }
-        customer.newOrder(orderId);
-    }
-
     public Order(int orderId, int customerID, List<OrderItem> orderItems, int orderType, double tip) throws IOException {
         this.orderId = orderId;
         this.customerID = customerID;

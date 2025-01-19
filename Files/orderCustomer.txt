@@ -54,3 +54,17 @@ Total: $19.98
 
 Thank you for your order!
 
+Order Details - 2025-01-17 22:34:12
+-------------
+Order Type: Delivery
+
+Selected Meals:
+Burger x 2 = $11.98
+Pizza x 3 = $26.97
+
+Subtotal: $38.95
+Tip: $858.00
+Total: $896.95
+
+Thank you for your order!
+

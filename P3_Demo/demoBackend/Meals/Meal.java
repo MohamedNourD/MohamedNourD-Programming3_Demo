@@ -15,13 +15,7 @@ public class Meal {
         this.ingredients = ingredients;
         this.price = price;
         this.orderCnt = orderCnt;
-<<<<<<< HEAD
-
         this.iconPath = iconPath;
-
-=======
-        this.iconPath = iconPath;
->>>>>>> 0b5b64a8121d32dbccd1a4d843a809bbfa61f65f
     }
 
     public Meal(int mealId, String mealName, String ingredients, double price, String iconPath) {
@@ -30,13 +24,7 @@ public class Meal {
         this.ingredients = ingredients;
         this.price = price;
         this.orderCnt = 0;
-<<<<<<< HEAD
-
         this.iconPath = iconPath;
-
-=======
-        this.iconPath = iconPath;
->>>>>>> 0b5b64a8121d32dbccd1a4d843a809bbfa61f65f
     }
 
     public int getId() {
@@ -64,12 +52,14 @@ public class Meal {
     }
 
     public void addCnt(int num) {
+        System.out.println("num: " + num);
         orderCnt += num;
+        MealsManagment.updateMealInternally(mealId, new Meal(mealId, mealName, ingredients, price, orderCnt, iconPath));
     }
 
     @Override
     public String toString() {
-        return mealId + "||" + mealName + "||" + ingredients + "||" + price + "||" + orderCnt + "||" + iconPath;
+        return mealId  + "||" + mealName + "||" + ingredients + "||" + price + "||" + orderCnt + "||" + iconPath;
     }
 
     public static Meal fromString(String line) {
@@ -80,6 +70,7 @@ public class Meal {
                 parts[2],
                 Double.parseDouble(parts[3]),
                 Integer.parseInt(parts[4]),
-                parts[5]);
+                parts[5]
+        );
     }
 }

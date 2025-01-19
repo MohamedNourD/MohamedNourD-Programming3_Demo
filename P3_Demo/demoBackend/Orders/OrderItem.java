@@ -2,26 +2,30 @@ package Orders;
 
 import Meals.*;
 
+import java.io.IOException;
+
 public class OrderItem {
-    private String mealName;
+    private int mealId;
     private int quantity;
     private double price;
+    private Boolean newItem;
 
     public OrderItem(Meal meal, int quantity) {
-        this.mealName = meal.getName();
+        this.mealId = meal.getId();
         this.quantity = quantity;
         this.price = meal.getPrice() * quantity;
+        System.out.println("quantity:" + quantity);
         meal.addCnt(quantity);
     }
 
-    private OrderItem(String mealName, int quantity, double price) {
-        this.mealName = mealName;
+    private OrderItem(int mealId, int quantity, double price) throws IOException {
+        this.mealId = mealId;
         this.quantity = quantity;
         this.price = price;
     }
 
-    public String getMealName() {
-        return mealName;
+    public int getMealId() {
+        return mealId;
     }
 
     public int getQuantity() {
@@ -37,10 +41,10 @@ public class OrderItem {
     }
 
     public String toString() {
-        return mealName + "|" + quantity + "|" + price;
+        return mealId + "|" + quantity + "|" + price;
     }
-    public static OrderItem fromString(String str) {
+    public static OrderItem fromString(String str) throws IOException {
         String[] parts = str.split("\\|", 3);
-        return new OrderItem(parts[0], Integer.parseInt(parts[1]), Double.parseDouble(parts[2]));
+        return new OrderItem(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Double.parseDouble(parts[2]));
     }
 }
