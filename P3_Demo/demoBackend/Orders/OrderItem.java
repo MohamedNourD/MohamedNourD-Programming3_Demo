@@ -8,7 +8,6 @@ public class OrderItem {
     private int mealId;
     private int quantity;
     private double price;
-    private Boolean newItem;
 
     public OrderItem(Meal meal, int quantity) {
         this.mealId = meal.getId();

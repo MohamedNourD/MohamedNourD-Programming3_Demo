@@ -55,8 +55,8 @@ public class Order {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDateTime orderDate) {
-        this.orderDate = orderDate;
+    public double getTip() {
+        return tip;
     }
 
     public Order(int orderId, int customerID, List<OrderItem> orderItems, int orderType, double tip) throws IOException {
@@ -94,9 +94,12 @@ public class Order {
         return orderStatus;
     }
 
-    public void updateStatus(String statusOrder) throws IOException {
-        this.orderStatus = statusOrder;
-        OrderManagement.updateOrder(orderId, new Order(orderId, customerID, orderDate, orderItems, orderType, statusOrder, tip));
+    public void updateStatus(String orderStatus) throws IOException {
+        if (this.orderStatus == orderStatus) {
+            this.orderStatus = orderStatus;
+            OrderManagement.updateOrder(orderId, new Order(orderId, customerID, orderDate, orderItems, orderType, this.orderStatus, tip));
+        }
+        System.out.println("same status");
     }
 
 

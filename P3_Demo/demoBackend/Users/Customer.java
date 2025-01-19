@@ -24,6 +24,7 @@ public class Customer extends User {
     public int getCntOrders() {
         return ordersID.size();
     }
+
     public List<Integer> getOrdersID() {
         return ordersID;
     }

@@ -1,6 +1,7 @@
 
 import Meals.Meal;
 import Meals.MealsManagment;
+import Orders.Order;
 import Orders.OrderItem;
 import Orders.OrderManagement;
 import Users.*;
@@ -21,7 +22,8 @@ public class Main {
 //        System.out.println(OrderManagement.getOrdersEmployee());
 //
 //        System.out.println(OrderManagement.countOrdersForToday());
-        System.out.println(OrderManagement.countOrdersForToday());
-        System.out.println(OrderManagement.dailyRevenues());
+//        System.out.println(OrderManagement.countOrdersForToday());
+//        System.out.println(OrderManagement.dailyRevenues());
+
     }
 }

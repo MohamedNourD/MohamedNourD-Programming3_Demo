@@ -1,8 +1,10 @@
 package Orders;
 
 import Execptions.Status;
+import Meals.MealsManagment;
 import Notifications.Notification;
 import Users.Customer;
+import Users.UsersManagement;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -36,7 +38,7 @@ public class OrderManagement {
             while ((line = reader.readLine()) != null) {
                 Order order = Order.fromString(line);
                 System.out.println(order.getOrderStatus());
-                if (order.getOrderStatus().equals("pending"))
+                if (order.getOrderStatus().equals("pending") || order.getOrderStatus().equals("preparing"))
                     orders.add(order);
             }
         }
@@ -132,5 +134,62 @@ public class OrderManagement {
         n.run();
 
         return new Status();
+    }
+
+    public static String getAllOrders(int customerId) throws IOException {
+        StringBuilder allOrders = new StringBuilder("                History         ");
+        List<Order> orders = customerOrders(customerId);
+
+        if (orders != null && !orders.isEmpty()) {
+            for (int i = orders.size() - 1; i >= 0; i--) {
+                if (orders.get(i) != null) {
+                    allOrders.append(System.lineSeparator()).append(System.lineSeparator());
+                    allOrders.append("Order #" + orders.get(i).getOrderId() + " details - " + orders.get(i).getOrderDate()).append(System.lineSeparator());
+                    allOrders.append("-----------------------------------\n");
+                    allOrders.append(System.lineSeparator());
+                    allOrders.append("Order status: " + orders.get(i).getOrderStatus()).append(System.lineSeparator());
+                    allOrders.append(System.lineSeparator());
+                    allOrders.append("Selected meals:\n");
+                    for (OrderItem orderItem : orders.get(i).getOrderItems()) {
+                        allOrders.append(MealsManagment.getMealById(orderItem.getMealId()).getName() + " x " + orderItem.getQuantity() + " = " + orderItem.getPrice()).append(System.lineSeparator());
+                    }
+                    allOrders.append(System.lineSeparator());
+                    allOrders.append("Subtotal: " + orders.get(i).getOrderPrice()).append(System.lineSeparator());
+                    allOrders.append("Tip: " + orders.get(i).getTip()).append(System.lineSeparator());
+                    allOrders.append("Total: " + (orders.get(i).getOrderPrice() + orders.get(i).getTip())).append(System.lineSeparator());
+                    allOrders.append(System.lineSeparator());
+                    allOrders.append("Thank you for choosing our restaurant! ❤️\n").append(System.lineSeparator());
+                    allOrders.append("=========================================\n");
+                }
+            }
+
+            return allOrders.toString();
+        }
+
+        return null;
+    }
+
+    private static List<Order> customerOrders(int customerId) throws IOException {
+        Customer customer = UsersManagement.getCustomerById(customerId);
+
+        List<Integer> ordersId = customer.getOrdersID();
+        List<Order> orders = new ArrayList<>();
+
+        for (int i = 0; i < ordersId.size(); i++) {
+            orders.add(getOrderById(ordersId.get(i)));
+        }
+
+        return orders;
+    }
+
+    private static Order getOrderById(int orderId) throws IOException {
+        List<Order> orders = getOrders();
+
+        for (Order order : orders) {
+            if (order.getId() == orderId) {
+                return order;
+            }
+        }
+        return null;
     }
 }
