@@ -109,7 +109,11 @@ public class EmployeeOrderUI extends JPanel {
                 new String[] { "Preparing", "Cooking", "Ready for Delivery", "Delivered" });
         statusComboBox.setSelectedItem(order.getStatus());
         statusComboBox.addActionListener(e -> {
-            order.setStatus((String) statusComboBox.getSelectedItem());
+            try {
+                order.updateStatus((String) statusComboBox.getSelectedItem());
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             statusLabel.setText("Status: " + order.getStatus());
             saveOrderStatus(order); // Save the updated status
         });

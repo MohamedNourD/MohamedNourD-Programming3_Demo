@@ -1,6 +1,5 @@
 package Orders;
 
-import Users.Customer;
 import Users.UsersManagement;
 
 import java.io.IOException;
@@ -95,8 +94,9 @@ public class Order {
         return orderStatus;
     }
 
-    public void setStatus(String statusOrder) {
+    public void updateStatus(String statusOrder) throws IOException {
         this.orderStatus = statusOrder;
+        OrderManagement.updateOrder(orderId, new Order(orderId, customerID, orderDate, orderItems, orderType, statusOrder, tip));
     }
 
 

@@ -3,7 +3,6 @@ package Orders;
 import Execptions.Status;
 import Notifications.Notification;
 import Users.Customer;
-import Users.Employee;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -95,8 +94,43 @@ public class OrderManagement {
         List<Order> orders = getOrders();
         for (Order order : orders) {
             if (order.getId() == updatedOrder.getId()) {
-                order.setStatus(updatedOrder.getStatus());
+                order.updateStatus(updatedOrder.getStatus());
                 break;
             }
-        }}
+        }
+    }
+
+    public static Status updateOrder(int orderID, Order updatedOrder) {
+        List<Order> orders;
+
+        try {
+            orders = getOrders();
+        } catch (IOException e) {
+            return new Status(e.getMessage());
+        }
+
+        boolean orderFound = false;
+
+        for (int i = 0; i < orders.size(); i++) {
+            if (orders.get(i).getId() == orderID) {
+                orders.set(i, updatedOrder);
+                orderFound = true;
+                break;
+            }
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\orders.txt", false))) {
+            for (Order order : orders) {
+                writer.write(order.toString());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            return new Status(e.getMessage());
+        }
+
+        Notification n = new Notification("Done!", "The order status has been updates successfully");
+        n.run();
+
+        return new Status();
+    }
 }
