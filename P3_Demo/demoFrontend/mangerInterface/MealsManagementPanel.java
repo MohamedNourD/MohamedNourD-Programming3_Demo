@@ -73,10 +73,20 @@ public class MealsManagementPanel extends JPanel {
     private void onAddMealButtonClicked() {
         JPanel newMealPanel = createMealItemPanel(null);
         mealsPanel.add(newMealPanel);
+    
+        // Dynamically update the preferred size of mealsPanel
+        updateMealsPanelPreferredSize();
+    
         mealsPanel.revalidate();
         mealsPanel.repaint();
-        scrollPane.revalidate(); // Force the scroll pane to update its view
+        scrollPane.revalidate(); // Update the scroll pane
         scrollPane.repaint();
+    }
+    
+    private void updateMealsPanelPreferredSize() {
+        int rows = (int) Math.ceil((double) mealsPanel.getComponentCount() / 3); // Assuming 3 meals per row
+        int panelHeight = rows * 310; // Each panel is 300px high + 10px vertical gap
+        mealsPanel.setPreferredSize(new Dimension(mealsPanel.getWidth(), panelHeight));
     }
 
     private JPanel createMealItemPanel(Meal meal) {
@@ -84,7 +94,7 @@ public class MealsManagementPanel extends JPanel {
         mealItemPanel.setBackground(Color.WHITE);
         mealItemPanel.setPreferredSize(new Dimension(300, 300)); // Ensure this is consistent
         mealItemPanel.setLayout(null);
-        JLabel mealIconLabel = new JLabel("");
+        JLabel mealIconLabel = new JLabel("Icon Meal", SwingConstants.CENTER);
         mealIconLabel.setBounds(10, 10, 280, 100);
         mealIconLabel.setForeground(fontColor);
         mealItemPanel.add(mealIconLabel); // For precise positioning
@@ -251,6 +261,8 @@ public class MealsManagementPanel extends JPanel {
         }
     }
      
+    
+
     private void loadMeals() {
         try {
             List<Meal> meals = MealsManagment.getMeals(); // Fetch the list of meals
