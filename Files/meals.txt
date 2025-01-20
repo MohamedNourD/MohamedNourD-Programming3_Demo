@@ -1,4 +1,6 @@
-1||pasta||chess,sald,water||55.0||0||
-2||pizza||chesse ,bibrone , drinks||44.0||0||
-5||Salad||Romaine lettuce Croutons||25.0||0||
-6||Margherita Pizza||Pizza dough,Mozzarella cheese||60.0||0||
+1||pasta||chess,sald,water||55.0||0||icons\pastMeal.png
+2||pizza||chesse ,bibrone , drinks||44.0||0||icons\pizaMeal.png
+4||burger||chesse , letuc,drinks,potao||55.0||0||icons\mnueBurgerIcon2.png
+5||Salad||Romaine lettuce Croutons||23.0||0||icons\creamy Caesa2.png
+6||Margherita Pizza||Pizza dough,Mozzarella cheese||60.0||0||icons\Margherita pizza.png
+7||tt||terer||55.0||0||C:\Users\Mohamed Nour diab\Desktop\fried fish2.png

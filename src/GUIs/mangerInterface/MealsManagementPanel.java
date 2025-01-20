@@ -238,10 +238,17 @@ public class MealsManagementPanel extends JPanel {
     
                 // Add meal to the list
                 try {
-                    meals.add(new Meal(MealsManagment.getIdByMealName(mealName), mealName, ingredients, price, iconPath));
+                    int id = MealsManagment.getIdByMealName(mealName);
+                    if(id == 0 ){
+                    MealsManagment.createMeal(mealName, ingredients, price, iconPath);
+                    MealsManagment.getIdByMealName(mealName);
+                    meals.add(new Meal(id, mealName, ingredients, price, MealsManagment.getIconPathById(id)));
+                    }else{
+                        meals.add(new Meal(id, mealName, ingredients, price, MealsManagment.getIconPathById(id)));
+                    }
+                   
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
             }
         }
