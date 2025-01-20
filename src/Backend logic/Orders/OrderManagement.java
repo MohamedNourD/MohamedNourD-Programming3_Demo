@@ -13,7 +13,7 @@ import java.util.*;
 
 public class OrderManagement {
     private static void addOrder(Order order) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("FilesProcessing\\orders.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\orders.txt", true))) {
             writer.write(order.toString());
             writer.newLine();
         }
@@ -22,7 +22,7 @@ public class OrderManagement {
 
     private static List<Order> getOrders() throws IOException {
         List<Order> orders = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("FilesProcessing\\orders.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("Files\\orders.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 orders.add(Order.fromString(line));
@@ -33,7 +33,7 @@ public class OrderManagement {
 
     public static List<Order> getOrdersEmployee() throws IOException {
         List<Order> orders = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("FilesProcessing\\orders.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("Files\\orders.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 Order order = Order.fromString(line);
@@ -122,7 +122,7 @@ public class OrderManagement {
             }
         }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("FilesProcessing\\orders.txt", false))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\orders.txt", false))) {
             for (Order order : orders) {
                 writer.write(order.toString());
                 writer.newLine();

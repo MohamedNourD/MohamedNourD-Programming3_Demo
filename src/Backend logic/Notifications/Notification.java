@@ -11,7 +11,7 @@ public class Notification extends Thread {
         this.description = description;
     }
 
-    public void run () {
+    public synchronized void run () {
         if (!SystemTray.isSupported()) {
             System.out.println("SystemTray is not supported on this system.");
             return;

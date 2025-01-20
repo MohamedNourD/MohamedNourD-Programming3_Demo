@@ -9,7 +9,7 @@ import java.util.*;
 
 public class MealsManagment {
     private static void addMeal(Meal meal) throws IOException {
-        try (FileWriter writer = new FileWriter("FilesProcessing\\meals.txt", true)) {
+        try (FileWriter writer = new FileWriter("Files\\meals.txt", true)) {
             writer.write(meal.toString() + "\n");
         }
     }
@@ -38,7 +38,7 @@ public class MealsManagment {
             return new Status("Meal with ID " + mealID + " not found! it will be added at the end");
         }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("FilesProcessing\\meals.txt", false))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\meals.txt", false))) {
             for (Meal meal : meals) {
                 writer.write(meal.toString());
                 writer.newLine();
@@ -55,7 +55,7 @@ public class MealsManagment {
 
 
     public static Status deleteMeal(int mealID) {
-        File file = new File("FilesProcessing\\meals.txt");
+        File file = new File("Files\\meals.txt");
         StringBuilder fileContent = new StringBuilder();
         boolean isDeleted = false;
 
@@ -90,7 +90,7 @@ public class MealsManagment {
 
     public static List<Meal> getMeals() throws IOException {
         List<Meal> meals = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("FilesProcessing\\meals.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("Files\\meals.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 meals.add(Meal.fromString(line));
@@ -161,7 +161,7 @@ public class MealsManagment {
         }
         System.out.println("before updating: " + updatedMeal.getOrderCnt());
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("FilesProcessing\\meals.txt", false))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\meals.txt", false))) {
             for (Meal meal : meals) {
                 writer.write(meal.toString());
                 writer.newLine();

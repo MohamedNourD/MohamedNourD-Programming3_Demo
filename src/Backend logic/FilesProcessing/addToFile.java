@@ -11,35 +11,35 @@ import java.io.IOException;
             this.object = object;
         }
 
-        public void run() {
+        public synchronized void run() {
             String className = object.getClass().getName();
             String fileName = null;
 
             switch (className) {
                 case "Users.Customer":
-                    fileName = "FilesProcessing\\customers.txt";
+                    fileName = "Files\\customers.txt";
                     break;
                 case "Users.Employee":
-                    fileName = "FilesProcessing\\employees.txt";
+                    fileName = "Files\\employees.txt";
                     break;
                 case "Meals.Meal":
-                    fileName = "FilesProcessing\\meals.txt";
+                    fileName = "Files\\meals.txt";
                     break;
                 case "Orders.Order":
-                    fileName = "FilesProcessing\\orders.txt";
+                    fileName = "Files\\orders.txt";
                     break;
             }
 
             if (fileName != null) {
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
-                    writer.write(object.toString());
-                    writer.newLine();
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
+                        writer.write(object.toString());
+                        writer.newLine();
 
-                    System.out.println("Successfully written to " + fileName);
-                } catch (IOException e) {
-                    System.out.println("Error writing to file: " + fileName);
-                    e.printStackTrace();
-                }
+                        System.out.println("Successfully written to " + fileName);
+                    } catch (IOException e) {
+                        System.out.println("Error writing to file: " + fileName);
+                        e.printStackTrace();
+                    }
             } else {
                 System.err.println("Unknown object type: " + className);
             }

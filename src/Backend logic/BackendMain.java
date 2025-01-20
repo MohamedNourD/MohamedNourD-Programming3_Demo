@@ -18,6 +18,9 @@ public class BackendMain {
 //        System.out.println(OrderManagement.countOrdersForToday());
 //        System.out.println(OrderManagement.dailyRevenues());
 //        System.out.println(OrderManagement.getAllOrders(1));
-        UsersManagement.logIn("m@m.m", "123");
+//        UsersManagement.logIn("m@m.m", "123");
+        System.out.println(UsersManagement.createCustomerAccount("test", "tse", "h@gs.fs", "123", "123").getMsg());//        System.out.println(UsersManagement.emailIsExist("sg@gs.fs"));
+       System.out.println(UsersManagement.emailIsExist("sg@gs.fs"));
+        UsersManagement.createCustomerAccount("test", "tse", "h@gs.fs", "123", "123");
     }
 }
