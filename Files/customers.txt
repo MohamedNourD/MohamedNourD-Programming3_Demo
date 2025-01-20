@@ -1,2 +1,2 @@
-0,Saeed,ALKhaled,s.khaled@gmail.com,123,1,
+0,Saeed,ALKhaled,s.khaled@gmail.com,123,1,0|2|3
 1,Saeed,Saeed,s@s.com,12345,1,7

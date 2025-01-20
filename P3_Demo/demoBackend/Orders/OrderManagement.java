@@ -10,6 +10,7 @@ import Users.UsersManagement;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class OrderManagement {
@@ -69,23 +70,11 @@ public class OrderManagement {
         return new Status();
     }
 
-    // public static HashMap<LocalDate, Integer> countOrdersForToday() throws IOException {
-    //     List<Order> orders = getOrders();
-    //     HashMap<LocalDate, Integer> cntMap = new HashMap<>();
-
-    //     for (Order order : orders) {
-    //         LocalDate dateKey = order.getOrderDate().toLocalDate();
-    //         cntMap.put(dateKey, cntMap.getOrDefault(dateKey, 0) + 1);
-    //     }
-
-    //     return cntMap;
-    // }
     public static HashMap<String, Integer> countOrdersForToday() throws IOException {
         List<Order> orders = getOrders();
         HashMap<String, Integer> cntMap = new HashMap<>();
     
         for (Order order : orders) {
-            // Convert LocalDate to String
             String dateKey = order.getOrderDate().toLocalDate().toString();
             cntMap.put(dateKey, cntMap.getOrDefault(dateKey, 0) + 1);
         }
@@ -153,12 +142,13 @@ public class OrderManagement {
     public static String getAllOrders(int customerId) throws IOException {
         StringBuilder allOrders = new StringBuilder("                History         ");
         List<Order> orders = customerOrders(customerId);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         if (orders != null && !orders.isEmpty()) {
             for (int i = orders.size() - 1; i >= 0; i--) {
                 if (orders.get(i) != null) {
                     allOrders.append(System.lineSeparator()).append(System.lineSeparator());
-                    allOrders.append("Order #" + orders.get(i).getOrderId() + " details - " + orders.get(i).getOrderDate()).append(System.lineSeparator());
+                    allOrders.append("Order #" + orders.get(i).getOrderId() + " details - " + orders.get(i).getOrderDate().format(formatter)).append(System.lineSeparator());
                     allOrders.append("-----------------------------------\n");
                     allOrders.append(System.lineSeparator());
                     switch (orders.get(i).getOrderType()) {
