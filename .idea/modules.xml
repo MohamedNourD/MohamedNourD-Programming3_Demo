@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/src/Backend logic/BackendLogic.iml" filepath="$PROJECT_DIR$/src/Backend logic/BackendLogic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/GUIs.iml" filepath="$PROJECT_DIR$/src/GUIs.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/P3 v1.2.iml" filepath="$PROJECT_DIR$/.idea/P3 v1.2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/P3_Demo/P3_Demo.iml" filepath="$PROJECT_DIR$/P3_Demo/P3_Demo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/P3_Demo/demoBackend/demoBackend.iml" filepath="$PROJECT_DIR$/P3_Demo/demoBackend/demoBackend.iml" />
     </modules>
   </component>
 </project>

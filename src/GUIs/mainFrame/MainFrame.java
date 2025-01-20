@@ -2,13 +2,7 @@ package mainFrame;
 
 import javax.swing.*;
 
-import employee_Interface.EmployeeOrderUI;
-import loginInterface.GetStarted;
-import loginInterface.SignInPanel;
 import loginInterface.SignUp;
-import mangerInterface.MealsManagementPanel;
-import mangerInterface.RestaurantManagementPanel;
-import orderInterface.OrderManagementUI;
 
 import java.awt.*;
 

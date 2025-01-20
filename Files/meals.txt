@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 1||pasta||chess,sald,water||55.0||7||icons\pastMeal.png
 2||pizza||chesse ,bibrone , drinks||44.0||8||icons\pizaMeal.png
 4||burger||chesse , letuc,drinks,potao||55.0||1||icons\mnueBurgerIcon2.png
 5||Salad||Romaine lettuce Croutons||23.0||0||icons\creamy Caesa2.png
 6||Margherita Pizza||Pizza dough,Mozzarella cheese||60.0||0||icons\Margherita pizza.png
+=======
+1||past||chess,sald,water||55.0||8||C:\Users\Mohamed Nour diab\Desktop\pastMeal.png
+2||pizza||chesse ,bibrone , drinks||44.0||8||C:\Users\Mohamed Nour diab\Desktop\pizaMeal.png
+3||potato||frid potato,sos||10.0||7||C:\Users\Mohamed Nour diab\Desktop\ptato.png
+4||burger||chesse , letuc,drinks,potao||55.0||1||C:\Users\Mohamed Nour diab\Desktop\mnueBurgerIcon2.png
+>>>>>>> 284a9119abcd1ee2d01fd68c650f228cc5696032

@@ -1,16 +1,9 @@
 
-import Meals.Meal;
-import Meals.MealsManagment;
-import Orders.Order;
-import Orders.OrderItem;
-import Orders.OrderManagement;
 import Users.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Main {
+public class BackendMain {
     public static void main (String[] args) throws IOException {
 //        System.out.println(MealsManagment.createMeal("Pizza", "Cheese", 25.0, "icons\\\\Pizza.png").getMsg());
 //        List<Meal> meals = MealsManagment.getMeals();
@@ -24,7 +17,7 @@ public class Main {
 //        System.out.println(OrderManagement.countOrdersForToday());
 //        System.out.println(OrderManagement.countOrdersForToday());
 //        System.out.println(OrderManagement.dailyRevenues());
-          System.out.println(OrderManagement.getAllOrders(1));
-
+//        System.out.println(OrderManagement.getAllOrders(1));
+        UsersManagement.logIn("m@m.m", "123");
     }
 }

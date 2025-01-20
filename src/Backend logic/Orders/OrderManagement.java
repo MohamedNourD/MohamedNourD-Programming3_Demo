@@ -134,7 +134,7 @@ public class OrderManagement {
         }
 
         Notification n = new Notification("Done!", "The order status has been updates successfully");
-        n.run();
+        n.start();
 
         return new Status();
     }
