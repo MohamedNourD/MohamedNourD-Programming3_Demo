@@ -75,7 +75,7 @@ public class Order {
         UsersManagement.getCustomerById(customerID).newOrder(orderId);
     }
 
-    private Order (int orderId, int customerID, LocalDateTime orderDate, List<OrderItem> orderItems, int orderType, String statusOrder, double tip) throws IOException {
+    public Order (int orderId, int customerID, LocalDateTime orderDate, List<OrderItem> orderItems, int orderType, String statusOrder, double tip) throws IOException {
         this.orderId = orderId;
         this.customerID = customerID;
         this.orderDate = orderDate;
@@ -95,7 +95,7 @@ public class Order {
     }
 
     public void updateStatus(String orderStatus) throws IOException {
-        if (this.orderStatus == orderStatus) {
+        if (this.orderStatus != orderStatus) {
             this.orderStatus = orderStatus;
             OrderManagement.updateOrder(orderId, new Order(orderId, customerID, orderDate, orderItems, orderType, this.orderStatus, tip));
         }

@@ -241,7 +241,7 @@ public class MealsManagementPanel extends JPanel {
         // Save meals to file
         try {
             for (Meal meal : meals) {
-                MealsManagment.createMeal(meal.getName(), meal.getIngredients(), meal.getPrice(), meal.getIconPath());
+                MealsManagment.updateMeal(meal.getId(), meal);
             }
             JOptionPane.showMessageDialog(this, "Meals saved successfully!", "Success",
                     JOptionPane.INFORMATION_MESSAGE);

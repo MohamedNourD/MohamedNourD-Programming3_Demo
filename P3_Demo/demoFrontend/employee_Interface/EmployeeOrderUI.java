@@ -5,10 +5,13 @@ import Orders.Order;
 import Orders.OrderItem;
 
 import javax.swing.*;
+
+import Meals.MealsManagment;
+
 import java.awt.*;
 import java.io.IOException;
 import java.util.List;
-
+import Orders.*;
 public class EmployeeOrderUI extends JPanel {
 
     private List<Order> orders;
@@ -54,7 +57,6 @@ public class EmployeeOrderUI extends JPanel {
 
     private void loadOrders() {
         try {
-
             orders = OrderManagement.getOrdersEmployee();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error loading orders: " + e.getMessage());
@@ -68,17 +70,22 @@ public class EmployeeOrderUI extends JPanel {
         card.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-        card.setPreferredSize(new Dimension(900, 150));
+        card.setPreferredSize(new Dimension(900, 250)); 
 
-        // Order details
+        
         StringBuilder details = new StringBuilder();
         details.append("Order ID: ").append(order.getId()).append("\n");
         details.append("Customer ID: ").append(order.getCustomerID()).append("\n");
         details.append("Order Date: ").append(order.getOrderDate()).append("\n");
         details.append("\nSelected Meals:\n");
         for (OrderItem item : order.getOrderItems()) {
-            details.append(item.getMealId()).append(" x ").append(item.getQuantity()).append(" = $")
-                    .append(String.format("%.2f", item.getPrice())).append("\n");
+            try {
+                details.append(MealsManagment.getMealById(item.getMealId()).getName()).append(" x ").append(item.getQuantity()).append(" = $")
+                        .append(String.format("%.2f", item.getPrice())).append("\n");
+            } catch (IOException e) {
+              
+                e.printStackTrace();
+            }
         }
         details.append("\nTotal: $").append(String.format("%.2f", order.getOrderPrice())).append("\n");
 
@@ -98,18 +105,14 @@ public class EmployeeOrderUI extends JPanel {
         statusLabel.setFont(new Font("Arial", Font.BOLD, 14));
         statusPanel.add(statusLabel);
 
-        
+        // Status dropdown
         JComboBox<String> statusComboBox = new JComboBox<>(
                 new String[] { "Preparing", "Cooking", "Ready for Delivery", "Delivered" });
         statusComboBox.setSelectedItem(order.getStatus());
         statusComboBox.addActionListener(e -> {
-            try {
-                order.updateStatus((String) statusComboBox.getSelectedItem());
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-            statusLabel.setText("Status: " + order.getStatus());
-            saveOrderStatus(order); 
+            String newStatus = (String) statusComboBox.getSelectedItem();
+            updateOrderStatusUI(order, newStatus); // Update the order status
+            statusLabel.setText("Status: " + newStatus);
         });
         statusPanel.add(statusComboBox);
 
@@ -118,12 +121,13 @@ public class EmployeeOrderUI extends JPanel {
         return card;
     }
 
-    private void saveOrderStatus(Order order) {
+    private void updateOrderStatusUI(Order order, String newStatus) {
         try {
-
-            OrderManagement.updateOrderStatus(order);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error saving order status: " + e.getMessage());
+        //   Order order2 = new Order (order.getOrderId(), order.getCustomerID(), order.getOrderDate(), order.getOrderItems(), order.getOrderType(), newStatus, order.getTip());
+        //     OrderManagement.updateOrderStatus(order2); 
+        order.updateStatus(newStatus);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error updating order status: " + e.getMessage());
         }
     }
 
