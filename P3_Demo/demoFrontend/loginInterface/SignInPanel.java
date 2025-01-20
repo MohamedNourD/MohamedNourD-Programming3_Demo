@@ -21,6 +21,8 @@ import orderInterface.OrderManagementUI;
 public class SignInPanel extends javax.swing.JPanel {
 
     // Components
+    public static int customerID;
+
     private javax.swing.JButton signin;
     private javax.swing.JButton register;
     private javax.swing.JLabel jLabel1;
@@ -211,34 +213,34 @@ public class SignInPanel extends javax.swing.JPanel {
         if (loginStatus.isDone()) {
             try {
                 int userType = UsersManagement.getUserByEmail(email).getUserType();
+
                 System.out.println(userType);
                 // Redirect based on user type
                 switch (userType) {
-                    case 1: //cusomer
-                    SwingUtilities.invokeLater(() -> {
-                       
-                        MainFrame.setPanel(new OrderManagementUI());
-                        
-            
-                    });
+                    case 1: // cusomer
+                        customerID = UsersManagement.getCustomerByEmail(email).getId();
+                        System.out.println("The customer ID is : "+ customerID);
+                        SwingUtilities.invokeLater(() -> {
+
+                            MainFrame.setPanel(new OrderManagementUI());
+
+                        });
                         break;
                     case 2: // Employee
-                    SwingUtilities.invokeLater(() -> {
-                       
-                        MainFrame.setPanel(new EmployeeOrderUI());
-                        
-            
-                    });
-                       
+                        SwingUtilities.invokeLater(() -> {
+
+                            MainFrame.setPanel(new EmployeeOrderUI());
+
+                        });
+
                         break;
                     case 0: // manger
-                    SwingUtilities.invokeLater(() -> {
-                       
-                        MainFrame.setPanel(new WelcomeMangerPanel());
-                        
-            
-                    });
-                      
+                        SwingUtilities.invokeLater(() -> {
+
+                            MainFrame.setPanel(new WelcomeMangerPanel());
+
+                        });
+
                         break;
                 }
             } catch (IOException e) {
@@ -253,9 +255,8 @@ public class SignInPanel extends javax.swing.JPanel {
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {
         SwingUtilities.invokeLater(() -> {
-           
+
             MainFrame.setPanel(new SignUp());
-           
 
         });
 

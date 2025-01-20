@@ -68,31 +68,17 @@ Total: $896.95
 
 Thank you for your order!
 
-Order Details - 2025-01-20 11:31:21
+Order Details - 2025-01-20 12:06:20
 -------------
 Order Type: Dine-In
 
 Selected Meals:
-Pizza x 1 = $8.99
+Burger x 1 = $5.99
 Pasta x 1 = $7.49
 
-Subtotal: $16.48
-Tip: $22.00
-Total: $38.48
-
-Thank you for your order!
-
-Order Details - 2025-01-20 11:36:24
--------------
-Order Type: Special
-
-Selected Meals:
-potato x 1 = $10.00
-burger x 1 = $55.00
-
-Subtotal: $65.00
-Tip: $44.00
-Total: $109.00
+Subtotal: $13.48
+Tip: $2.30
+Total: $15.78
 
 Thank you for your order!
 

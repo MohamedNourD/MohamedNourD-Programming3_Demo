@@ -11,23 +11,18 @@ import java.util.List;
 
 public class EmployeeOrderUI extends JPanel {
 
-    // List to store orders
     private List<Order> orders;
 
     public EmployeeOrderUI() {
-        // Panel setup
         setLayout(new BorderLayout());
-        setBackground(new Color(240, 240, 240)); // Light gray background
+        setBackground(new Color(240, 240, 240));
 
-        // Load orders from the file
         loadOrders();
 
-        // Panel to display orders
         JPanel orderPanel = new JPanel();
         orderPanel.setLayout(new BoxLayout(orderPanel, BoxLayout.Y_AXIS));
         orderPanel.setBackground(new Color(240, 240, 240));
 
-        // Add each order to the panel
         for (Order order : orders) {
             orderPanel.add(createOrderCard(order));
         }
@@ -36,10 +31,9 @@ public class EmployeeOrderUI extends JPanel {
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
         add(scrollPane, BorderLayout.CENTER);
 
-        // Button to refresh orders
         JButton refreshButton = new JButton("Refresh Orders");
-        refreshButton.setBackground(new Color(251, 133, 0)); // Orange background
-        refreshButton.setForeground(Color.WHITE); // White text
+        refreshButton.setBackground(new Color(251, 133, 0));
+        refreshButton.setForeground(Color.WHITE);
         refreshButton.setFont(new Font("Arial", Font.BOLD, 16));
         refreshButton.setFocusPainted(false);
         refreshButton.addActionListener(e -> {
@@ -60,7 +54,7 @@ public class EmployeeOrderUI extends JPanel {
 
     private void loadOrders() {
         try {
-            // Load orders using the OrderManagment class
+
             orders = OrderManagement.getOrdersEmployee();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error loading orders: " + e.getMessage());
@@ -104,7 +98,7 @@ public class EmployeeOrderUI extends JPanel {
         statusLabel.setFont(new Font("Arial", Font.BOLD, 14));
         statusPanel.add(statusLabel);
 
-        // Combo box to change status
+        
         JComboBox<String> statusComboBox = new JComboBox<>(
                 new String[] { "Preparing", "Cooking", "Ready for Delivery", "Delivered" });
         statusComboBox.setSelectedItem(order.getStatus());
@@ -115,7 +109,7 @@ public class EmployeeOrderUI extends JPanel {
                 throw new RuntimeException(ex);
             }
             statusLabel.setText("Status: " + order.getStatus());
-            saveOrderStatus(order); // Save the updated status
+            saveOrderStatus(order); 
         });
         statusPanel.add(statusComboBox);
 
@@ -126,7 +120,7 @@ public class EmployeeOrderUI extends JPanel {
 
     private void saveOrderStatus(Order order) {
         try {
-            // Save the updated status back to the file
+
             OrderManagement.updateOrderStatus(order);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error saving order status: " + e.getMessage());

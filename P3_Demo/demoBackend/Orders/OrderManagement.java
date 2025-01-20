@@ -160,6 +160,17 @@ public class OrderManagement {
                     allOrders.append("Order #" + orders.get(i).getOrderId() + " details - " + orders.get(i).getOrderDate()).append(System.lineSeparator());
                     allOrders.append("-----------------------------------\n");
                     allOrders.append(System.lineSeparator());
+                    switch (orders.get(i).getOrderType()) {
+                        case 1:
+                            allOrders.append("Order Type: Dine-in").append(System.lineSeparator());
+                            break;
+                        case 2:
+                            allOrders.append("Order Type: Special").append(System.lineSeparator());
+                            break;
+                        case 3:
+                            allOrders.append("Order Type: Delivery").append(System.lineSeparator());
+                            break;
+                    }
                     allOrders.append("Order status: " + orders.get(i).getOrderStatus()).append(System.lineSeparator());
                     allOrders.append(System.lineSeparator());
                     allOrders.append("Selected meals:\n");
