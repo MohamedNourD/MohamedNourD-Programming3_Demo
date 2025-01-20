@@ -70,24 +70,37 @@ public class OrderManagement {
         return new Status();
     }
 
-    public static HashMap<LocalDate, Integer> countOrdersForToday() throws IOException {
-        List<Order> orders = getOrders();
-        HashMap<LocalDate, Integer> cntMap = new HashMap<>();
+    // public static HashMap<LocalDate, Integer> countOrdersForToday() throws IOException {
+    //     List<Order> orders = getOrders();
+    //     HashMap<LocalDate, Integer> cntMap = new HashMap<>();
 
+    //     for (Order order : orders) {
+    //         LocalDate dateKey = order.getOrderDate().toLocalDate();
+    //         cntMap.put(dateKey, cntMap.getOrDefault(dateKey, 0) + 1);
+    //     }
+
+    //     return cntMap;
+    // }
+    public static HashMap<String, Integer> countOrdersForToday() throws IOException {
+        List<Order> orders = getOrders();
+        HashMap<String, Integer> cntMap = new HashMap<>();
+    
         for (Order order : orders) {
-            LocalDate dateKey = order.getOrderDate().toLocalDate();
+            // Convert LocalDate to String
+            String dateKey = order.getOrderDate().toLocalDate().toString();
             cntMap.put(dateKey, cntMap.getOrDefault(dateKey, 0) + 1);
         }
-
+    
         return cntMap;
     }
+    
 
-    public static HashMap<LocalDate, Double> dailyRevenues() throws IOException {
+    public static HashMap<String, Double> dailyRevenues() throws IOException {
         List<Order> orders = getOrders();
-        HashMap<LocalDate, Double> revenueMap = new HashMap<>();
+        HashMap<String, Double> revenueMap = new HashMap<>();
 
         for (Order order : orders) {
-            LocalDate dateKey = order.getOrderDate().toLocalDate();
+            String dateKey = order.getOrderDate().toLocalDate().toString();
             revenueMap.put(dateKey, revenueMap.getOrDefault(dateKey, 0.0) + order.getOrderPrice());
         }
 

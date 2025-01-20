@@ -7,7 +7,7 @@ public class Meal {
     private String ingredients;
     private double price;
     private int orderCnt;
-    private String iconPath;
+    private String iconPath = "";
 
     public Meal(int mealId, String mealName, String ingredients, double price, int orderCnt, String iconPath) {
         this.mealId = mealId;

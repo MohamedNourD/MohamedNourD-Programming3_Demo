@@ -128,9 +128,9 @@ public class MealsManagment {
         return new Status();
     }
 
-    public static String mostOrderedMeal() throws IOException {
+    public static Meal mostOrderedMeal() throws IOException {
         List<Meal> meals = getMeals();
-        return Collections.max(meals, Comparator.comparingInt(Meal::getOrderCnt)).getName();
+        return Collections.max(meals, Comparator.comparingInt(Meal::getOrderCnt));
     }
 
     public static Meal getMealById(int id) throws IOException {

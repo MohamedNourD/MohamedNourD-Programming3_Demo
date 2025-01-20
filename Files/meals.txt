@@ -1,3 +1,4 @@
-0||piza||teste||55.0||6||icons\\C:\Users\Mohamed Nour diab\Desktop\pizaMeal.png.png
-1||Bur||sfdf||45.2||0||file.file
-2||burgur||tester||55.0||0||icons\\C:\Users\Mohamed Nour diab\Desktop\mnueBurgerIcon2.png.png
+1||past||chess,sald,water||55.0||4||C:\Users\Mohamed Nour diab\Desktop\pastMeal.png
+2||pizza||chesse ,bibrone , drinks||44.0||2||C:\Users\Mohamed Nour diab\Desktop\pizaMeal.png
+3||potato||frid potato,sos||10.0||2||C:\Users\Mohamed Nour diab\Desktop\ptato.png
+4||burger||chesse , letuc,drinks,potao||55.0||0||C:\Users\Mohamed Nour diab\Desktop\mnueBurgerIcon2.png

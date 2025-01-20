@@ -22,6 +22,12 @@ public class OrderItem {
         this.quantity = quantity;
         this.price = price;
     }
+    // private OrderItem(String mealName, int quantity) {
+    //     this.mealName = mealName;
+    //     this.quantity = quantity;
+    //     this.price = price;
+    // }
+    public OrderItem () {}
 
     public int getMealId() {
         return mealId;
@@ -34,11 +40,9 @@ public class OrderItem {
     public double getPrice() {
         return price;
     }
-
     public void setPrice(double price) {
         this.price = price;
     }
-
     public String toString() {
         return mealId + "|" + quantity + "|" + price;
     }
