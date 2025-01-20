@@ -1,4 +1,4 @@
-package Files;
+package FilesProcessing;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -17,16 +17,16 @@ import java.io.IOException;
 
             switch (className) {
                 case "Users.Customer":
-                    fileName = "Files\\customers.txt";
+                    fileName = "FilesProcessing\\customers.txt";
                     break;
                 case "Users.Employee":
-                    fileName = "Files\\employees.txt";
+                    fileName = "FilesProcessing\\employees.txt";
                     break;
                 case "Meals.Meal":
-                    fileName = "Files\\meals.txt";
+                    fileName = "FilesProcessing\\meals.txt";
                     break;
                 case "Orders.Order":
-                    fileName = "Files\\orders.txt";
+                    fileName = "FilesProcessing\\orders.txt";
                     break;
             }
 

@@ -2,14 +2,14 @@ package Users;
 
 import Execptions.Status;
 import Notifications.Notification;
-import Files.addToFile;
+import FilesProcessing.addToFile;
 
 import java.io.*;
 import java.util.*;
 
 public class UsersManagement {
     private static void addCustomer(Customer customer) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\customers.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("FilesProcessing\\customers.txt", true))) {
             writer.write(customer.toString());
             writer.newLine();
         }
@@ -17,7 +17,7 @@ public class UsersManagement {
 
     static List<Customer> getCustomers() throws IOException {
         List<Customer> customers = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("Files\\customers.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("FilesProcessing\\customers.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 customers.add(Customer.fromString(line));
@@ -27,7 +27,7 @@ public class UsersManagement {
     }
 
     private static void addEmployee(Employee employee) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\employees.txt", true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("FilesProcessing\\employees.txt", true))) {
             writer.write(employee.toString());
             writer.newLine();
         }
@@ -35,7 +35,7 @@ public class UsersManagement {
 
     static List<Employee> getEmployees() throws IOException {
         List<Employee> employees = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("Files\\employees.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("FilesProcessing\\employees.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 employees.add(Employee.fromString(line));
@@ -235,7 +235,7 @@ public class UsersManagement {
             }
         }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\customers.txt", false))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("FilesProcessing\\customers.txt", false))) {
             for (Customer customer : customers) {
                 writer.write(customer.toString());
                 writer.newLine();
