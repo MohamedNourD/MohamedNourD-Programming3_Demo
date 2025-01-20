@@ -141,6 +141,17 @@ public class MealsManagment {
         return null;
     }
 
+    public static int getIdByMealName(String mealName) throws IOException {
+        List<Meal> meals = getMeals();
+
+        for (Meal meal : meals) {
+            if (meal.getName().equals(mealName)) {
+                return meal.getId();
+            }
+        }
+        return 0;
+    }
+
     static Status updateMealInternally(int mealID, Meal updatedMeal) {
         List<Meal> meals;
 
