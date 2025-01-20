@@ -24,7 +24,7 @@ public class Main {
 //        System.out.println(OrderManagement.countOrdersForToday());
 //        System.out.println(OrderManagement.countOrdersForToday());
 //        System.out.println(OrderManagement.dailyRevenues());
-        UsersManagement.createCustomerAccount("firas", "saeed", "f@s.com", "123", "123");
+        System.out.println(UsersManagement.createCustomerAccount("Ahmad", "Saeed", "s@s.com", "123", "123").getMsg());
 
     }
 }

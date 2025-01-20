@@ -144,7 +144,7 @@ public class MealsManagment {
         return null;
     }
 
-    public static Status updateMealInternally(int mealID, Meal updatedMeal) {
+    static Status updateMealInternally(int mealID, Meal updatedMeal) {
         List<Meal> meals;
 
         try {

@@ -289,7 +289,7 @@ public class OrderManagementUI extends JPanel {
         // Create a timestamp for the order
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
-        try (FileWriter writer = new FileWriter(ORDER_FILE_PATH, true)) {
+        try (FileWriter writer = new FileWriter("ORDER_FILE_PATH", true)) {
             // Write order details to the file
             writer.write("Order Details - " + timestamp + "\n");
             writer.write("-------------\n");
@@ -305,7 +305,7 @@ public class OrderManagementUI extends JPanel {
             writer.write("Total: $" + String.format("%.2f", total) + "\n");
             writer.write("\nThank you for your order!\n\n");
 
-            JOptionPane.showMessageDialog(this, "Order details saved to " + ORDER_FILE_PATH);
+            JOptionPane.showMessageDialog(this, "Order details saved to " + "ORDER_FILE_PATH");
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error saving order details: " + e.getMessage());
         }
@@ -314,7 +314,7 @@ public class OrderManagementUI extends JPanel {
     private void showPreviousOrders() {
         try {
             // Read the contents of the order file
-            String ordersContent = Files.readString(Paths.get(ORDER_FILE_PATH));
+            String ordersContent = Files.readString(Paths.get("ORDER_FILE_PATH"));
 
             if (ordersContent.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No previous orders found.");

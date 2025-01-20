@@ -94,6 +94,23 @@ public class UsersManagement {
         return null;
     }
 
+    private static Boolean emailIsExist(String email) throws IOException {
+        List<Customer> customers = getCustomers();
+        List<Employee> employees = getEmployees();
+
+        List<User> users = new ArrayList<>();
+        users.addAll(customers);
+        users.addAll(employees);
+
+        for (User user : users) {
+            if (user.getEmail().equalsIgnoreCase(email)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static Status createCustomerAccount(String firstName, String lastName, String email, String password1, String password2) {
         try {
             if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password1.isEmpty() || password2.isEmpty()) {
@@ -104,6 +121,9 @@ public class UsersManagement {
             }
             else if (!password1.equals(password2)) {
                 throw new Exception("Password mismatching!");
+            }
+            else if (emailIsExist(email)){
+                throw new Exception("Email already exists");
             }
             else {
                 List<Customer> customers = getCustomers();
@@ -135,6 +155,9 @@ public class UsersManagement {
             }
             else if (!password1.equals(password2)) {
                 throw new Exception("Password mismatching!");
+            }
+            else if (emailIsExist(email)){
+                throw new Exception("Email already exists");
             }
             else {
                 List<Employee> employees = getEmployees();
