@@ -78,6 +78,23 @@ public class UsersManagement {
         return null;
     }
 
+    public static Customer getCustomerByEmail(String email) throws IOException {
+        List<Customer> customers = getCustomers();
+
+        System.out.println("Searching for email: " + email);
+
+        for (Customer customer : customers) {
+            System.out.println("Checking user: " + customer.getEmail());
+            if (customer.getEmail().equalsIgnoreCase(email)) {
+                System.out.println("Match found! Returning password.");
+                return customer;
+            }
+        }
+
+        System.out.println("Email not found: " + email);
+        return null;
+    }
+
     public static Status createCustomerAccount(String firstName, String lastName, String email, String password1, String password2) {
         try {
             if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password1.isEmpty() || password2.isEmpty()) {

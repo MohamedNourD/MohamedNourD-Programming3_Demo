@@ -44,8 +44,8 @@ public class MainFrame extends JFrame {
         leftPanel.setBackground(Color.WHITE); // White background
 
         // Load and resize the fixed image
-        ImageIcon icon = new ImageIcon("icons/fast-foodlogo.png");
-        Image scaledIcon = icon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon("icons/resturant_logo.png");
+        Image scaledIcon = icon.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH);
         JLabel iconLabel = new JLabel(new ImageIcon(scaledIcon));
 
         // Add the fixed image to the left panel
