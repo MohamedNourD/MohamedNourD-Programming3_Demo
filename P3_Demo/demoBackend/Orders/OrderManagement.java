@@ -1,6 +1,8 @@
 package Orders;
 
 import Execptions.Status;
+import Files.addToFile;
+import Meals.Meal;
 import Meals.MealsManagment;
 import Notifications.Notification;
 import Users.Customer;
@@ -38,7 +40,7 @@ public class OrderManagement {
             while ((line = reader.readLine()) != null) {
                 Order order = Order.fromString(line);
                 System.out.println(order.getOrderStatus());
-                if (order.getOrderStatus().equals("pending") || order.getOrderStatus().equals("preparing"))
+                if (order.getOrderStatus().equals("pending") || order.getOrderStatus().equals("preparing") || order.getOrderStatus().equals("ready"))
                     orders.add(order);
             }
         }
@@ -55,11 +57,11 @@ public class OrderManagement {
                 int nextOrderId = orders.isEmpty() ? 0 : orders.get(orders.size() - 1).getId() + 1;
 
                 Order order = new Order(nextOrderId, customerID, orderItems, orderType, tip);
-                System.out.println("to add");
-                addOrder(order);
+                addToFile<Order> file = new addToFile<>(order);
+                file.start();
 
                 Notification n = new Notification("Done!", "Your order has been successfully added ✅\nYou can follow up on the order via the history");
-                n.run();
+                n.start();
             }
         }
         catch (Exception e) {

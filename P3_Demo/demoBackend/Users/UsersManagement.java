@@ -1,10 +1,9 @@
 package Users;
 
 import Execptions.Status;
-import Meals.Meal;
 import Notifications.Notification;
+import Files.addToFile;
 
-import javax.swing.event.ListDataEvent;
 import java.io.*;
 import java.util.*;
 
@@ -111,10 +110,12 @@ public class UsersManagement {
                 int nextCustomerId = customers.isEmpty() ? 1 : customers.get(customers.size() - 1).getId() + 1;
 
                 Customer customer = new Customer(nextCustomerId, firstName, lastName, email, password1, 1);
-                addCustomer(customer);
+
+                addToFile<Customer> file = new addToFile<>(customer);
+                file.start();
 
                 Notification n = new Notification("Welcome!", "Your account has been created successfully ❤️");
-                n.run();
+                n.start();
 
                 return new Status();
             }
@@ -140,7 +141,8 @@ public class UsersManagement {
                 int nextEmployeeId = employees.isEmpty() ? 1 : employees.get(employees.size() - 1).getId() + 1;
 
                 Employee employee = new Employee(nextEmployeeId, firstName, lastName, email, password1, 2);
-                addEmployee(employee);
+                addToFile<Employee> file = new addToFile<>(employee);
+                file.start();
 
                 Notification n = new Notification("Done!", "The account has been created successfully ❤️");
                 n.run();

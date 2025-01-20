@@ -67,7 +67,6 @@ public class OrderManagementUI extends JPanel {
     private String orderType = "";
 
     // Path to the order file
-    private static final String ORDER_FILE_PATH = "Files/orderCustomer.txt";
 
     public OrderManagementUI() {
         setLayout(new BorderLayout());
