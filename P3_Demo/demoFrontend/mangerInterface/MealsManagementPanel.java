@@ -84,7 +84,7 @@ public class MealsManagementPanel extends JPanel {
         mealItemPanel.setBackground(Color.WHITE);
         mealItemPanel.setPreferredSize(new Dimension(300, 300)); // Ensure this is consistent
         mealItemPanel.setLayout(null);
-        JLabel mealIconLabel = new JLabel("Icon Meal", SwingConstants.CENTER);
+        JLabel mealIconLabel = new JLabel("");
         mealIconLabel.setBounds(10, 10, 280, 100);
         mealIconLabel.setForeground(fontColor);
         mealItemPanel.add(mealIconLabel); // For precise positioning
@@ -251,8 +251,6 @@ public class MealsManagementPanel extends JPanel {
         }
     }
      
-    
-
     private void loadMeals() {
         try {
             List<Meal> meals = MealsManagment.getMeals(); // Fetch the list of meals

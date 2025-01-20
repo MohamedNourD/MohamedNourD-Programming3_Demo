@@ -1,10 +1,9 @@
 package Users;
 
 import Execptions.Status;
-import Meals.Meal;
 import Notifications.Notification;
+import Files.addToFile;
 
-import javax.swing.event.ListDataEvent;
 import java.io.*;
 import java.util.*;
 
@@ -95,6 +94,23 @@ public class UsersManagement {
         return null;
     }
 
+    private static Boolean emailIsExist(String email) throws IOException {
+        List<Customer> customers = getCustomers();
+        List<Employee> employees = getEmployees();
+
+        List<User> users = new ArrayList<>();
+        users.addAll(customers);
+        users.addAll(employees);
+
+        for (User user : users) {
+            if (user.getEmail().equalsIgnoreCase(email)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static Status createCustomerAccount(String firstName, String lastName, String email, String password1, String password2) {
         try {
             if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password1.isEmpty() || password2.isEmpty()) {
@@ -106,15 +122,20 @@ public class UsersManagement {
             else if (!password1.equals(password2)) {
                 throw new Exception("Password mismatching!");
             }
+            else if (emailIsExist(email)){
+                throw new Exception("Email already exists");
+            }
             else {
                 List<Customer> customers = getCustomers();
                 int nextCustomerId = customers.isEmpty() ? 1 : customers.get(customers.size() - 1).getId() + 1;
 
                 Customer customer = new Customer(nextCustomerId, firstName, lastName, email, password1, 1);
-                addCustomer(customer);
+
+                addToFile<Customer> file = new addToFile<>(customer);
+                file.start();
 
                 Notification n = new Notification("Welcome!", "Your account has been created successfully ❤️");
-                n.run();
+                n.start();
 
                 return new Status();
             }
@@ -135,12 +156,16 @@ public class UsersManagement {
             else if (!password1.equals(password2)) {
                 throw new Exception("Password mismatching!");
             }
+            else if (emailIsExist(email)){
+                throw new Exception("Email already exists");
+            }
             else {
                 List<Employee> employees = getEmployees();
                 int nextEmployeeId = employees.isEmpty() ? 1 : employees.get(employees.size() - 1).getId() + 1;
 
                 Employee employee = new Employee(nextEmployeeId, firstName, lastName, email, password1, 2);
-                addEmployee(employee);
+                addToFile<Employee> file = new addToFile<>(employee);
+                file.start();
 
                 Notification n = new Notification("Done!", "The account has been created successfully ❤️");
                 n.run();

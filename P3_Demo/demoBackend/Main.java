@@ -24,8 +24,7 @@ public class Main {
 //        System.out.println(OrderManagement.countOrdersForToday());
 //        System.out.println(OrderManagement.countOrdersForToday());
 //        System.out.println(OrderManagement.dailyRevenues());
-        System.out.println(OrderManagement.getAllOrders(0));
-        int id = UsersManagement.getCustomerByEmail("sf").getId();
+          System.out.println(OrderManagement.getAllOrders(1));
 
     }
 }

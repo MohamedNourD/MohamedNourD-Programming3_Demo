@@ -1,6 +1,7 @@
 package Meals;
 
 import Execptions.Status;
+import Files.addToFile;
 import Notifications.Notification;
 import Users.Customer;
 import Users.Employee;
@@ -110,7 +111,12 @@ public class MealsManagment {
                 int nextMealId = meals.isEmpty() ? 1 : meals.get(meals.size() - 1).getId() + 1;
 
                 Meal meal = new Meal(nextMealId, mealName, ingredients, price, iconPath);
-                addMeal(meal);
+                addToFile<Meal> file = new addToFile<>(meal);
+                file.start();
+
+                Notification n = new Notification("Done", "The meal has been added successfully!");
+                n.start();
+
             }
         } catch (Exception e) {
             return new Status("Not all fields are complete.");
@@ -138,7 +144,7 @@ public class MealsManagment {
         return null;
     }
 
-    public static Status updateMealInternally(int mealID, Meal updatedMeal) {
+    static Status updateMealInternally(int mealID, Meal updatedMeal) {
         List<Meal> meals;
 
         try {

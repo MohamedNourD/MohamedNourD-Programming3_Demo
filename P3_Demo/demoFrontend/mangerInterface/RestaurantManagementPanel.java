@@ -12,6 +12,7 @@ import Users.UsersManagement;
 import mainFrame.MainFrame;
 
 public class RestaurantManagementPanel extends JPanel {
+    ;
 
     private JPanel reportPanel;
     private JButton dailyOrdersButton;
@@ -127,29 +128,34 @@ public class RestaurantManagementPanel extends JPanel {
         reportPanel.repaint();
     }
 
-    private void showMostRequestedMeal() {
-        reportPanel.removeAll(); // Clear previous content
-        Meal meal = null ;
-        try {
-            meal = MealsManagment.mostOrderedMeal();
-        } catch (IOException e) {
+private void showMostRequestedMeal() {
+    reportPanel.removeAll(); // Clear previous content
 
-            e.printStackTrace();
-        }
+    Meal requestedMeal = null;
+    try {
+        requestedMeal = MealsManagment.mostOrderedMeal();
+    } catch (IOException e) {
+        System.err.println("Error retrieving most requested meal: " + e.getMessage());
+        
+    }
 
+    if (requestedMeal != null) {
         JPanel mealPanel = createMealItemPanel();
+       boolean bool = true;
         for (Component component : mealPanel.getComponents()) {
             if (component instanceof JTextField textField) {
-                if (textField.getBounds().y == 120) { 
-                    textField.setText(meal.getName());
-                } else if (textField.getBounds().y == 150) { 
-                    textField.setText(new String(meal.getPrice() + " $")); 
+                if (textField.getBounds().y == 120) {
+                    textField.setText(requestedMeal.getName());
+                } else if (textField.getBounds().y == 150) {
+                    textField.setText(new String(requestedMeal.getPrice() + " $"));
                 }
-            } else if (component instanceof JTextArea textArea) { 
-                textArea.setText( meal.getIngredients());
-            }else if (component instanceof JLabel) {
+            } else if (component instanceof JTextArea textArea) {
+                textArea.setText(requestedMeal.getIngredients());
+            } else if (component instanceof JLabel&&bool) {
                 JLabel label = (JLabel) component;
-               label.setIcon(new ImageIcon(meal.getIconPath()));
+                label.setText("");
+                label.setIcon(new ImageIcon(requestedMeal.getIconPath()));
+                bool = false;
             }
         }
 
@@ -159,7 +165,10 @@ public class RestaurantManagementPanel extends JPanel {
         reportPanel.add(mealPanel, BorderLayout.CENTER);
         reportPanel.revalidate();
         reportPanel.repaint();
+    } else {
+       
     }
+}
 
     private void showDailyRevenues() {
         reportPanel.removeAll(); // Clear previous content
@@ -206,7 +215,6 @@ public class RestaurantManagementPanel extends JPanel {
         JLabel customerLabel = new JLabel(UsersManagement.loyalCustomer());
         customerLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         contentPanel.add(customerLabel);
-
         reportPanel.add(new JScrollPane(contentPanel), BorderLayout.CENTER);
         reportPanel.revalidate();
         reportPanel.repaint();
@@ -269,25 +277,6 @@ public class RestaurantManagementPanel extends JPanel {
 
         return mealItemPanel;
     }
-
-    // // Populate sample data for demonstration
-    // private void populateSampleData() {
-    //     dailyOrders.put("2023-10-01", 50);
-    //     dailyOrders.put("2023-10-02", 60);
-    //     dailyOrders.put("2023-10-03", 45);
-
-    //     mealRequests.put("Burger", 120);
-    //     mealRequests.put("Pizza", 90);
-    //     mealRequests.put("Pasta", 75);
-
-    //     dailyRevenues.put("2023-10-01", 1500.0);
-    //     dailyRevenues.put("2023-10-02", 1800.0);
-    //     dailyRevenues.put("2023-10-03", 1350.0);
-
-    //     customerVisits.put("John Doe", 10);
-    //     customerVisits.put("Jane Smith", 15);
-    //     customerVisits.put("Alice Johnson", 8);
-    // }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

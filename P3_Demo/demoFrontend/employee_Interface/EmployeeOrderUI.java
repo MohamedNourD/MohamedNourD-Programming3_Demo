@@ -107,7 +107,7 @@ public class EmployeeOrderUI extends JPanel {
 
         // Status dropdown
         JComboBox<String> statusComboBox = new JComboBox<>(
-                new String[] { "Preparing", "Cooking", "Ready for Delivery", "Delivered" });
+                new String[] { "Preparing", "Ready", "Done", "Deleted" });
         statusComboBox.setSelectedItem(order.getStatus());
         statusComboBox.addActionListener(e -> {
             String newStatus = (String) statusComboBox.getSelectedItem();
