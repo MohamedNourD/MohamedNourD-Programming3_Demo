@@ -1,6 +1,5 @@
 package Orders;
 
-import Users.Customer;
 import Users.UsersManagement;
 
 import java.io.IOException;
@@ -56,26 +55,8 @@ public class Order {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDateTime orderDate) {
-        this.orderDate = orderDate;
-    }
-
-
-
-    public Order(int orderId, Customer customer, List<OrderItem> orderItems, int orderType, double tip) {
-        this.orderId = orderId;
-        this.customerID = customer.getId();
-        this.orderDate = LocalDateTime.now();
-        this.orderItems = orderItems;
-        this.orderType = orderType;
-        this.orderStatus = "pending";
-        this.tip = tip;
-
-        orderPrice = 0;
-        for (OrderItem orderItem : orderItems) {
-            orderPrice += orderItem.getPrice();
-        }
-        customer.newOrder(orderId);
+    public double getTip() {
+        return tip;
     }
 
     public Order(int orderId, int customerID, List<OrderItem> orderItems, int orderType, double tip) throws IOException {
@@ -113,8 +94,12 @@ public class Order {
         return orderStatus;
     }
 
-    public void setStatus(String statusOrder) {
-        this.orderStatus = statusOrder;
+    public void updateStatus(String orderStatus) throws IOException {
+        if (this.orderStatus == orderStatus) {
+            this.orderStatus = orderStatus;
+            OrderManagement.updateOrder(orderId, new Order(orderId, customerID, orderDate, orderItems, orderType, this.orderStatus, tip));
+        }
+        System.out.println("same status");
     }
 
 

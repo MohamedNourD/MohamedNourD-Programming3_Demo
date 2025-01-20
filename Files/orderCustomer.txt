@@ -54,3 +54,45 @@ Total: $60.45
 
 Thank you for your order!
 
+Order Details - 2025-01-17 22:34:12
+-------------
+Order Type: Delivery
+
+Selected Meals:
+Burger x 2 = $11.98
+Pizza x 3 = $26.97
+
+Subtotal: $38.95
+Tip: $858.00
+Total: $896.95
+
+Thank you for your order!
+
+Order Details - 2025-01-20 11:31:21
+-------------
+Order Type: Dine-In
+
+Selected Meals:
+Pizza x 1 = $8.99
+Pasta x 1 = $7.49
+
+Subtotal: $16.48
+Tip: $22.00
+Total: $38.48
+
+Thank you for your order!
+
+Order Details - 2025-01-20 11:36:24
+-------------
+Order Type: Special
+
+Selected Meals:
+potato x 1 = $10.00
+burger x 1 = $55.00
+
+Subtotal: $65.00
+Tip: $44.00
+Total: $109.00
+
+Thank you for your order!
+

@@ -174,5 +174,38 @@ public class UsersManagement {
         return Collections.max(customers, Comparator.comparingInt(Customer::getCntOrders)).getName();
     }
 
+    public static Status updateCustomer(int customerID, Customer updatedCustomer) {
+        List<Customer> customers;
+
+        try {
+            customers = getCustomers();
+        } catch (IOException e) {
+            return new Status(e.getMessage());
+        }
+
+        boolean customerFound = false;
+
+        for (int i = 0; i < customers.size(); i++) {
+            if (customers.get(i).getId() == customerID) {
+                customers.set(i, updatedCustomer);
+                customerFound = true;
+                break;
+            }
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\customers.txt", false))) {
+            for (Customer customer : customers) {
+                writer.write(customer.toString());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            return new Status(e.getMessage());
+        }
+
+        Notification n = new Notification("Done!", "The meal has been added to the customer account");
+        n.run();
+
+        return new Status();
+    }
     
 }

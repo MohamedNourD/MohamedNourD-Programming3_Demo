@@ -19,9 +19,14 @@ public class Customer extends User {
     public int getId() {return customerId;}
     public void newOrder(int orderId) {
         ordersID.add(orderId);
+        UsersManagement.updateCustomer(customerId, new Customer(customerId, getFirstName(), getLastName(), getEmail(), getPassword(), getUserType(), getOrdersID()));
     }
     public int getCntOrders() {
         return ordersID.size();
+    }
+
+    public List<Integer> getOrdersID() {
+        return ordersID;
     }
 
     public String toString() {

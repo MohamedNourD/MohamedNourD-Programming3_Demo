@@ -2,6 +2,9 @@ package Meals;
 
 import Execptions.Status;
 import Notifications.Notification;
+import Users.Customer;
+import Users.Employee;
+import Users.User;
 
 import java.io.*;
 import java.util.*;
@@ -119,9 +122,52 @@ public class MealsManagment {
         return new Status();
     }
 
-    public static String mostOrderedMeal() throws IOException {
+    public static Meal mostOrderedMeal() throws IOException {
         List<Meal> meals = getMeals();
-        return Collections.max(meals, Comparator.comparingInt(Meal::getOrderCnt)).getName();
+        return Collections.max(meals, Comparator.comparingInt(Meal::getOrderCnt));
+    }
+
+    public static Meal getMealById(int id) throws IOException {
+        List<Meal> meals = getMeals();
+
+        for (Meal meal : meals) {
+            if (meal.getId() == id) {
+                return meal;
+            }
+        }
+        return null;
+    }
+
+    public static Status updateMealInternally(int mealID, Meal updatedMeal) {
+        List<Meal> meals;
+
+        try {
+            meals = getMeals();
+        } catch (IOException e) {
+            return new Status(e.getMessage());
+        }
+
+        boolean mealFound = false;
+
+        for (int i = 0; i < meals.size(); i++) {
+            if (meals.get(i).getId() == mealID) {
+                meals.set(i, updatedMeal);
+                mealFound = true;
+                break;
+            }
+        }
+        System.out.println("before updating: " + updatedMeal.getOrderCnt());
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Files\\meals.txt", false))) {
+            for (Meal meal : meals) {
+                writer.write(meal.toString());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            return new Status(e.getMessage());
+        }
+
+        return new Status();
     }
 
 }

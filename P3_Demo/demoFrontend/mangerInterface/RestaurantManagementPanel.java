@@ -1,9 +1,14 @@
 package mangerInterface;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.*;
 import javax.swing.*;
 
+import Meals.Meal;
+import Meals.MealsManagment;
+import Orders.OrderManagement;
+import Users.UsersManagement;
 import mainFrame.MainFrame;
 
 public class RestaurantManagementPanel extends JPanel {
@@ -15,15 +20,12 @@ public class RestaurantManagementPanel extends JPanel {
     private JButton regularCustomerButton;
     private JButton backButton;
 
-    // Sample data for demonstration
-    private Map<String, Integer> dailyOrders = new HashMap<>(); // Date -> Number of orders
-    private Map<String, Integer> mealRequests = new HashMap<>(); // Meal -> Number of requests
-    private Map<String, Double> dailyRevenues = new HashMap<>(); // Date -> Revenue
-    private Map<String, Integer> customerVisits = new HashMap<>(); // Customer -> Number of visits
+ 
+   
 
     public RestaurantManagementPanel() {
         initComponents();
-        populateSampleData(); // Populate sample data for demonstration
+       // populateSampleData(); // Populate sample data for demonstration
     }
 
     private void initComponents() {
@@ -65,9 +67,17 @@ public class RestaurantManagementPanel extends JPanel {
         Font buttonFont = new Font("Segoe UI", Font.BOLD, 14);
 
         dailyOrdersButton = createButton("Daily Orders", buttonColor, buttonFont, e -> showDailyOrders());
-        mostRequestedMealButton = createButton("Most Requested Meal", buttonColor, buttonFont, e -> showMostRequestedMeal());
+        mostRequestedMealButton = createButton("Most Requested Meal", buttonColor, buttonFont,
+                e -> showMostRequestedMeal());
         dailyRevenuesButton = createButton("Daily Revenues", buttonColor, buttonFont, e -> showDailyRevenues());
-        regularCustomerButton = createButton("Regular Customer", buttonColor, buttonFont, e -> showRegularCustomer());
+        regularCustomerButton = createButton("Regular Customer", buttonColor, buttonFont, e -> {
+            try {
+                showRegularCustomer();
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        });
         backButton = createButton("Back", buttonColor, buttonFont, e -> onBackButtonClicked());
 
         buttonPanel.add(dailyOrdersButton);
@@ -92,7 +102,13 @@ public class RestaurantManagementPanel extends JPanel {
     // Methods to handle report generation
     private void showDailyOrders() {
         reportPanel.removeAll(); // Clear previous content
-
+         Map<String, Integer> dailyOrders = null;
+        try {
+            dailyOrders = OrderManagement.countOrdersForToday();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } // Date -> Number of
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setBackground(Color.WHITE);
@@ -113,20 +129,27 @@ public class RestaurantManagementPanel extends JPanel {
 
     private void showMostRequestedMeal() {
         reportPanel.removeAll(); // Clear previous content
+        Meal meal = null ;
+        try {
+            meal = MealsManagment.mostOrderedMeal();
+        } catch (IOException e) {
 
-        String mostRequestedMeal = Collections.max(mealRequests.entrySet(), Map.Entry.comparingByValue()).getKey();
-        int requests = mealRequests.get(mostRequestedMeal);
+            e.printStackTrace();
+        }
 
         JPanel mealPanel = createMealItemPanel();
         for (Component component : mealPanel.getComponents()) {
             if (component instanceof JTextField textField) {
-                if (textField.getBounds().y == 120) { // Meal Name
-                    textField.setText(mostRequestedMeal);
-                } else if (textField.getBounds().y == 150) { // Price
-                    textField.setText("$10.00"); // Example price
+                if (textField.getBounds().y == 120) { 
+                    textField.setText(meal.getName());
+                } else if (textField.getBounds().y == 150) { 
+                    textField.setText(new String(meal.getPrice() + " $")); 
                 }
-            } else if (component instanceof JTextArea textArea) { // Ingredients
-                textArea.setText("Ingredients for " + mostRequestedMeal);
+            } else if (component instanceof JTextArea textArea) { 
+                textArea.setText( meal.getIngredients());
+            }else if (component instanceof JLabel) {
+                JLabel label = (JLabel) component;
+               label.setIcon(new ImageIcon(meal.getIconPath()));
             }
         }
 
@@ -140,6 +163,14 @@ public class RestaurantManagementPanel extends JPanel {
 
     private void showDailyRevenues() {
         reportPanel.removeAll(); // Clear previous content
+          Map<String, Double> dailyRevenues = null;
+        try {
+            dailyRevenues = OrderManagement.dailyRevenues();
+        } catch (IOException e) {
+            
+            e.printStackTrace();
+        } 
+
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setBackground(Color.WHITE);
@@ -159,11 +190,10 @@ public class RestaurantManagementPanel extends JPanel {
         reportPanel.repaint();
     }
 
-    private void showRegularCustomer() {
+    private void showRegularCustomer() throws IOException {
         reportPanel.removeAll(); // Clear previous content
 
-        String regularCustomer = Collections.max(customerVisits.entrySet(), Map.Entry.comparingByValue()).getKey();
-        int visits = customerVisits.get(regularCustomer);
+       
 
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
@@ -173,7 +203,7 @@ public class RestaurantManagementPanel extends JPanel {
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
         contentPanel.add(titleLabel);
 
-        JLabel customerLabel = new JLabel(regularCustomer + " (" + visits + " visits)");
+        JLabel customerLabel = new JLabel(UsersManagement.loyalCustomer());
         customerLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         contentPanel.add(customerLabel);
 
@@ -184,8 +214,8 @@ public class RestaurantManagementPanel extends JPanel {
 
     // Back button action
     private void onBackButtonClicked() {
-       SwingUtilities.invokeLater(() -> {
-          MainFrame.setPanel(new WelcomeMangerPanel());
+        SwingUtilities.invokeLater(() -> {
+            MainFrame.setPanel(new WelcomeMangerPanel());
         });
         reportPanel.removeAll(); // Clear the report panel
         reportPanel.revalidate();
@@ -240,24 +270,24 @@ public class RestaurantManagementPanel extends JPanel {
         return mealItemPanel;
     }
 
-    // Populate sample data for demonstration
-    private void populateSampleData() {
-        dailyOrders.put("2023-10-01", 50);
-        dailyOrders.put("2023-10-02", 60);
-        dailyOrders.put("2023-10-03", 45);
+    // // Populate sample data for demonstration
+    // private void populateSampleData() {
+    //     dailyOrders.put("2023-10-01", 50);
+    //     dailyOrders.put("2023-10-02", 60);
+    //     dailyOrders.put("2023-10-03", 45);
 
-        mealRequests.put("Burger", 120);
-        mealRequests.put("Pizza", 90);
-        mealRequests.put("Pasta", 75);
+    //     mealRequests.put("Burger", 120);
+    //     mealRequests.put("Pizza", 90);
+    //     mealRequests.put("Pasta", 75);
 
-        dailyRevenues.put("2023-10-01", 1500.0);
-        dailyRevenues.put("2023-10-02", 1800.0);
-        dailyRevenues.put("2023-10-03", 1350.0);
+    //     dailyRevenues.put("2023-10-01", 1500.0);
+    //     dailyRevenues.put("2023-10-02", 1800.0);
+    //     dailyRevenues.put("2023-10-03", 1350.0);
 
-        customerVisits.put("John Doe", 10);
-        customerVisits.put("Jane Smith", 15);
-        customerVisits.put("Alice Johnson", 8);
-    }
+    //     customerVisits.put("John Doe", 10);
+    //     customerVisits.put("Jane Smith", 15);
+    //     customerVisits.put("Alice Johnson", 8);
+    // }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

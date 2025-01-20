@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import  java.util.List;
+import java.util.List;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -35,64 +34,23 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-
 import Orders.OrderItem;
+import Meals.Meal; // Import the Meal class from the Meals package
+import Meals.MealsManagment;
+import jagva
 public class OrderManagementUI extends JPanel {
 
-    // Meal class to represent meal details
-    public static class Meal {
-        private String name;
-        private double price;
-        private String ingredients;
-        private ImageIcon icon;
+  
+    private  List<Meal> meals = null;
 
-        public Meal(String name, double price, String ingredients, String iconPath) {
-            this.name = name;
-            this.price = price;
-            this.ingredients = ingredients;
-
-            // Load the image icon safely
-            File imgFile = new File(iconPath);
-            if (imgFile.exists() && !imgFile.isDirectory()) {
-                this.icon = new ImageIcon(iconPath);
-            } else {
-                this.icon = new ImageIcon(); // Placeholder for missing icons
-                System.err.println("Image not found: " + iconPath);
-            }
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public double getPrice() {
-            return price;
-        }
-
-        public String getIngredients() {
-            return ingredients;
-        }
-
-        public ImageIcon getIcon() {
-            return icon;
-        }
-    }
-
-    // Meals data (replace with backend service in production)
-    private final Meal[] meals = {
-            new Meal("Burger", 5.99, "Beef, Cheese, Lettuce, Tomato", "icons/mnueBurgerIcon2.png"),
-            new Meal("Pizza", 8.99, "Pepperoni, Cheese, Tomato Sauce", "icons/pizaMeal.png"),
-            new Meal("Pasta", 7.49, "Pasta, Alfredo Sauce, Chicken", "icons/pastMeal.png")
-    };
-
-    // Selected meals and their quantities
+    
     private final Map<Meal, Integer> selectedMeals = new HashMap<>();
 
-    // Order type selection
+    
     private String orderType = "";
 
     // Path to the order file
-    private static final String ORDER_FILE_PATH = "Files\\orderCustomer.txt";
+    private static final String ORDER_FILE_PATH = "Files\\orders.txt";
 
     public OrderManagementUI() {
         setLayout(new BorderLayout());
@@ -114,7 +72,12 @@ public class OrderManagementUI extends JPanel {
         JPanel mealPanel = new JPanel();
         mealPanel.setLayout(new BoxLayout(mealPanel, BoxLayout.Y_AXIS));
         mealPanel.setBackground(new Color(240, 240, 240));
-
+            try {
+                meals = MealsManagment.getMeals();
+            } catch (IOException e) {
+                
+                e.printStackTrace();
+            }
         for (Meal meal : meals) {
             mealPanel.add(createMealCard(meal));
         }
@@ -201,7 +164,8 @@ public class OrderManagementUI extends JPanel {
         card.setPreferredSize(new Dimension(900, 150));
 
         // Icon
-        JLabel iconLabel = new JLabel(meal.getIcon());
+        ImageIcon icon = new ImageIcon(meal.getIconPath());
+        JLabel iconLabel = new JLabel(icon);
         iconLabel.setBounds(20, 10, 130, 130);
         card.add(iconLabel);
 
@@ -311,31 +275,23 @@ public class OrderManagementUI extends JPanel {
         billDialog.setVisible(true);
     }
 
-    private void saveOrderToFile(double subtotal, double tip, double total) {
-        // Create a timestamp for the order
-        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-
-        try (FileWriter writer = new FileWriter(ORDER_FILE_PATH, true)) {
-            // Write order details to the file
-            writer.write("Order Details - " + timestamp + "\n");
-            writer.write("-------------\n");
-            writer.write("Order Type: " + orderType + "\n");
-            writer.write("\nSelected Meals:\n");
-            for (Map.Entry<Meal, Integer> entry : selectedMeals.entrySet()) {
-                Meal meal = entry.getKey();
-                int quantity = entry.getValue();
-                writer.write(meal.getName() + " x " + quantity + " = $" + String.format("%.2f", meal.getPrice() * quantity) + "\n");
-            }
-            writer.write("\nSubtotal: $" + String.format("%.2f", subtotal) + "\n");
-            writer.write("Tip: $" + String.format("%.2f", tip) + "\n");
-            writer.write("Total: $" + String.format("%.2f", total) + "\n");
-            writer.write("\nThank you for your order!\n\n");
-
-            JOptionPane.showMessageDialog(this, "Order details saved to " + ORDER_FILE_PATH);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error saving order details: " + e.getMessage());
-        }
-    }
+    // private void saveOrderToFile(double subtotal, double tip, double total) {
+      
+       
+      
+    //       List<OrderItem> orderTypes = new ArrayList<OrderItem>();
+    //         for (Map.Entry<Meal, Integer> entry : selectedMeals.entrySet()) {
+    //             Meal meal = entry.getKey();
+    //             int quantity = entry.getValue();
+    //             orderTypes.add(meal,quantity);
+               
+    //         }
+           
+    //         JOptionPane.showMessageDialog(this, "Order details saved to " + ORDER_FILE_PATH);
+    //     } catch (IOException e) {
+    //         JOptionPane.showMessageDialog(this, "Error saving order details: " + e.getMessage());
+    //     }
+    // }
 
     private void showPreviousOrders() {
         try {
@@ -372,7 +328,7 @@ public class OrderManagementUI extends JPanel {
         return subtotal;
     }
 
-     public List<OrderItem> getOrderItems() {
+    public List<OrderItem> getOrderItems() {
         List<OrderItem> orderItems = new ArrayList<>();
 
         for (Map.Entry<Meal, Integer> entry : selectedMeals.entrySet()) {
@@ -380,8 +336,7 @@ public class OrderManagementUI extends JPanel {
             int quantity = entry.getValue();
             double price = meal.getPrice();
 
-          
-            OrderItem orderItem = new OrderItem(meal.getName(), quantity, price);
+            OrderItem orderItem = new OrderItem(meal, quantity);
             orderItems.add(orderItem);
         }
 
