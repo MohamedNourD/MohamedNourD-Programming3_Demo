@@ -152,6 +152,17 @@ public class MealsManagment {
         return 0;
     }
 
+    public static String getIconPathById(int id) throws IOException {
+        List<Meal> meals = getMeals();
+
+        for (Meal meal : meals) {
+            if (meal.getId() == id) {
+                return meal.getIconPath();
+            }
+        }
+        return "";
+    }
+
     static Status updateMealInternally(int mealID, Meal updatedMeal) {
         List<Meal> meals;
 
