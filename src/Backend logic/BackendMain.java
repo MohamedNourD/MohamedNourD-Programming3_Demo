@@ -1,19 +1,9 @@
 
-import Meals.Meal;
-import Meals.MealsManagment;
-import Notifications.Notification;
-import Orders.Order;
-import Orders.OrderItem;
-import Orders.OrderManagement;
 import Users.*;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-public class backendMain {
+public class BackendMain {
     public static void main (String[] args) throws IOException {
 //        System.out.println(MealsManagment.createMeal("Pizza", "Cheese", 25.0, "icons\\\\Pizza.png").getMsg());
 //        List<Meal> meals = MealsManagment.getMeals();
