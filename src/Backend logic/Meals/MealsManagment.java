@@ -51,7 +51,7 @@ public class MealsManagment {
         }
 
         Notification n = new Notification("Done!", "The meal has been updated successfully 🔁");
-        n.run();
+        n.start();
 
         return new Status();
     }
@@ -80,7 +80,7 @@ public class MealsManagment {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 writer.write(fileContent.toString());
                 Notification n = new Notification("Done!", "The meal has been deleted successfully 🗑️");
-                n.run();
+                n.start();
                 return new Status();
             } catch (IOException e) {
                 return new Status(e.getMessage());
@@ -123,7 +123,7 @@ public class MealsManagment {
         }
 
         Notification n = new Notification("Done!", "The meal has been added successfully 🍴");
-        n.run();
+        n.start();
 
         return new Status();
     }

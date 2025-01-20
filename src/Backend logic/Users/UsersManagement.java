@@ -168,7 +168,7 @@ public class UsersManagement {
                 file.start();
 
                 Notification n = new Notification("Done!", "The account has been created successfully ❤️");
-                n.run();
+                n.start();
 
                 return new Status();
             }
@@ -197,11 +197,11 @@ public class UsersManagement {
 
                 if (currentUser.getUserType() == 1) {
                     Notification n = new Notification("Welcome back!", "We miss you " + currentUser.getFirstName() + " \nready for a delicious meal? 😋");
-                    n.run();
+                    n.start();
                 }
                 else {
                     Notification n = new Notification("Welcome back!", "Wish you a nice day 😎");
-                    n.run();
+                    n.start();
                 }
                 return new Status();
             }
@@ -245,7 +245,7 @@ public class UsersManagement {
         }
 
         Notification n = new Notification("Done!", "The meal has been added to the customer account");
-        n.run();
+        n.start();
 
         return new Status();
     }
