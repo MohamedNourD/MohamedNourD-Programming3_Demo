@@ -25,7 +25,6 @@ public class OrderManagement {
         List<Order> orders = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("Files\\orders.txt"))) {
             String line;
-            System.out.println("fdjfsdfsf");
             while ((line = reader.readLine()) != null) {
                 orders.add(Order.fromString(line));
             }
