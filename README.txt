@@ -8,7 +8,7 @@ This project was prepared by:
 To open the project:
     1. Please follow the following file path: P3_Assignment\src\GUIs\loginInterface\GetStarted.java
     2. Run the main method in the file
-    3. To understand the project Don't forget to check the Project Report and the Project Requests File
+    3. For better understand Don't forget to check the Project Report and the Assignment File
 
 =======================================================================================================
 
