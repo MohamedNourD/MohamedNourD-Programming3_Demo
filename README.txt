@@ -1,7 +1,7 @@
 This project was prepared by:
-    - MHD Nour Ali Diab
-    - Mulham MHD Loay Zakaria
-    - Mulham Ahmad Hamdan
+    - MHD Nour Diab
+    - Mulham Zakaria
+    - Mulham Hamdan
 
 =======================================================================================================
 
