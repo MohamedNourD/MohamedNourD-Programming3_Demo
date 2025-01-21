@@ -1,6 +1,5 @@
 1||pasta||chess,sald,water||9.99||0||icons\pastMeal.png
 2||pizza||chesse ,bibrone , drinks||13.99||0||icons\pizaMeal.png
-4||burger||chesse , letuc,drinks,potao||7.49||0||icons\mnueBurgerIcon2.png
+4||burger||chesse , letuc,drinks,potao||7.49||2||icons\mnueBurgerIcon2.png
 5||Salad||Romaine lettuce Croutons||4.99||0||icons\creamy Caesa2.png
-6||Margherita Pizza||Pizza dough,Mozzarella cheese||18.99||0||icons\Margherita pizza.png
-
+6||Margherita Pizza||Pizza dough,Mozzarella cheese||18.99||2||icons\Margherita pizza.png
